@@ -13,7 +13,7 @@ public class Snake {
 
     private int direction = 0;
 
-    private Directions directionDecider  = Directions.UP;
+    private Directions directionEnum  = Directions.UP;
 
     public Snake(final int startPositionX, final int startPositionY){
         getXPositions().add(startPositionX);
@@ -21,29 +21,45 @@ public class Snake {
     }
 
     private void decideDirections(){
-        switch (getDirections()){
-            case UP -> setDirection(0);
-            case DOWN -> setDirection(1);
-            case LEFT -> setDirection(3);
-            case RIGHT -> setDirection(2);
+        switch (getDirectionEnum()){
+            case UP -> {
+                if(getDirections() != 1){
+                    setDirection(0);
+                }
+            }
+            case DOWN -> {
+                if(getDirections() != 0){
+                    setDirection(1);
+                }
+            }
+            case LEFT -> {
+                if(getDirections() != 2){
+                    setDirection(3);
+                }
+            }
+            case RIGHT -> {
+                if(getDirections() != 3){
+                    setDirection(2);
+                }
+            }
         }
     }
 
     public void move(){
         decideDirections();
-        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirectionEnum()]);
-        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirectionEnum()]);
+        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()]);
+        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()]);
 
         getXPositions().remove(getXPositions().size()-1);
         getYPositions().remove(getYPositions().size()-1);
     }
 
-    public Directions getDirections() {
-        return directionDecider;
+    public Directions getDirectionEnum() {
+        return directionEnum;
     }
 
-    public void setDirections(Directions directions) {
-        directionDecider = directions;
+    public void setDirectionEnum(Directions directions) {
+        directionEnum = directions;
     }
 
     public ArrayList<Integer> getXPositions() {
@@ -62,7 +78,7 @@ public class Snake {
         return yPositions;
     }
 
-    public int getDirectionEnum() {
+    public int getDirections() {
         return direction;
     }
 
@@ -73,10 +89,10 @@ public class Snake {
     public class KeyFunction extends KeyAdapter {
         public void keyPressed(KeyEvent e){
             switch (e.getKeyCode()){
-                case KeyEvent.VK_DOWN -> setDirections(Directions.DOWN);
-                case KeyEvent.VK_UP -> setDirections(Directions.UP);
-                case KeyEvent.VK_LEFT -> setDirections(Directions.LEFT);
-                case KeyEvent.VK_RIGHT -> setDirections(Directions.RIGHT);
+                case KeyEvent.VK_DOWN -> setDirectionEnum(Directions.DOWN);
+                case KeyEvent.VK_UP -> setDirectionEnum(Directions.UP);
+                case KeyEvent.VK_LEFT -> setDirectionEnum(Directions.LEFT);
+                case KeyEvent.VK_RIGHT -> setDirectionEnum(Directions.RIGHT);
             }
         }
     }
