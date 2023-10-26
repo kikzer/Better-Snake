@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 public class Snake {
 
     private final ArrayList<Integer>xPositions = new ArrayList<>(),yPositions = new ArrayList<>();
+
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
     private final int[] directionX = {0,0,1,-1};
     private final int[] directionY = {-1,1,0,0};
