@@ -15,14 +15,23 @@ public class GameWindow extends Application {
     private final GameField gameField = new GameField();
     @Override
     public void start(Stage primaryStage) throws Exception {
+        createStage(primaryStage);
+    }
+
+    private void createStage(Stage stage){
         Group root = new Group();
         root.getChildren().add(getGameField().getCanvas());
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Better Snake");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        stage.setTitle("Better Snake");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        startGame();
+    }
+
+    private void startGame(){
         getGameField().createGameField(getGameField().getCanvas().getGraphicsContext2D());
+
     }
 
     public static void main(String[] args) {
