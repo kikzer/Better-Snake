@@ -1,4 +1,4 @@
-package Managment;
+package Management;
 
 public class GameManager {
 }

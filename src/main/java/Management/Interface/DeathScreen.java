@@ -1,4 +1,4 @@
-package Managment.Interface;
+package Management.Interface;
 
 public class DeathScreen {
 }

@@ -1,6 +1,6 @@
 package GameField.Food;
 
-import Managment.SnakeManagement.Snake;
+import Management.SnakeManagement.Snake;
 
 public class Melon extends AFood{
 

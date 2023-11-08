@@ -3,6 +3,6 @@ module SE2StartupProject {
     requires javafx.fxml;
     requires java.desktop;
 
-    opens mainpackage;
-    exports Managment.Interface to javafx.graphics;
+    opens Management.Interface;
+    exports Management.Interface to javafx.graphics;
 }

@@ -1,4 +1,4 @@
-package Managment.SnakeManagement;
+package Management.SnakeManagement;
 
 import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
