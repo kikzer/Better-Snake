@@ -1,5 +1,8 @@
 package Managment.SnakeManagement;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,6 +16,8 @@ public class Snake {
     private final int[] directionY = {-1,1,0,0};
 
     private int direction = 0;
+
+    private final int BODYSIZE = 20;
 
     private Directions directionEnum  = Directions.UP;
 
@@ -55,8 +60,11 @@ public class Snake {
         getYPositions().remove(getYPositions().size()-1);
     }
 
-    public void draw(){
-        //TODO implement
+    public void draw(GraphicsContext graphicsContext){
+        graphicsContext.setFill(Color.GREENYELLOW);
+        for(int i = 0; i < xPositions.size();i++){
+            graphicsContext.fillRect(xPositions.get(i), yPositions.get(i),BODYSIZE,BODYSIZE);
+        }
     }
 
     public Directions getDirectionEnum() {
