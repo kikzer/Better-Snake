@@ -17,11 +17,19 @@ public class UiManager {
     public void changeGameview(Scene scene){
         gameWindow.changeScene(scene);
     }
-    public void updateGameField(){
 
+    public UiManager(GameWindow gameWindow){
+        this.gameWindow = gameWindow;
+    }
+    public void updateGameField(){
+        gameWindow.updateBackground();
+        player.draw(gameWindow.getGraphicContext());
     }
 
     public Stage getCurrentStage() {
         return currentStage;
+    }
+    public void setPlayer(Snake player) {
+        this.player = player;
     }
 }

@@ -1,5 +1,6 @@
 package Managment;
 
+import Managment.Interface.GameWindow;
 import Managment.SnakeManagement.Snake;
 import javafx.stage.Stage;
 
@@ -10,7 +11,7 @@ public class GameManager {
     private final UiManager UIMANAGER;
     private Stage currentStage;
     private final Snake PLAYER;
-    Timer gameTick = new Timer();
+    public Timer gameTick = new Timer();
     TimerTask moveSnake = new TimerTask() {
         @Override
         public void run() {
@@ -19,20 +20,14 @@ public class GameManager {
             UIMANAGER.updateGameField();
         }
     };
-    public GameManager(){
-        this.UIMANAGER = new UiManager();
+    public GameManager(GameWindow gameWindow){
+        this.UIMANAGER = new UiManager(gameWindow);
         currentStage = UIMANAGER.getCurrentStage();
-        PLAYER = new Snake(100,100);
-    }
-    public void updateGameTick(){
-        currentStage.setOnCloseRequest(event -> {
-            //System.exit(0);
-            gameTick.cancel();
-        });
+        PLAYER = new Snake(290,390);
         gameTick.schedule(moveSnake,0,1000);
     }
 
     private void updatePlayerState(){
-        //TODO implement
+        UIMANAGER.setPlayer(PLAYER);
     }
 }

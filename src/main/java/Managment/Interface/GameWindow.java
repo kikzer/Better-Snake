@@ -1,5 +1,6 @@
 package Managment.Interface;
 
+import Managment.GameManager;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -30,6 +31,11 @@ public class GameWindow extends Application {
         primaryStage.setTitle("First JavaFX test");
         primaryStage.setScene(gameField);
         primaryStage.show();
+        GameManager manager = new GameManager(this);
+        primaryStage.setOnCloseRequest(event -> {
+            //System.exit(0);
+            manager.gameTick.cancel();
+        });
     }
 
     public void changeScene(Scene scene){
