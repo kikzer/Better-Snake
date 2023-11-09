@@ -1,9 +1,9 @@
 package GameField.Obstacle;
 
-import GameField.ObjectManager;
+import GameField.IObjectManager;
 import Management.SnakeManagement.Snake;
 
-public abstract class AObstacle implements ObjectManager {
+public abstract class AObstacle implements IObjectManager {
 
     private int x,y;
     private final Snake snake;
@@ -14,6 +14,7 @@ public abstract class AObstacle implements ObjectManager {
         this.y = y;
     }
 
+    @Override
     public boolean checkCollision(){
         return getSnake().getXPositions().get(0) == getX() && getSnake().getYPositions().get(0) == getY();
     }
