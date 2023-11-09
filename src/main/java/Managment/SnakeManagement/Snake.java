@@ -55,6 +55,10 @@ public class Snake {
         getYPositions().remove(getYPositions().size()-1);
     }
 
+    public void draw(){
+        //TODO implement
+    }
+
     public Directions getDirectionEnum() {
         return directionEnum;
     }
