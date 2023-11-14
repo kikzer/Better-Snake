@@ -1,5 +1,6 @@
 package GameField;
 
+import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -7,11 +8,11 @@ import javafx.scene.paint.Color;
 
 
 public class GameField {
-    public static int WIDTH = 600, HEIGHT = 600;
     public static final int SIZE_BLOCK = 25;
-    private final int row = WIDTH/getSizeBlock();
-    private final Canvas canvas = new Canvas(WIDTH,HEIGHT);
-    public GameField(){
+    private final int row = GameWindow.WIDTH /getSizeBlock();
+    private final Canvas canvas;
+    public GameField(final Canvas canvas){
+        this.canvas = canvas;
     }
 
     public void createGameField(GraphicsContext graphicsContext){

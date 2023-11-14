@@ -1,7 +1,7 @@
 package mainpackage;
 
-import Managment.GameManager;
-import Managment.Interface.GameWindow;
+import Management.GameManager;
+import Management.Interface.GameWindow;
 import javafx.application.Application;
 
 public class Main {

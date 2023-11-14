@@ -1,7 +1,6 @@
 package Management.SnakeManagement;
 
-import GameField.ObjectManager;
-
+import GameField.GameField;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -17,9 +16,8 @@ public class Snake{
     private final int[] directionX = {0,0,1,-1};
     private final int[] directionY = {-1,1,0,0};
 
-    private int direction = 0;
+    private int direction = 1;
 
-    private final int BODYSIZE = 20;
 
     private Directions directionEnum  = Directions.UP;
 
@@ -55,8 +53,8 @@ public class Snake{
 
     public void move(){
         decideDirections();
-        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()]);
-        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()]);
+        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()]*GameField.SIZE_BLOCK);
+        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()]*GameField.SIZE_BLOCK);
 
         getXPositions().remove(getXPositions().size()-1);
         getYPositions().remove(getYPositions().size()-1);
@@ -65,7 +63,7 @@ public class Snake{
     public void draw(GraphicsContext graphicsContext){
         graphicsContext.setFill(Color.GREENYELLOW);
         for(int i = 0; i < xPositions.size();i++){
-            graphicsContext.fillRect(xPositions.get(i), yPositions.get(i),BODYSIZE,BODYSIZE);
+            graphicsContext.fillRect(xPositions.get(i), yPositions.get(i),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
         }
     }
 

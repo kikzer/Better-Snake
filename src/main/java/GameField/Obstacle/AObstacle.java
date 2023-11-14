@@ -2,6 +2,8 @@ package GameField.Obstacle;
 
 import GameField.IObjectManager;
 import Management.SnakeManagement.Snake;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public abstract class AObstacle implements IObjectManager {
 
@@ -38,4 +40,6 @@ public abstract class AObstacle implements IObjectManager {
     public Snake getSnake() {
         return snake;
     }
+
+    public abstract void show(GraphicsContext graphicsContext, Color color);
 }

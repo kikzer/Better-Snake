@@ -1,7 +1,9 @@
 package Management;
 
-import Managment.Interface.GameWindow;
-import Managment.SnakeManagement.Snake;
+import GameField.GameField;
+import Management.Interface.GameWindow;
+import Management.Interface.UiManager;
+import Management.SnakeManagement.Snake;
 import javafx.stage.Stage;
 
 import java.util.Timer;
@@ -23,7 +25,7 @@ public class GameManager {
     public GameManager(GameWindow gameWindow){
         this.UIMANAGER = new UiManager(gameWindow);
         currentStage = UIMANAGER.getCurrentStage();
-        PLAYER = new Snake(290,390);
+        PLAYER = new Snake(10*GameField.SIZE_BLOCK,10*GameField.SIZE_BLOCK);
         gameTick.schedule(moveSnake,0,1000);
     }
 

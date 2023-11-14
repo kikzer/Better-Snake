@@ -1,13 +1,11 @@
-package Managment;
+package Management.Interface;
 
-import Managment.Interface.GameWindow;
-import Managment.SnakeManagement.Snake;
+import Management.Interface.GameWindow;
+import Management.SnakeManagement.Snake;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class UiManager {
     private GameWindow gameWindow = new GameWindow();
