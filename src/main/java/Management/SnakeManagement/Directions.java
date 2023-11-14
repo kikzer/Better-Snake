@@ -1,4 +1,4 @@
-package Managment.SnakeManagement;
+package Management.SnakeManagement;
 
 public enum Directions {
     LEFT,

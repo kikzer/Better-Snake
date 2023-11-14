@@ -1,4 +1,6 @@
-package Managment.SnakeManagement;
+package Management.SnakeManagement;
+
+import GameField.ObjectManager;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Snake {
+public class Snake{
 
     private final ArrayList<Integer>xPositions = new ArrayList<>(),yPositions = new ArrayList<>();
 

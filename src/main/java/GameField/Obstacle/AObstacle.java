@@ -1,22 +1,20 @@
-package GameField.Food;
+package GameField.Obstacle;
 
-import GameField.GameField;
 import GameField.IObjectManager;
 import Management.SnakeManagement.Snake;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
-public abstract class AFood implements IObjectManager {
+public abstract class AObstacle implements IObjectManager {
 
     private int x,y;
     private final Snake snake;
 
-    public AFood(final int x, final int y, final Snake snake){
+    public AObstacle(final int x, final int y, final Snake snake){
         this.snake = snake;
         this.x = x;
         this.y = y;
     }
-     @Override
+
+    @Override
     public boolean checkCollision(){
         return getSnake().getXPositions().get(0) == getX() && getSnake().getYPositions().get(0) == getY();
     }
@@ -39,11 +37,5 @@ public abstract class AFood implements IObjectManager {
 
     public Snake getSnake() {
         return snake;
-    }
-
-    @Override
-    public void show(GraphicsContext graphicsContext, Color color){
-        graphicsContext.setFill(color);
-        graphicsContext.fillRect(getX()*GameField.SIZE_BLOCK,getY()*GameField.SIZE_BLOCK, GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
     }
 }

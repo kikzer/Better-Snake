@@ -1,4 +1,4 @@
-package Managment;
+package Management;
 
 import Managment.Interface.GameWindow;
 import Managment.SnakeManagement.Snake;
