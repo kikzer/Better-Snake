@@ -78,6 +78,11 @@ public class Snake{
     public void draw(GraphicsContext graphicsContext){
         graphicsContext.setFill(Color.GREENYELLOW);
         for(int i = 0; i < getXPositions().size();i++){
+            if(i == 0){
+                graphicsContext.setFill(Color.RED);
+            }else{
+                graphicsContext.setFill(Color.GREENYELLOW);
+            }
             graphicsContext.fillRect(getXPositions().get(i), getYPositions().get(i),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
         }
     }

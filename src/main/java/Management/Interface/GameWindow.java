@@ -27,10 +27,11 @@ public class GameWindow extends Application {
         graphicContext = canvas.getGraphicsContext2D();
     }
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
+
         Group group = new Group(getCanvas());
         Scene gameField = new Scene(group, WIDTH, HEIGHT);
-        primaryStage.setTitle("First JavaFX test");
+        primaryStage.setTitle("Better Snake");
         primaryStage.setScene(gameField);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -46,7 +47,6 @@ public class GameWindow extends Application {
     }
 
     public void updateBackground(){
-        //TODO richtiges gameField implementieren
         getGameField().createGameField(getGraphicContext());
     }
 
@@ -56,10 +56,6 @@ public class GameWindow extends Application {
 
     public GameField getGameField() {
         return gameField;
-    }
-
-    public Stage getPRIMARYSTAGE() {
-        return PRIMARYSTAGE;
     }
 
     public Canvas getCanvas() {

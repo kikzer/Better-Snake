@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 public abstract class AObstacle implements IObjectManager {
 
     private int x,y;
+
+    private Color color;
     private final Snake snake;
 
     public AObstacle(final int x, final int y, final Snake snake){
@@ -41,5 +43,13 @@ public abstract class AObstacle implements IObjectManager {
         return snake;
     }
 
-    public abstract void show(GraphicsContext graphicsContext, Color color);
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public abstract void draw(GraphicsContext graphicsContext);
 }

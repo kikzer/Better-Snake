@@ -4,11 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public interface IObjectManager {
+    Color color = null;
     default boolean checkCollision() {
         return false;
     }
 
-    public void show(GraphicsContext graphicsContext, Color color);
+    public void draw(GraphicsContext graphicsContext);
 
 }
 
