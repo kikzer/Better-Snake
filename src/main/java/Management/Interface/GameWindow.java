@@ -32,6 +32,7 @@ public class GameWindow extends Application {
         Scene gameField = new Scene(group, WIDTH, HEIGHT);
         primaryStage.setTitle("First JavaFX test");
         primaryStage.setScene(gameField);
+        primaryStage.setResizable(false);
         primaryStage.show();
         GameManager manager = new GameManager(this);
         primaryStage.setOnCloseRequest(event -> {

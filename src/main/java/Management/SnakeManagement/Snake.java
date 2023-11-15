@@ -1,6 +1,7 @@
 package Management.SnakeManagement;
 
 import GameField.GameField;
+import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -23,6 +24,7 @@ public class Snake{
 
     public Snake(final int startPositionX, final int startPositionY){
         getXPositions().add(startPositionX);
+
         getYPositions().add(startPositionY);
     }
 
@@ -58,6 +60,19 @@ public class Snake{
 
         getXPositions().remove(getXPositions().size()-1);
         getYPositions().remove(getYPositions().size()-1);
+        checkBorder();
+    }
+
+    private void checkBorder(){
+        if(getXPositions().get(0) < 0){
+            getXPositions().set(0, GameWindow.WIDTH-GameField.SIZE_BLOCK);
+        } else if (getXPositions().get(0) > GameWindow.WIDTH-GameField.SIZE_BLOCK) {
+            getXPositions().set(0, 0);
+        } else if (getYPositions().get(0) > GameWindow.WIDTH-GameField.SIZE_BLOCK ) {
+            getYPositions().set(0,0);
+        }else {
+            getXPositions().set(0, GameWindow.WIDTH-GameField.SIZE_BLOCK);
+        }
     }
 
     public void draw(GraphicsContext graphicsContext){
