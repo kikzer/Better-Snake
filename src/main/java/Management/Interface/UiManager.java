@@ -8,20 +8,20 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class UiManager {
-    private GameWindow gameWindow = new GameWindow();
+    private GameWindow gameWindow;
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
     private Snake player;
-    public void changeGameview(Scene scene){
-        gameWindow.changeScene(scene);
+    public void changeGameView(Scene scene){
+        getGameWindow().changeScene(scene);
     }
 
     public UiManager(GameWindow gameWindow){
         this.gameWindow = gameWindow;
     }
     public void updateGameField(){
-        gameWindow.updateBackground();
-        player.draw(gameWindow.getGraphicContext());
+        getGameWindow().updateBackground();
+        getPlayer().draw(getGameWindow().getGraphicContext());
     }
 
     public Stage getCurrentStage() {
@@ -29,5 +29,29 @@ public class UiManager {
     }
     public void setPlayer(Snake player) {
         this.player = player;
+    }
+
+    public GameWindow getGameWindow() {
+        return gameWindow;
+    }
+
+    public void setGameWindow(GameWindow gameWindow) {
+        this.gameWindow = gameWindow;
+    }
+
+    public ArrayList<Scene> getScenes() {
+        return scenes;
+    }
+
+    public void setScenes(ArrayList<Scene> scenes) {
+        this.scenes = scenes;
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
+    }
+
+    public Snake getPlayer() {
+        return player;
     }
 }

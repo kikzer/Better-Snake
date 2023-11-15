@@ -70,15 +70,15 @@ public class Snake{
             getXPositions().set(0, 0);
         } else if (getYPositions().get(0) > GameWindow.WIDTH-GameField.SIZE_BLOCK ) {
             getYPositions().set(0,0);
-        }else {
+        }else if(getYPositions().get(0) < 0){
             getXPositions().set(0, GameWindow.WIDTH-GameField.SIZE_BLOCK);
         }
     }
 
     public void draw(GraphicsContext graphicsContext){
         graphicsContext.setFill(Color.GREENYELLOW);
-        for(int i = 0; i < xPositions.size();i++){
-            graphicsContext.fillRect(xPositions.get(i), yPositions.get(i),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
+        for(int i = 0; i < getXPositions().size();i++){
+            graphicsContext.fillRect(getXPositions().get(i), getYPositions().get(i),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
         }
     }
 

@@ -8,6 +8,7 @@ public interface IObjectManager {
         return false;
     }
 
-    void show(GraphicsContext graphicsContext, Color color);
+    public void show(GraphicsContext graphicsContext, Color color);
+
 }
 

@@ -28,7 +28,7 @@ public class GameWindow extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Group group = new Group(canvas);
+        Group group = new Group(getCanvas());
         Scene gameField = new Scene(group, WIDTH, HEIGHT);
         primaryStage.setTitle("First JavaFX test");
         primaryStage.setScene(gameField);
@@ -47,11 +47,22 @@ public class GameWindow extends Application {
 
     public void updateBackground(){
         //TODO richtiges gameField implementieren
-        gameField.createGameField(getGraphicContext());
+        getGameField().createGameField(getGraphicContext());
     }
 
     public GraphicsContext getGraphicContext() {
         return graphicContext;
     }
 
+    public GameField getGameField() {
+        return gameField;
+    }
+
+    public Stage getPRIMARYSTAGE() {
+        return PRIMARYSTAGE;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
 }
