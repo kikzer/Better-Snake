@@ -3,7 +3,11 @@ package Management;
 import GameField.GameField;
 import Management.Interface.GameWindow;
 import Management.Interface.UiManager;
+import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.util.Timer;
@@ -20,13 +24,14 @@ public class GameManager {
             getPlayer().move();
             updatePlayerState();
             getUiManager().updateGameField();
+            keyHandler(getUiManager().getGameWindow().getGameScene());
         }
     };
     public GameManager(GameWindow gameWindow){
         this.uiManager = new UiManager(gameWindow);
         currentStage = uiManager.getCurrentStage();
         player = new Snake(10*GameField.SIZE_BLOCK,5*GameField.SIZE_BLOCK);
-        getGameTick().schedule(getMoveSnake(),0,1000);
+        getGameTick().schedule(getMoveSnake(),0,500);
     }
 
     private void updatePlayerState(){
@@ -64,4 +69,27 @@ public class GameManager {
     public void setMoveSnake(TimerTask moveSnake) {
         this.moveSnake = moveSnake;
     }
+
+    public void keyHandler(Scene gameScene){
+        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()){
+                    case UP -> {
+                        getPlayer().setDirectionEnum(Directions.UP);
+                    }
+                    case DOWN -> {
+                        getPlayer().setDirectionEnum(Directions.DOWN);
+                    }
+                    case LEFT -> {
+                        getPlayer().setDirectionEnum(Directions.LEFT);
+                    }
+                    case RIGHT -> {
+                        getPlayer().setDirectionEnum(Directions.RIGHT);
+                    }
+                }
+            }
+        });
+    }
+
 }

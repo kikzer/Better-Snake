@@ -118,15 +118,4 @@ public class Snake{
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
-    public class KeyFunction extends KeyAdapter {
-        public void keyPressed(KeyEvent e){
-            switch (e.getKeyCode()){
-                case KeyEvent.VK_DOWN -> setDirectionEnum(Directions.DOWN);
-                case KeyEvent.VK_UP -> setDirectionEnum(Directions.UP);
-                case KeyEvent.VK_LEFT -> setDirectionEnum(Directions.LEFT);
-                case KeyEvent.VK_RIGHT -> setDirectionEnum(Directions.RIGHT);
-            }
-        }
-    }
 }
