@@ -1,6 +1,7 @@
 package GameField;
 
 import GameField.Food.AFood;
+import GameField.Food.Apple;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
@@ -14,6 +15,8 @@ public class GameField {
     private final int row = GameWindow.WIDTH /getSizeBlock();
 
     private final Canvas canvas;
+
+    private AFood food = new Apple(((int)(Math.random()*10))*SIZE_BLOCK,((int)(Math.random()*10))*SIZE_BLOCK);
     public GameField(final Canvas canvas){
         this.canvas = canvas;
     }
@@ -41,6 +44,18 @@ public class GameField {
 
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public AFood getFood() {
+        return food;
+    }
+
+    public void setFood(AFood food) {
+        this.food = food;
+    }
+
+    public void createdRandomFood(){
+        setFood(new Apple(((int)(Math.random()*10))*SIZE_BLOCK,((int)(Math.random()*10))*SIZE_BLOCK));
     }
 
 }

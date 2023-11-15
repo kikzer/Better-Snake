@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Apple extends AFood {
 
-    public Apple(int x, int y, Snake snake) {
-        super(x, y, snake);
+    public Apple(int x, int y) {
+        super(x, y);
         setColor(Color.GREEN);
     }
 }

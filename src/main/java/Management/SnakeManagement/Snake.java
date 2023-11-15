@@ -19,6 +19,8 @@ public class Snake{
 
     private int direction = 1;
 
+    private boolean eaten = false;
+
 
     private Directions directionEnum  = Directions.UP;
 
@@ -26,6 +28,14 @@ public class Snake{
         getXPositions().add(startPositionX);
 
         getYPositions().add(startPositionY);
+    }
+
+    public boolean isEaten() {
+        return eaten;
+    }
+
+    public void setEaten(boolean eaten) {
+        this.eaten = eaten;
     }
 
     private void decideDirections(){
@@ -58,8 +68,11 @@ public class Snake{
         getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()]*GameField.SIZE_BLOCK);
         getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()]*GameField.SIZE_BLOCK);
 
-        getXPositions().remove(getXPositions().size()-1);
-        getYPositions().remove(getYPositions().size()-1);
+        if (isEaten()) {
+            getXPositions().remove(getXPositions().size() - 1);
+            getYPositions().remove(getYPositions().size() - 1);
+            setEaten(!isEaten());
+        }
         checkBorder();
     }
 
