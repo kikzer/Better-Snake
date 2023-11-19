@@ -25,10 +25,6 @@ public class GameManager {
             updatePlayerState();
             getUiManager().updateGameField();
             keyHandler(getUiManager().getGameWindow().getGameScene());
-            if (checkCollision(getUiManager().getGameWindow().getGameField().getFood().getX(),getUiManager().getGameWindow().getGameField().getFood().getY())){
-                getPlayer().setEaten(true);
-                getUiManager().getGameWindow().getGameField().createdRandomFood();
-            }
         }
     };
     public GameManager(GameWindow gameWindow){

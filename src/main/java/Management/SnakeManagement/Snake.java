@@ -9,94 +9,81 @@ import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Snake{
+public class Snake {
 
-    private final ArrayList<Integer>xPositions = new ArrayList<>(),yPositions = new ArrayList<>();
+    private final ArrayList<Integer> xPositions = new ArrayList<>(), yPositions = new ArrayList<>();
 
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
-    private final int[] directionX = {0,0,1,-1};
-    private final int[] directionY = {-1,1,0,0};
+    private final int[] directionX = {0, 0, 1, -1};
+    private final int[] directionY = {-1, 1, 0, 0};
 
     private int direction = 1;
 
-    private boolean eaten = false;
 
+    private Directions directionEnum = Directions.UP;
 
-    private Directions directionEnum  = Directions.UP;
-
-    public Snake(final int startPositionX, final int startPositionY){
+    public Snake(final int startPositionX, final int startPositionY) {
         getXPositions().add(startPositionX);
 
         getYPositions().add(startPositionY);
     }
 
-    public boolean isEaten() {
-        return eaten;
-    }
-
-    public void setEaten(boolean eaten) {
-        this.eaten = eaten;
-    }
-
-    private void decideDirections(){
-        switch (getDirectionEnum()){
+    private void decideDirections() {
+        switch (getDirectionEnum()) {
             case UP -> {
-                if(getDirections() != 1){
+                if (getDirections() != 1) {
                     setDirection(0);
                 }
             }
             case DOWN -> {
-                if(getDirections() != 0){
+                if (getDirections() != 0) {
                     setDirection(1);
                 }
             }
             case LEFT -> {
-                if(getDirections() != 2){
+                if (getDirections() != 2) {
                     setDirection(3);
                 }
             }
             case RIGHT -> {
-                if(getDirections() != 3){
+                if (getDirections() != 3) {
                     setDirection(2);
                 }
             }
         }
     }
 
-    public void move(){
+    public void move() {
         decideDirections();
-        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()]*GameField.SIZE_BLOCK);
-        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()]*GameField.SIZE_BLOCK);
+        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()] * GameField.SIZE_BLOCK);
+        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()] * GameField.SIZE_BLOCK);
 
-        if (isEaten()) {
-            getXPositions().remove(getXPositions().size() - 1);
-            getYPositions().remove(getYPositions().size() - 1);
-            setEaten(!isEaten());
-        }
+        getXPositions().remove(getXPositions().size() - 1);
+        getYPositions().remove(getYPositions().size() - 1);
         checkBorder();
     }
 
-    private void checkBorder(){
-        if(getXPositions().get(0) < 0){
-            getXPositions().set(0, GameWindow.WIDTH-GameField.SIZE_BLOCK);
-        } else if (getXPositions().get(0) > GameWindow.WIDTH-GameField.SIZE_BLOCK) {
+    private void checkBorder() {
+        if (getXPositions().get(0) < 0) {
+            getXPositions().set(0, GameWindow.WIDTH - GameField.SIZE_BLOCK);
+        } else if (getXPositions().get(0) > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
             getXPositions().set(0, 0);
-        } else if (getYPositions().get(0) > GameWindow.WIDTH-GameField.SIZE_BLOCK ) {
-            getYPositions().set(0,0);
-        }else if(getYPositions().get(0) < 0){
-            getXPositions().set(0, GameWindow.WIDTH-GameField.SIZE_BLOCK);
+        } else if (getYPositions().get(0) > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
+            getYPositions().set(0, 0);
+        } else if (getYPositions().get(0) < 0) {
+            getXPositions().set(0, GameWindow.WIDTH - GameField.SIZE_BLOCK);
         }
     }
 
-    public void draw(GraphicsContext graphicsContext){
+    public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.GREENYELLOW);
-        for(int i = 0; i < getXPositions().size();i++){
-            if(i == 0){
+        for (int i = 0; i < getXPositions().size(); i++) {
+            if (i == 0) {
                 graphicsContext.setFill(Color.RED);
-            }else{
+            } else {
                 graphicsContext.setFill(Color.GREENYELLOW);
             }
-            graphicsContext.fillRect(getXPositions().get(i), getYPositions().get(i),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
+            graphicsContext.fillRect(getXPositions().get(i), getYPositions().get(i), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK);
         }
     }
 
