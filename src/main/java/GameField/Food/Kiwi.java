@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Kiwi extends AFood {
 
-    public Kiwi(int x, int y, Snake snake) {
-        super(x, y, snake);
+    public Kiwi(int x, int y) {
+        super(x, y);
         setColor(Color.GREENYELLOW);
     }
 }

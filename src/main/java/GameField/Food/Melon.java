@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Melon extends AFood{
 
-    public Melon(int x, int y, Snake snake) {
-        super(x, y, snake);
+    public Melon(int x, int y) {
+        super(x, y);
         setColor(Color.LIGHTGREEN);
     }
 }

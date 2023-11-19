@@ -1,6 +1,7 @@
 package GameField;
 
 import GameField.Food.AFood;
+import GameField.Food.Apple;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
@@ -14,6 +15,7 @@ public class GameField {
     private final int row = GameWindow.WIDTH /getSizeBlock();
 
     private final Canvas canvas;
+
     public GameField(final Canvas canvas){
         this.canvas = canvas;
     }
