@@ -71,7 +71,7 @@ public class Snake {
         } else if (getYPositions().get(0) > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
             getYPositions().set(0, 0);
         } else if (getYPositions().get(0) < 0) {
-            getXPositions().set(0, GameWindow.WIDTH - GameField.SIZE_BLOCK);
+            getYPositions().set(0, GameWindow.WIDTH - GameField.SIZE_BLOCK);
         }
     }
 

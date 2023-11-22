@@ -2,19 +2,26 @@ package Management.Interface;
 
 import Management.Interface.GameWindow;
 import Management.SnakeManagement.Snake;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.Objects;
+//TODO Scenes in Factories umwandeln maybe
 public class UiManager {
     private GameWindow gameWindow;
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
     private Snake player;
-    public void changeGameView(Scene scene){
-        getGameWindow().changeScene(scene);
-    }
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     public UiManager(GameWindow gameWindow){
         this.gameWindow = gameWindow;
@@ -23,6 +30,8 @@ public class UiManager {
         getGameWindow().updateBackground();
         getPlayer().draw(getGameWindow().getGraphicContext());
     }
+
+
 
     public Stage getCurrentStage() {
         return currentStage;
@@ -53,5 +62,17 @@ public class UiManager {
 
     public Snake getPlayer() {
         return player;
+    }
+
+    public void switchScene(SnakeScene scene) throws IOException {
+        switch (scene){
+            case GAMEOVER -> {
+            }
+            case GAME -> {
+            }case MENU -> {
+
+            }
+        }
+
     }
 }

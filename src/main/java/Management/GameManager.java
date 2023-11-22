@@ -2,14 +2,20 @@ package Management;
 
 import GameField.GameField;
 import Management.Interface.GameWindow;
+import Management.Interface.SnakeScene;
 import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,7 +33,7 @@ public class GameManager {
             keyHandler(getUiManager().getGameWindow().getGameScene());
         }
     };
-    public GameManager(GameWindow gameWindow){
+    public GameManager(GameWindow gameWindow) throws IOException {
         this.uiManager = new UiManager(gameWindow);
         currentStage = uiManager.getCurrentStage();
         player = new Snake(10*GameField.SIZE_BLOCK,5*GameField.SIZE_BLOCK);
@@ -96,5 +102,7 @@ public class GameManager {
                 getPlayer().getYPositions().get(0) + GameField.SIZE_BLOCK <= obstaclePositionY + GameField.SIZE_BLOCK;
 
     }
+
+
 
 }
