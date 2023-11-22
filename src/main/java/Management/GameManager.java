@@ -70,6 +70,9 @@ public class GameManager {
         this.moveSnake = moveSnake;
     }
 
+    public int headPositionX;
+    public int headPositionY;
+
     public void keyHandler(Scene gameScene){
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -92,9 +95,12 @@ public class GameManager {
         });
     }
     public boolean checkCollision(final int obstaclePositionX, final int obstaclePositionY){
-        return getPlayer().getYPositions().get(0) >= obstaclePositionY && getPlayer().getXPositions().get(0) >= obstaclePositionX &&
-                getPlayer().getYPositions().get(0) + GameField.SIZE_BLOCK <= obstaclePositionY + GameField.SIZE_BLOCK;
 
+            if ( obstaclePositionX == headPositionX  && obstaclePositionY == headPositionY)
+            {
+                return true;
+            }
+        return false;
     }
 
 }

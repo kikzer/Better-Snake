@@ -22,6 +22,7 @@ public class Snake {
 
     private Directions directionEnum = Directions.UP;
 
+
     public Snake(final int startPositionX, final int startPositionY) {
         getXPositions().add(startPositionX);
 
@@ -118,4 +119,6 @@ public class Snake {
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
+
 }
