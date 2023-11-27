@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 
 public class Treasure extends AObstacle {
 
-    public Treasure(int x, int y, Snake snake) {
-        super(x, y, snake);
+    public Treasure(int x, int y) {
+        super(x, y);
     }
 
     @Override

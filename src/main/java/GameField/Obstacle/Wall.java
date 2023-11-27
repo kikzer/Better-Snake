@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 
 public class Wall extends AObstacle {
 
-    public Wall(int x, int y, Snake snake) {
-        super(x, y, snake);
+    public Wall(int x, int y) {
+        super(x, y);
     }
 
     @Override

@@ -1,24 +1,18 @@
 package GameField.Food;
 
 import GameField.GameField;
-import GameField.IObjectManager;
+import GameField.IObject;
 import Management.SnakeManagement.Snake;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public abstract class AFood implements IObjectManager {
+public abstract class AFood implements IObject {
 
     private int x,y;
-    private final Snake snake;
 
-    public AFood(final int x, final int y, final Snake snake){
-        this.snake = snake;
+    public AFood(final int x, final int y){
         this.x = x;
         this.y = y;
-    }
-     @Override
-    public boolean checkCollision(){
-        return getSnake().getXPositions().get(0) == getX() && getSnake().getYPositions().get(0) == getY();
     }
 
     public int getX() {
@@ -35,10 +29,6 @@ public abstract class AFood implements IObjectManager {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public Snake getSnake() {
-        return snake;
     }
 
     @Override
