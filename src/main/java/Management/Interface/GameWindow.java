@@ -45,8 +45,10 @@ public class GameWindow extends Application {
     }
 
     public void updateBackground(){
-        //TODO richtiges gameField implementieren
         gameField.createGameField(getGraphicContext());
+    }
+    public void drawFood(){
+
     }
 
     public GraphicsContext getGraphicContext() {

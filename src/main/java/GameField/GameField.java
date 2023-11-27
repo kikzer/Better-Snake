@@ -1,5 +1,6 @@
 package GameField;
 
+import GameField.Food.AFood;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
@@ -38,9 +39,5 @@ public class GameField {
 
     public Canvas getCanvas() {
         return canvas;
-    }
-
-    public void drawFood(int x, int y){
-
     }
 }

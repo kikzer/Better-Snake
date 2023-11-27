@@ -2,12 +2,12 @@ package GameField.Food;
 
 import GameField.GameField;
 import GameField.IObject;
-import Management.SnakeManagement.Snake;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public abstract class AFood implements IObject {
-
+    private Image appearance;
     private int x,y;
 
     public AFood(final int x, final int y){
@@ -31,9 +31,16 @@ public abstract class AFood implements IObject {
         this.y = y;
     }
 
+    public Image getAppearance() {
+        return appearance;
+    }
+
+    public void setAppearance(Image appearance) {
+        this.appearance = appearance;
+    }
+
     @Override
-    public void show(GraphicsContext graphicsContext, Color color){
-        graphicsContext.setFill(color);
-        graphicsContext.fillRect(getX()*GameField.SIZE_BLOCK,getY()*GameField.SIZE_BLOCK, GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
+    public void show(GraphicsContext graphicsContext){
+        graphicsContext.drawImage(appearance,x,y);
     }
 }

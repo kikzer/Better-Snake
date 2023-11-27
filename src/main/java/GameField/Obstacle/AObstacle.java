@@ -29,5 +29,5 @@ public abstract class AObstacle implements IObject {
         this.y = y;
     }
 
-    public abstract void show(GraphicsContext graphicsContext, Color color);
+    public abstract void show(GraphicsContext graphicsContext);
 }

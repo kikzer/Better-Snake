@@ -1,8 +1,11 @@
 package GameField.Food;
 
+import GameField.GameField;
 import Management.SnakeManagement.Snake;
+import javafx.scene.image.Image;
 
-public class Banana extends AFood {
+class Banana extends AFood {
+    Image appearance = new Image("src/main/java/GameField/FoodImages/banana.png", GameField.SIZE_BLOCK, GameField.SIZE_BLOCK, false , false);
 
     public Banana(int x, int y) {
         super(x, y);

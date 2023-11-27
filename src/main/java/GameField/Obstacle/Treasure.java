@@ -11,7 +11,7 @@ public class Treasure extends AObstacle {
     }
 
     @Override
-    public void show(GraphicsContext graphicsContext, Color color) {
+    public void show(GraphicsContext graphicsContext) {
 
     }
 }
