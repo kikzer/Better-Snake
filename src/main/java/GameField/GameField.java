@@ -39,4 +39,8 @@ public class GameField {
     public Canvas getCanvas() {
         return canvas;
     }
+
+    public void drawFood(int x, int y){
+
+    }
 }

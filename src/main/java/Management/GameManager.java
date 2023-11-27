@@ -32,4 +32,8 @@ public class GameManager {
     private void updatePlayerState(){
         UIMANAGER.setPlayer(PLAYER);
     }
+
+    private boolean checkCollision(){
+        return false;
+    }
 }
