@@ -28,19 +28,17 @@ public class GameWindow extends Application {
 
     public final static int WIDTH = 600, HEIGHT = 600;
 
-    private GameField gameField;
-    private Canvas canvas;
+    private final Canvas canvas = new Canvas(WIDTH, HEIGHT);;
     private GraphicsContext graphicContext;
 
 
-    private Group root = new Group();
-    private final Scene gameScene = new Scene(getRoot(), WIDTH, HEIGHT);
-
+    private Group root = new Group(canvas);
+    private final Scene gameScene = new Scene(root, WIDTH, HEIGHT);
+    private final GameField gameField = new GameField(canvas);
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        ;
-        createGameOverScene(primaryStage);
+        createGame(primaryStage);
 
     }
 
@@ -99,10 +97,7 @@ public class GameWindow extends Application {
     }
 
     public void createGame(Stage stage) throws IOException {
-        canvas = new Canvas(WIDTH, HEIGHT);
-        gameField = new GameField(canvas);
         graphicContext = canvas.getGraphicsContext2D();
-        root = new Group(canvas);
         stage.setTitle("Better Snake");
         stage.setScene(getGameScene());
 

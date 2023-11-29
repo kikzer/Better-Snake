@@ -31,13 +31,14 @@ public class GameManager {
             updatePlayerState();
             getUiManager().updateGameField();
             keyHandler(getUiManager().getGameWindow().getGameScene());
+            getPlayer().selfDestroy();
         }
     };
     public GameManager(GameWindow gameWindow) throws IOException {
         this.uiManager = new UiManager(gameWindow);
         currentStage = uiManager.getCurrentStage();
         player = new Snake(10*GameField.SIZE_BLOCK,5*GameField.SIZE_BLOCK);
-        getGameTick().schedule(getMoveSnake(),0,500);
+        getGameTick().schedule(getMoveSnake(),0,200);
     }
 
     private void updatePlayerState(){
