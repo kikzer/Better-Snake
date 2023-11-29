@@ -12,6 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 public class GameWindow extends Application {
 
@@ -30,14 +33,13 @@ public class GameWindow extends Application {
     private GraphicsContext graphicContext;
 
 
-    private Group root;
-    private final Scene gameScene = new Scene(getRoot(), WIDTH, HEIGHT);;
+    private Group root = new Group();
+    private final Scene gameScene = new Scene(getRoot(), WIDTH, HEIGHT);
 
-    public GameWindow(){
 
-    }
     @Override
-    public void start(Stage primaryStage) throws IOException {;
+    public void start(Stage primaryStage) throws IOException {
+        ;
         createGameOverScene(primaryStage);
 
     }
@@ -50,7 +52,7 @@ public class GameWindow extends Application {
         return gameScene;
     }
 
-    public void updateBackground(){
+    public void updateBackground() {
         getGameField().createGameField(getGraphicContext());
     }
 
@@ -66,13 +68,36 @@ public class GameWindow extends Application {
         return canvas;
     }
 
-    public void createGameOverScene(Stage stage) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("src/main/resources/gameOverScene.fxml")));
-        stage.setTitle("Game Over Scene");
-        stage.setScene(gameScene);
+    public void createGameOverScene(Stage stage) {
+        StackPane root = new StackPane();
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        Button btn = new Button("Reset");
+
+        btn.setMaxWidth(200);
+        btn.setMaxHeight(50);
+
+
+        Label title = new Label("Game Over");
+        title.setScaleX(2);
+        title.setScaleY(2);
+        title.setTranslateY(-70);
+
+        btn.setOnAction((ActionEvent e) -> {
+            title.setText("TEST");
+            scene.setFill(Color.BLACK);
+        });
+
+        root.getChildren().add(title);
+        root.getChildren().add(btn);
+
+
+
+        stage.setTitle("Game Over");
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
+
     public void createGame(Stage stage) throws IOException {
         canvas = new Canvas(WIDTH, HEIGHT);
         gameField = new GameField(canvas);
@@ -80,11 +105,12 @@ public class GameWindow extends Application {
         root = new Group(canvas);
         stage.setTitle("Better Snake");
         stage.setScene(getGameScene());
+
         stage.setResizable(false);
         stage.show();
         GameManager manager = new GameManager(this);
         stage.setOnCloseRequest(event -> {
-            manager.gameTick.cancel();
+            manager.getGameTick().cancel();
         });
     }
 }
