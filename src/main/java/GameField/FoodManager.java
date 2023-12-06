@@ -3,12 +3,13 @@ package GameField;
 import GameField.Food.AFood;
 import GameField.Food.FoodFactory;
 import GameField.Food.FoodNames;
+import Management.Interface.GameWindow;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class FoodManager {
-    public AFood currentFood;
+    public IObject currentFood;
     private FoodNames[] foodNames = FoodNames.values();
     private Random rnd = new Random();
 
@@ -19,11 +20,11 @@ public class FoodManager {
     }
 
     private FoodNames randomFood(){
-        return foodNames[rnd.nextInt(foodNames.length)];
+        return foodNames[0];
     }
 
     private Integer randomCoordinate(){
-        return rnd.nextInt(25)*GameField.SIZE_BLOCK;
+        return rnd.nextInt(GameWindow.WIDTH/GameField.SIZE_BLOCK)*GameField.SIZE_BLOCK;
     }
 
     public Boolean getFoodExisting() {

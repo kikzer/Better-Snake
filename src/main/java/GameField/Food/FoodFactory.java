@@ -1,8 +1,10 @@
 package GameField.Food;
 
+import GameField.IObject;
+
 public class FoodFactory {
 
-    public static AFood createFood(FoodNames foodType, int x, int y){
+    public static IObject createFood(FoodNames foodType, int x, int y){
         switch(foodType){
             case CHERRY -> {
                 return new Cherry(x,y);

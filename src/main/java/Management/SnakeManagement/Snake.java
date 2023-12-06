@@ -1,6 +1,8 @@
 package Management.SnakeManagement;
 
 import GameField.GameField;
+import GameField.Position;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -12,6 +14,7 @@ public class Snake{
 
     private final ArrayList<Integer>xPositions = new ArrayList<>(),yPositions = new ArrayList<>();
 
+    private final ArrayList<Position> positions = new ArrayList<Position>();
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
     private final int[] directionX = {0,0,1,-1};
     private final int[] directionY = {-1,1,0,0};
@@ -24,6 +27,7 @@ public class Snake{
     public Snake(final int startPositionX, final int startPositionY){
         getXPositions().add(startPositionX);
         getYPositions().add(startPositionY);
+        positions.add(new Position(startPositionX,startPositionY));
     }
 
     private void decideDirections(){
@@ -53,18 +57,19 @@ public class Snake{
 
     public void move(){
         decideDirections();
-        getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()]*GameField.SIZE_BLOCK);
-        getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()]*GameField.SIZE_BLOCK);
 
-        getXPositions().remove(getXPositions().size()-1);
-        getYPositions().remove(getYPositions().size()-1);
+        positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()]*GameField.SIZE_BLOCK,
+                positions.get(0).getY() + getDirectionY()[getDirections()]*GameField.SIZE_BLOCK));
+
+
+
+        positions.remove(positions.size()-1);
     }
 
     public void draw(GraphicsContext graphicsContext){
         graphicsContext.setFill(Color.GREENYELLOW);
-        for(int i = 0; i < xPositions.size();i++){
-            graphicsContext.fillRect(xPositions.get(i), yPositions.get(i),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
-        }
+        positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK));
+
     }
 
     public Directions getDirectionEnum() {
