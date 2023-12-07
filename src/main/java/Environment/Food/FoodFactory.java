@@ -1,6 +1,6 @@
-package Enviroment.Food;
+package Environment.Food;
 
-import Enviroment.IObject;
+import Environment.IObject;
 
 public class FoodFactory {
 

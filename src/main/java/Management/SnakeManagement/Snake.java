@@ -1,7 +1,7 @@
 package Management.SnakeManagement;
 
-import Enviroment.GameField;
-import Enviroment.Position;
+import Environment.GameField;
+import Environment.Position;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

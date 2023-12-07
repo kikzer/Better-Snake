@@ -1,6 +1,5 @@
-package Enviroment.Obstacle;
+package Environment.Obstacle;
 
-import Management.SnakeManagement.Snake;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Wall extends AObstacle {
@@ -9,8 +8,10 @@ public class Wall extends AObstacle {
         super(x, y);
     }
 
+
+
     @Override
-    public void draw(GraphicsContext graphicsContext) {
+    public void show(GraphicsContext graphicsContext) {
 
     }
 }

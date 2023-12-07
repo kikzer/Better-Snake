@@ -1,17 +1,15 @@
-package Enviroment;
+package Environment;
 
-import Enviroment.Food.AFood;
-import Enviroment.Food.FoodFactory;
-import Enviroment.Food.FoodNames;
+import Environment.Food.FoodFactory;
+import Environment.Food.FoodNames;
 import Management.Interface.GameWindow;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class FoodManager {
     public IObject currentFood;
-    private FoodNames[] foodNames = FoodNames.values();
-    private Random rnd = new Random();
+    private final FoodNames[] foodNames = FoodNames.values();
+    private final Random rnd = new Random();
 
     private Boolean foodExisting = false;
 
@@ -20,7 +18,7 @@ public class FoodManager {
     }
 
     private FoodNames randomFood(){
-        return foodNames[0];
+        return foodNames[rnd.nextInt(foodNames.length-1)];
     }
 
     private Integer randomCoordinate(){

@@ -1,6 +1,6 @@
 package Management.Interface;
 
-import Enviroment.GameField;
+import Environment.GameField;
 import Management.GameManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;

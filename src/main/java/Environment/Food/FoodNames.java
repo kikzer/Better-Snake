@@ -1,4 +1,4 @@
-package Enviroment.Food;
+package Environment.Food;
 
 public enum FoodNames {
     APPLE,

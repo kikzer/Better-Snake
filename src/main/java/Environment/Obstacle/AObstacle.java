@@ -1,11 +1,9 @@
-package Enviroment.Obstacle;
+package Environment.Obstacle;
 
-import Enviroment.IObjectManager;
-import Management.SnakeManagement.Snake;
-import javafx.scene.canvas.GraphicsContext;
+import Environment.IObject;
 import javafx.scene.paint.Color;
 
-public abstract class AObstacle implements IObjectManager {
+public abstract class AObstacle implements IObject {
 
     private int x,y;
 
@@ -41,5 +39,4 @@ public abstract class AObstacle implements IObjectManager {
         this.color = color;
     }
 
-    public abstract void draw(GraphicsContext graphicsContext);
 }

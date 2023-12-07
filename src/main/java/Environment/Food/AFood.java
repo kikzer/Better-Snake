@@ -1,11 +1,8 @@
-package Enviroment.Food;
+package Environment.Food;
 
-import Enviroment.GameField;
-import Enviroment.IObject;
+import Environment.IObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 public abstract class AFood implements IObject {
     private Image appearance;

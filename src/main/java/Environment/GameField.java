@@ -1,4 +1,4 @@
-package Enviroment;
+package Environment;
 
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;

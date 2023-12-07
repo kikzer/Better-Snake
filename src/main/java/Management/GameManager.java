@@ -1,6 +1,7 @@
 package Management;
 
-import Enviroment.GameField;
+import Environment.FoodManager;
+import Environment.GameField;
 import Management.Interface.GameWindow;
 import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
@@ -18,22 +19,33 @@ public class GameManager {
     private final UiManager uiManager;
     private Stage currentStage;
     private final Snake player;
+
+    private final FoodManager foodManager = new FoodManager();
+    ;
     public Timer gameTick = new Timer();
     TimerTask moveSnake = new TimerTask() {
         @Override
         public void run() {
             getPlayer().move();
             updatePlayerState();
+            updateGameState();
             getUiManager().updateGameField();
             keyHandler(getUiManager().getGameWindow().getGameScene());
             getPlayer().selfDestroy();
         }
     };
     public GameManager(GameWindow gameWindow) throws IOException {
-        this.uiManager = new UiManager(gameWindow);
+        this.uiManager = new UiManager(gameWindow, foodManager);
         currentStage = uiManager.getCurrentStage();
         player = new Snake(10*GameField.SIZE_BLOCK,5*GameField.SIZE_BLOCK);
         getGameTick().schedule(getMoveSnake(),0,200);
+    }
+
+    private void updateGameState(){
+        if(!foodManager.getFoodExisting()){
+            foodManager.setFoodExisting(true);
+            foodManager.createFood();
+        }
     }
 
     private void updatePlayerState(){
@@ -96,13 +108,8 @@ public class GameManager {
             }
         });
     }
-    public boolean checkCollision(final int obstaclePositionX, final int obstaclePositionY){
+    public void checkCollision(){
 
-            if ( obstaclePositionX == headPositionX  && obstaclePositionY == headPositionY)
-            {
-                return true;
-            }
-        return false;
     }
 
 

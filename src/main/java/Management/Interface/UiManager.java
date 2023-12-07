@@ -1,17 +1,14 @@
 package Management.Interface;
 
-import Management.Interface.GameWindow;
+import Environment.FoodManager;
 import Management.SnakeManagement.Snake;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
+
 //TODO Scenes in Factories umwandeln maybe
 public class UiManager {
     private GameWindow gameWindow;
@@ -19,16 +16,20 @@ public class UiManager {
     private Stage currentStage;
     private Snake player;
 
+    private final FoodManager foodManager;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    public UiManager(GameWindow gameWindow){
+    public UiManager(GameWindow gameWindow, FoodManager foodManager){
         this.gameWindow = gameWindow;
+        this.foodManager = foodManager;
     }
     public void updateGameField(){
         getGameWindow().updateBackground();
         getPlayer().draw(getGameWindow().getGraphicContext());
+        foodManager.currentFood.show(gameWindow.getGraphicContext());
     }
 
 
