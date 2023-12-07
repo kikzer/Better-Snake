@@ -31,8 +31,7 @@ public class GameManager {
     TimerTask moveSnake = new TimerTask() {
         @Override
         public void run() {
-            getPlayer().move();
-            updatePlayerState();
+            Snake.getInstance().move();
             updateGameState();
             getUiManager().updateGameField();
             keyHandler(getUiManager().getGameWindow().getGameScene());
@@ -40,15 +39,13 @@ public class GameManager {
         }
     };
 
-    private GameManager(GameWindow gameWindow) throws IOException {
-        currentStage = UiManager.getInstance().getCurrentStage();
-        player = new Snake(10 * GameField.SIZE_BLOCK, 5 * GameField.SIZE_BLOCK);
+    private GameManager() throws IOException {
         getGameTick().schedule(getMoveSnake(), 0, 200);
     }
 
-    public static GameManager getInstance(final GameWindow gameWindow) throws IOException {
+    public static GameManager getInstance() throws IOException {
         if(instance==null){
-            instance = new GameManager(gameWindow);
+            instance = new GameManager();
         }
         return instance;
     }
@@ -61,25 +58,6 @@ public class GameManager {
         checkCollision();
     }
 
-    private void updatePlayerState() {
-        UiManager.getInstance().setPlayer(getPlayer());
-    }
-
-    public UiManager getUiManager() {
-        return uiManager;
-    }
-
-    public Stage getCurrentStage() {
-        return currentStage;
-    }
-
-    public void setCurrentStage(Stage currentStage) {
-        this.currentStage = currentStage;
-    }
-
-    public Snake getPlayer() {
-        return player;
-    }
 
     public Timer getGameTick() {
         return gameTick;
@@ -93,46 +71,37 @@ public class GameManager {
         return moveSnake;
     }
 
-    public void setMoveSnake(TimerTask moveSnake) {
-        this.moveSnake = moveSnake;
-    }
-
-    public int headPositionX;
-    public int headPositionY;
 
     public void keyHandler(Scene gameScene) {
-        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case UP -> {
-                        getPlayer().setDirectionEnum(Directions.UP);
-                    }
-                    case DOWN -> {
-                        getPlayer().setDirectionEnum(Directions.DOWN);
-                    }
-                    case LEFT -> {
-                        getPlayer().setDirectionEnum(Directions.LEFT);
-                    }
-                    case RIGHT -> {
-                        getPlayer().setDirectionEnum(Directions.RIGHT);
-                    }
+        gameScene.setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case UP -> {
+                    Snake.getInstance().setDirectionEnum(Directions.UP);
+                }
+                case DOWN -> {
+                    Snake.getInstance().setDirectionEnum(Directions.DOWN);
+                }
+                case LEFT -> {
+                    Snake.getInstance().setDirectionEnum(Directions.LEFT);
+                }
+                case RIGHT -> {
+                    Snake.getInstance().setDirectionEnum(Directions.RIGHT);
                 }
             }
         });
     }
 
     public void checkCollision() {
-        if (FoodManager.getInstance().currentFood.getX() <= player.getPositions().get(0).getX() &&
-                FoodManager.getInstance().currentFood.getY() <= player.getPositions().get(0).getY() &&
-                FoodManager.getInstance().currentFood.getX() + GameField.SIZE_BLOCK >= player.getPositions().get(0).getX() + GameField.SIZE_BLOCK &&
-                FoodManager.getInstance().currentFood.getY() + GameField.SIZE_BLOCK >= player.getPositions().get(0).getY() + GameField.SIZE_BLOCK) {
+        if (FoodManager.getInstance().currentFood.getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+                FoodManager.getInstance().currentFood.getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
+                FoodManager.getInstance().currentFood.getPosition().getX() + GameField.SIZE_BLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZE_BLOCK &&
+                FoodManager.getInstance().currentFood.getPosition().getY() + GameField.SIZE_BLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZE_BLOCK) {
             FoodManager.getInstance().createFood();
-            player.setGrowing(true);
+            Snake.getInstance().setGrowing(true);
             score.setScore(score.getScore()+1);
             System.out.println("Counter: " + score.getScore());
         }else {
-            player.setGrowing(false);
+            Snake.getInstance().setGrowing(false);
         }
     }
 

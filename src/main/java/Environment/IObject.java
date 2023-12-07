@@ -5,11 +5,9 @@ import javafx.scene.canvas.GraphicsContext;
 public interface IObject {
     void show(GraphicsContext graphicsContext);
 
-    int getX();
-    void setX(int x);
+    Position getPosition();
 
-    int getY();
+    void setPosition(Position position);
 
-    void setY(int y);
 }
 

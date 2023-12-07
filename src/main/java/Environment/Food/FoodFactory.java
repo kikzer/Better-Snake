@@ -1,25 +1,26 @@
 package Environment.Food;
 
 import Environment.IObject;
+import Environment.Position;
 
 public class FoodFactory {
 
-    public static IObject createFood(FoodNames foodType, int x, int y){
+    public static IObject createFood(FoodNames foodType, Position position){
         switch(foodType){
             case CHERRY -> {
-                return new Cherry(x,y);
+                return new Cherry(position);
             }
             case KIWI -> {
-                return new Kiwi(x,y);
+                return new Kiwi(position);
             }
             case APPLE -> {
-                return new Apple(x,y);
+                return new Apple(position);
             }
             case MELON -> {
-                return new Melon(x,y);
+                return new Melon(position);
             }
             case BANANA -> {
-                return new Banana(x,y);
+                return new Banana(position);
             }
             default ->{
                 return null;

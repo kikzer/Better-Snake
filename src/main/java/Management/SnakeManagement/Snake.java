@@ -27,13 +27,22 @@ public class Snake {
 
     private Directions directionEnum = Directions.UP;
 
+    private static Snake instance;
 
-    public Snake(final int startPositionX, final int startPositionY) {
-        positions.add(new Position(startPositionX, startPositionY));
+
+    private Snake() {
+        positions.add(new Position(10 * GameField.SIZE_BLOCK, 5 * GameField.SIZE_BLOCK));
         for (int i = 1; i < 8; i++) {
-            positions.add(new Position(startPositionX, startPositionY - (GameField.SIZE_BLOCK)));
+            positions.add(new Position(10 * GameField.SIZE_BLOCK, (5 * GameField.SIZE_BLOCK - (GameField.SIZE_BLOCK*i))));
         }
 
+    }
+
+    public static Snake getInstance(){
+        if (instance == null){
+            instance = new Snake();
+        }
+        return instance;
     }
 
     private void decideDirections() {

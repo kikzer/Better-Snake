@@ -14,7 +14,7 @@ public class FoodManager {
     private Boolean foodExisting = false;
 
     public void createFood(){
-        currentFood=FoodFactory.createFood(randomFood(),randomCoordinate(),randomCoordinate());
+        currentFood=FoodFactory.createFood(randomFood(),new Position(randomCoordinate(),randomCoordinate()));
     }
 
     private FoodNames randomFood(){

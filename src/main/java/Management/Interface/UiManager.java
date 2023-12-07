@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 //TODO Scenes in Factories umwandeln maybe
 public class UiManager {
-    private GameWindow gameWindow;
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
     private Snake player;
@@ -22,19 +21,19 @@ public class UiManager {
     private Scene scene;
     private Parent root;
 
-     public static UiManager getInstance(){
-        if(instance == null){
+    public static UiManager getInstance() {
+        if (instance == null) {
             instance = new UiManager();
         }
         return instance;
-     }
-
-    public void updateGameField(){
-        getGameWindow().updateBackground();
-        getPlayer().draw(getGameWindow().getGraphicContext());
-        FoodManager.getInstance().currentFood.show(gameWindow.getGraphicContext());
     }
 
+    public void updateGameField() {
+        GameWindow.getInstance().updateBackground();
+        Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
+        FoodManager.getInstance().currentFood.show(GameWindow.getInstance().getGraphicContext());
+
+    }
 
 
     public Stage getCurrentStage() {
@@ -42,14 +41,6 @@ public class UiManager {
     }
     public void setPlayer(Snake player) {
         this.player = player;
-    }
-
-    public GameWindow getGameWindow() {
-        return gameWindow;
-    }
-
-    public void setGameWindow(GameWindow gameWindow) {
-        this.gameWindow = gameWindow;
     }
 
     public ArrayList<Scene> getScenes() {
@@ -64,19 +55,4 @@ public class UiManager {
         this.currentStage = currentStage;
     }
 
-    public Snake getPlayer() {
-        return player;
-    }
-
-    public void switchScene(SnakeScene scene) throws IOException {
-        switch (scene){
-            case GAMEOVER -> {
-            }
-            case GAME -> {
-            }case MENU -> {
-
-            }
-        }
-
-    }
 }
