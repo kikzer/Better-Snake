@@ -1,4 +1,4 @@
-package GameField;
+package Enviroment;
 
 import javafx.geometry.Pos;
 

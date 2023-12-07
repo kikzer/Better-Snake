@@ -1,4 +1,4 @@
-package GameField.Food;
+package Enviroment.Food;
 
 public enum FoodNames {
     APPLE,

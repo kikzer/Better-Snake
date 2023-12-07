@@ -1,13 +1,9 @@
-package GameField;
+package Enviroment;
 
-import GameField.Food.AFood;
-import GameField.Food.Apple;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
-
-import java.util.Arrays;
 
 
 public class GameField {

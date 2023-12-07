@@ -1,6 +1,6 @@
-package GameField.Obstacle;
+package Enviroment.Obstacle;
 
-import GameField.IObjectManager;
+import Enviroment.IObjectManager;
 import Management.SnakeManagement.Snake;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -10,17 +10,10 @@ public abstract class AObstacle implements IObjectManager {
     private int x,y;
 
     private Color color;
-    private final Snake snake;
 
-    public AObstacle(final int x, final int y, final Snake snake){
-        this.snake = snake;
+    public AObstacle(final int x, final int y){
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    public boolean checkCollision(){
-        return getSnake().getXPositions().get(0) == getX() && getSnake().getYPositions().get(0) == getY();
     }
 
     public int getX() {
@@ -39,9 +32,6 @@ public abstract class AObstacle implements IObjectManager {
         this.y = y;
     }
 
-    public Snake getSnake() {
-        return snake;
-    }
 
     public Color getColor() {
         return color;

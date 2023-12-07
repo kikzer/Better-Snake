@@ -1,21 +1,16 @@
 package Management;
 
-import GameField.GameField;
+import Enviroment.GameField;
 import Management.Interface.GameWindow;
-import Management.Interface.SnakeScene;
 import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 

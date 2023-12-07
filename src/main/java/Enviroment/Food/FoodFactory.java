@@ -1,6 +1,6 @@
-package GameField.Food;
+package Enviroment.Food;
 
-import GameField.IObject;
+import Enviroment.IObject;
 
 public class FoodFactory {
 

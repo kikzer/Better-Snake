@@ -1,8 +1,8 @@
-package GameField;
+package Enviroment;
 
-import GameField.Food.AFood;
-import GameField.Food.FoodFactory;
-import GameField.Food.FoodNames;
+import Enviroment.Food.AFood;
+import Enviroment.Food.FoodFactory;
+import Enviroment.Food.FoodNames;
 import Management.Interface.GameWindow;
 
 import java.util.ArrayList;

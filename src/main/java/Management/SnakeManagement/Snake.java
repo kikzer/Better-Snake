@@ -1,18 +1,18 @@
 package Management.SnakeManagement;
 
-import GameField.GameField;
+import Enviroment.GameField;
+import Enviroment.Position;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.Objects;
 
 public class Snake {
 
-    private final ArrayList<Integer> xPositions = new ArrayList<>(), yPositions = new ArrayList<>();
+    private final ArrayList<Position> positions = new ArrayList<Position>();
+
 
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
     private final int[] directionX = {0, 0, 1, -1};
@@ -27,13 +27,9 @@ public class Snake {
 
 
     public Snake(final int startPositionX, final int startPositionY) {
-        getXPositions().add(startPositionX);
-
-        getYPositions().add(startPositionY);
+        positions.add(new Position(startPositionX, startPositionY));
         for (int i = 1; i < 8; i++) {
-            getXPositions().add(startPositionX);
-
-            getYPositions().add(startPositionY - (GameField.SIZE_BLOCK * i));
+            positions.add(new Position(startPositionX, startPositionY - (GameField.SIZE_BLOCK)));
         }
 
     }
@@ -63,13 +59,6 @@ public class Snake {
         }
     }
 
-    public ArrayList<Integer> getxPositions() {
-        return xPositions;
-    }
-
-    public ArrayList<Integer> getyPositions() {
-        return yPositions;
-    }
 
     public int getDirection() {
         return direction;
@@ -85,14 +74,13 @@ public class Snake {
 
     public void selfDestroy() {
         if (gameOver) {
-            if (xPositions.size()-1 > 0) {
-                xPositions.remove(xPositions.size() - 1);
-                yPositions.remove(yPositions.size() - 1);
+            if (positions.size() - 1 > 0) {
+                positions.remove(positions.size() - 1);
             }
         } else {
-            for (int i = 1; i < xPositions.size(); i++) {
+            for (int i = 1; i < positions.size(); i++) {
 
-                if ((Objects.equals(xPositions.get(0), xPositions.get(i))) && (Objects.equals(yPositions.get(0), yPositions.get(i)))) {
+                if ((Objects.equals(positions.get(0).getX(), positions.get(i).getX())) && (Objects.equals(positions.get(0).getY(), positions.get(i).getY()))) {
                     gameOver = true;
                     break;
                 }
@@ -105,37 +93,31 @@ public class Snake {
 
         if (!gameOver) {
             decideDirections();
-            getXPositions().add(0, getXPositions().get(0) + getDirectionX()[getDirections()] * GameField.SIZE_BLOCK);
-            getYPositions().add(0, getYPositions().get(0) + getDirectionY()[getDirections()] * GameField.SIZE_BLOCK);
-
-            getXPositions().remove(getXPositions().size() - 1);
-            getYPositions().remove(getYPositions().size() - 1);
+            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameField.SIZE_BLOCK,
+                    positions.get(0).getY() + getDirectionY()[getDirections()] * GameField.SIZE_BLOCK));
+            positions.remove(positions.size() - 1);
             checkBorder();
         }
     }
 
     private void checkBorder() {
-        if (getXPositions().get(0) < 0) {
-            getXPositions().set(0, GameWindow.WIDTH - GameField.SIZE_BLOCK);
-        } else if (getXPositions().get(0) > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
-            getXPositions().set(0, 0);
-        } else if (getYPositions().get(0) > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
-            getYPositions().set(0, 0);
-        } else if (getYPositions().get(0) < 0) {
-            getYPositions().set(0, GameWindow.WIDTH - GameField.SIZE_BLOCK);
+        if (positions.get(0).getX() < 0) {
+            positions.get(0).setX(GameWindow.WIDTH - GameField.SIZE_BLOCK);
+        } else if (positions.get(0).getX() > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
+            positions.get(0).setX(0);
+        } else if (positions.get(0).getY() > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
+            positions.get(0).setY(0);
+        } else if (positions.get(0).getY() < 0) {
+            positions.get(0).setY(GameWindow.WIDTH - GameField.SIZE_BLOCK);
         }
     }
 
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.GREENYELLOW);
-        for (int i = 0; i < getXPositions().size(); i++) {
-            if (i == 0) {
-                graphicsContext.setFill(Color.RED);
-            } else {
-                graphicsContext.setFill(Color.GREENYELLOW);
-            }
-            graphicsContext.fillRect(getXPositions().get(i), getYPositions().get(i), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK);
-        }
+        positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK));
+        graphicsContext.setFill(Color.RED);
+        graphicsContext.fillRect(positions.get(0).getX(),positions.get(0).getY(),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
+
     }
 
     public Directions getDirectionEnum() {
@@ -146,9 +128,6 @@ public class Snake {
         directionEnum = directions;
     }
 
-    public ArrayList<Integer> getXPositions() {
-        return xPositions;
-    }
 
     public int[] getDirectionX() {
         return directionX;
@@ -158,9 +137,6 @@ public class Snake {
         return directionY;
     }
 
-    public ArrayList<Integer> getYPositions() {
-        return yPositions;
-    }
 
     public int getDirections() {
         return direction;

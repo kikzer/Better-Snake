@@ -1,13 +1,12 @@
-package GameField.Obstacle;
+package Enviroment.Obstacle;
 
 import Management.SnakeManagement.Snake;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public class Wall extends AObstacle {
 
-    public Wall(int x, int y, Snake snake) {
-        super(x, y, snake);
+    public Wall(int x, int y) {
+        super(x, y);
     }
 
     @Override
