@@ -22,14 +22,17 @@ public class UiManager {
     private Scene scene;
     private Parent root;
 
-    public UiManager(GameWindow gameWindow, FoodManager foodManager){
-        this.gameWindow = gameWindow;
-        this.foodManager = foodManager;
-    }
+     public static UiManager getInstance(){
+        if(instance == null){
+            instance = new UiManager();
+        }
+        return instance;
+     }
+
     public void updateGameField(){
         getGameWindow().updateBackground();
         getPlayer().draw(getGameWindow().getGraphicContext());
-        foodManager.currentFood.show(gameWindow.getGraphicContext());
+        FoodManager.getInstance().currentFood.show(gameWindow.getGraphicContext());
     }
 
 

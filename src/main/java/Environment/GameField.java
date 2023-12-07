@@ -12,8 +12,17 @@ public class GameField {
 
     private final Canvas canvas;
 
-    public GameField(final Canvas canvas){
+    private static GameField instance;
+
+    private GameField(final Canvas canvas){
         this.canvas = canvas;
+    }
+
+    public static GameField getInstance(final Canvas canvas){
+        if (instance == null){
+            instance = new GameField(canvas);
+        }
+        return instance;
     }
 
     public void createGameField(GraphicsContext graphicsContext){

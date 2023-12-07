@@ -1,8 +1,11 @@
 package Management;
 
+import Environment.Food.FoodFactory;
 import Environment.FoodManager;
 import Environment.GameField;
+import Environment.IObject;
 import Management.Interface.GameWindow;
+import Management.Interface.Score;
 import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
@@ -16,12 +19,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameManager {
-    private final UiManager uiManager;
     private Stage currentStage;
     private final Snake player;
 
-    private final FoodManager foodManager = new FoodManager();
-    ;
+    private final Score score = new Score();
+
+
+
+
     public Timer gameTick = new Timer();
     TimerTask moveSnake = new TimerTask() {
         @Override
@@ -34,22 +39,30 @@ public class GameManager {
             getPlayer().selfDestroy();
         }
     };
-    public GameManager(GameWindow gameWindow) throws IOException {
-        this.uiManager = new UiManager(gameWindow, foodManager);
-        currentStage = uiManager.getCurrentStage();
-        player = new Snake(10*GameField.SIZE_BLOCK,5*GameField.SIZE_BLOCK);
-        getGameTick().schedule(getMoveSnake(),0,200);
+
+    private GameManager(GameWindow gameWindow) throws IOException {
+        currentStage = UiManager.getInstance().getCurrentStage();
+        player = new Snake(10 * GameField.SIZE_BLOCK, 5 * GameField.SIZE_BLOCK);
+        getGameTick().schedule(getMoveSnake(), 0, 200);
     }
 
-    private void updateGameState(){
-        if(!foodManager.getFoodExisting()){
-            foodManager.setFoodExisting(true);
-            foodManager.createFood();
+    public static GameManager getInstance(final GameWindow gameWindow) throws IOException {
+        if(instance==null){
+            instance = new GameManager(gameWindow);
         }
+        return instance;
     }
 
-    private void updatePlayerState(){
-        getUiManager().setPlayer(getPlayer());
+    private void updateGameState() {
+        if (!FoodManager.getInstance().getFoodExisting()) {
+            FoodManager.getInstance().setFoodExisting(true);
+            FoodManager.getInstance().createFood();
+        }
+        checkCollision();
+    }
+
+    private void updatePlayerState() {
+        UiManager.getInstance().setPlayer(getPlayer());
     }
 
     public UiManager getUiManager() {
@@ -87,11 +100,11 @@ public class GameManager {
     public int headPositionX;
     public int headPositionY;
 
-    public void keyHandler(Scene gameScene){
+    public void keyHandler(Scene gameScene) {
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()){
+                switch (keyEvent.getCode()) {
                     case UP -> {
                         getPlayer().setDirectionEnum(Directions.UP);
                     }
@@ -108,10 +121,20 @@ public class GameManager {
             }
         });
     }
-    public void checkCollision(){
 
+    public void checkCollision() {
+        if (FoodManager.getInstance().currentFood.getX() <= player.getPositions().get(0).getX() &&
+                FoodManager.getInstance().currentFood.getY() <= player.getPositions().get(0).getY() &&
+                FoodManager.getInstance().currentFood.getX() + GameField.SIZE_BLOCK >= player.getPositions().get(0).getX() + GameField.SIZE_BLOCK &&
+                FoodManager.getInstance().currentFood.getY() + GameField.SIZE_BLOCK >= player.getPositions().get(0).getY() + GameField.SIZE_BLOCK) {
+            FoodManager.getInstance().createFood();
+            player.setGrowing(true);
+            score.setScore(score.getScore()+1);
+            System.out.println("Counter: " + score.getScore());
+        }else {
+            player.setGrowing(false);
+        }
     }
-
 
 
 }

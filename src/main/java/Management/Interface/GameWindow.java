@@ -20,13 +20,21 @@ public class GameWindow extends Application {
 
     public final static int WIDTH = 600, HEIGHT = 600;
 
+    private static GameWindow instance;
+
     private final Canvas canvas = new Canvas(WIDTH, HEIGHT);;
     private GraphicsContext graphicContext;
 
 
     private Group root = new Group(canvas);
     private final Scene gameScene = new Scene(root, WIDTH, HEIGHT);
-    private final GameField gameField = new GameField(canvas);
+
+    public static GameWindow getInstance(){
+        if(instance == null){
+            instance = new GameWindow();
+        }
+        return instance;
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -43,15 +51,11 @@ public class GameWindow extends Application {
     }
 
     public void updateBackground() {
-        getGameField().createGameField(getGraphicContext());
+        GameField.getInstance(canvas).createGameField(getGraphicContext());
     }
 
     public GraphicsContext getGraphicContext() {
         return graphicContext;
-    }
-
-    public GameField getGameField() {
-        return gameField;
     }
 
     public Canvas getCanvas() {
@@ -95,9 +99,12 @@ public class GameWindow extends Application {
 
         stage.setResizable(false);
         stage.show();
-        GameManager manager = new GameManager(this);
         stage.setOnCloseRequest(event -> {
-            manager.getGameTick().cancel();
+            try {
+                GameManager.getInstance(this).getGameTick().cancel();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 }

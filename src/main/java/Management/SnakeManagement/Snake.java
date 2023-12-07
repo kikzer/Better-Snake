@@ -22,6 +22,8 @@ public class Snake {
 
     private boolean gameOver = false;
 
+    private boolean growing = false;
+
 
     private Directions directionEnum = Directions.UP;
 
@@ -95,9 +97,20 @@ public class Snake {
             decideDirections();
             positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameField.SIZE_BLOCK,
                     positions.get(0).getY() + getDirectionY()[getDirections()] * GameField.SIZE_BLOCK));
-            positions.remove(positions.size() - 1);
+
+            if (!growing) {
+                positions.remove(positions.size() - 1);
+            }
             checkBorder();
         }
+    }
+
+    public boolean isGrowing() {
+        return growing;
+    }
+
+    public void setGrowing(boolean growing) {
+        this.growing = growing;
     }
 
     private void checkBorder() {
@@ -112,11 +125,15 @@ public class Snake {
         }
     }
 
+    public ArrayList<Position> getPositions() {
+        return positions;
+    }
+
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.GREENYELLOW);
         positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK));
         graphicsContext.setFill(Color.RED);
-        graphicsContext.fillRect(positions.get(0).getX(),positions.get(0).getY(),GameField.SIZE_BLOCK,GameField.SIZE_BLOCK);
+        graphicsContext.fillRect(positions.get(0).getX(), positions.get(0).getY(), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK);
 
     }
 
