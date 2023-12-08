@@ -1,7 +1,10 @@
-package Environment;
+package Management;
 
 import Environment.Food.FoodFactory;
 import Environment.Food.FoodNames;
+import Environment.GameField;
+import Environment.IObject;
+import Environment.Position;
 import Management.Interface.GameWindow;
 
 import java.util.Random;
@@ -30,7 +33,7 @@ public class FoodManager {
     }
 
     private Integer randomCoordinate(){
-        return rnd.nextInt(GameWindow.WIDTH/GameField.SIZE_BLOCK)*GameField.SIZE_BLOCK;
+        return rnd.nextInt(GameWindow.WIDTH/ GameField.SIZEBLOCK)*GameField.SIZEBLOCK;
     }
 
     public Boolean getFoodExisting() {
@@ -39,5 +42,25 @@ public class FoodManager {
 
     public void setFoodExisting(Boolean foodExisting) {
         this.foodExisting = foodExisting;
+    }
+
+    public IObject getCurrentFood() {
+        return currentFood;
+    }
+
+    public void setCurrentFood(IObject currentFood) {
+        this.currentFood = currentFood;
+    }
+
+    public FoodNames[] getFoodNames() {
+        return foodNames;
+    }
+
+    public Random getRnd() {
+        return rnd;
+    }
+
+    public static void setInstance(FoodManager instance) {
+        FoodManager.instance = instance;
     }
 }

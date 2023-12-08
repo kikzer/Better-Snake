@@ -96,6 +96,7 @@ public class GameWindow extends Application{
         graphicContext = canvas.getGraphicsContext2D();
         stage.setTitle("Better Snake");
         stage.setScene(getGameScene());
+        root.getChildren().add(UiManager.getInstance().getScoreField());
         GameManager.getInstance();
         stage.setResizable(false);
         stage.show();
@@ -112,6 +113,4 @@ public class GameWindow extends Application{
     public GameWindow(){
         instance = this;
     }
-
-
 }

@@ -1,27 +1,20 @@
 package Management;
 
-import Environment.Food.FoodFactory;
-import Environment.FoodManager;
 import Environment.GameField;
-import Environment.IObject;
 import Management.Interface.GameWindow;
 import Management.Interface.Score;
 import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameManager {
     private static GameManager instance;
-
-    private final Score score = new Score();
-
     public Timer gameTick = new Timer();
     TimerTask moveSnake = new TimerTask() {
         @Override
@@ -39,7 +32,7 @@ public class GameManager {
     }
 
     public static GameManager getInstance() throws IOException {
-        if(instance==null){
+        if (instance == null) {
             instance = new GameManager();
         }
         return instance;
@@ -91,10 +84,25 @@ public class GameManager {
                 FoodManager.getInstance().currentFood.getPosition().getY() + GameField.SIZE_BLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZE_BLOCK) {
             FoodManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
-            score.setScore(score.getScore()+1);
-            System.out.println("Counter: " + score.getScore());
-        }else {
+            Score.getInstance().setScore(Score.getInstance().getScore() + 1);
+
+            System.out.println("Counter: " + Score.getInstance().getScore());
+        } else if (ObstacleManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+                ObstacleManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
+                ObstacleManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
+                ObstacleManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
+            if (ObstacleManager.getInstance().getCurrenObject().isBlocked()) {
+                Snake.getInstance().setGameOver(true);
+            } else {
+                Score.getInstance().setScore(Score.getInstance().getScore() + 5);
+                ObstacleManager.getInstance().createObstacle();
+            }
+
+        } else {
             Snake.getInstance().setGrowing(false);
         }
+        Platform.runLater(() -> {
+            UiManager.getInstance().getScoreField().setText(String.valueOf(Score.getInstance().getScore()));
+        });
     }
 }
