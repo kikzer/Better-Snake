@@ -1,18 +1,19 @@
-package GameField.Obstacle;
+package Environment.Obstacle;
 
-import GameField.IObject;
-import Management.SnakeManagement.Snake;
-import javafx.scene.canvas.GraphicsContext;
+import Environment.IObject;
 import javafx.scene.paint.Color;
 
 public abstract class AObstacle implements IObject {
 
     private int x,y;
 
+    private Color color;
+
     public AObstacle(final int x, final int y){
         this.x = x;
         this.y = y;
     }
+
     public int getX() {
         return x;
     }
@@ -29,5 +30,13 @@ public abstract class AObstacle implements IObject {
         this.y = y;
     }
 
-    public abstract void show(GraphicsContext graphicsContext);
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
 }

@@ -1,6 +1,4 @@
-package GameField;
-
-import javafx.geometry.Pos;
+package Environment;
 
 public class Position {
     private int x,y;

@@ -1,37 +1,48 @@
 package Management.Interface;
 
-import GameField.FoodManager;
-import Management.Interface.GameWindow;
+import Environment.FoodManager;
 import Management.SnakeManagement.Snake;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UiManager {
-    private GameWindow gameWindow = new GameWindow();
-    private final FoodManager FOODMANAGER;
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
-    private Snake player;
-    public void changeGameview(Scene scene){
-        gameWindow.changeScene(scene);
+    private static UiManager instance;
+
+    public static UiManager getInstance() {
+        if (instance == null) {
+            instance = new UiManager();
+        }
+        return instance;
     }
 
-    public UiManager(GameWindow gameWindow, FoodManager FOODMANAGER){
-        this.gameWindow = gameWindow;
-        this.FOODMANAGER = FOODMANAGER;
+    public void updateGameField() {
+        GameWindow.getInstance().updateBackground();
+        Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
+        FoodManager.getInstance().currentFood.show(GameWindow.getInstance().getGraphicContext());
+
     }
-    public void updateGameField(){
-        gameWindow.updateBackground();
-        player.draw(gameWindow.getGraphicContext());
-        FOODMANAGER.currentFood.show(gameWindow.getGraphicContext());
-    }
+
 
     public Stage getCurrentStage() {
         return currentStage;
     }
-    public void setPlayer(Snake player) {
-        this.player = player;
+
+    public ArrayList<Scene> getScenes() {
+        return scenes;
     }
+
+    public void setScenes(ArrayList<Scene> scenes) {
+        this.scenes = scenes;
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
+    }
+
 }

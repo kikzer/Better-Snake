@@ -1,8 +1,7 @@
-package GameField.Obstacle;
+package Environment.Obstacle;
 
-import Management.SnakeManagement.Snake;
+import Environment.Position;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public class Treasure extends AObstacle {
 
@@ -10,8 +9,19 @@ public class Treasure extends AObstacle {
         super(x, y);
     }
 
+
     @Override
     public void show(GraphicsContext graphicsContext) {
+
+    }
+
+    @Override
+    public Position getPosition() {
+        return null;
+    }
+
+    @Override
+    public void setPosition(Position position) {
 
     }
 }

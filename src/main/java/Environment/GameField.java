@@ -1,19 +1,28 @@
-package GameField;
+package Environment;
 
-import GameField.Food.AFood;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
 
-
 public class GameField {
     public static final int SIZE_BLOCK = 25;
     private final int row = GameWindow.WIDTH /getSizeBlock();
+
     private final Canvas canvas;
-    public GameField(final Canvas canvas){
+
+    private static GameField instance;
+
+    private GameField(final Canvas canvas){
         this.canvas = canvas;
+    }
+
+    public static GameField getInstance(final Canvas canvas){
+        if (instance == null){
+            instance = new GameField(canvas);
+        }
+        return instance;
     }
 
     public void createGameField(GraphicsContext graphicsContext){
@@ -40,4 +49,5 @@ public class GameField {
     public Canvas getCanvas() {
         return canvas;
     }
+
 }

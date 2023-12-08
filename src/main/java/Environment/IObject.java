@@ -1,9 +1,13 @@
-package GameField;
+package Environment;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public interface IObject {
     void show(GraphicsContext graphicsContext);
+
+    Position getPosition();
+
+    void setPosition(Position position);
+
 }
 
