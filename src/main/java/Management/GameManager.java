@@ -13,19 +13,14 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameManager {
-    private Stage currentStage;
-    private final Snake player;
+    private static GameManager instance;
 
     private final Score score = new Score();
-
-
-
 
     public Timer gameTick = new Timer();
     TimerTask moveSnake = new TimerTask() {
@@ -33,9 +28,9 @@ public class GameManager {
         public void run() {
             Snake.getInstance().move();
             updateGameState();
-            getUiManager().updateGameField();
-            keyHandler(getUiManager().getGameWindow().getGameScene());
-            getPlayer().selfDestroy();
+            UiManager.getInstance().updateGameField();
+            keyHandler(GameWindow.getInstance().getGameScene());
+            Snake.getInstance().selfDestroy();
         }
     };
 
@@ -58,7 +53,6 @@ public class GameManager {
         checkCollision();
     }
 
-
     public Timer getGameTick() {
         return gameTick;
     }
@@ -70,7 +64,6 @@ public class GameManager {
     public TimerTask getMoveSnake() {
         return moveSnake;
     }
-
 
     public void keyHandler(Scene gameScene) {
         gameScene.setOnKeyPressed(keyEvent -> {
@@ -104,6 +97,4 @@ public class GameManager {
             Snake.getInstance().setGrowing(false);
         }
     }
-
-
 }

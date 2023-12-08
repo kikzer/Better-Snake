@@ -33,6 +33,9 @@ public class GameWindow extends Application{
     private final Scene gameScene = new Scene(root, WIDTH, HEIGHT);
 
     public static GameWindow getInstance(){
+        if(instance == null){
+            instance = new GameWindow();
+        }
         return instance;
     }
 
@@ -70,7 +73,6 @@ public class GameWindow extends Application{
         btn.setMaxWidth(200);
         btn.setMaxHeight(50);
 
-
         Label title = new Label("Game Over");
         title.setScaleX(2);
         title.setScaleY(2);
@@ -84,8 +86,6 @@ public class GameWindow extends Application{
         root.getChildren().add(title);
         root.getChildren().add(btn);
 
-
-
         stage.setTitle("Game Over");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -96,7 +96,7 @@ public class GameWindow extends Application{
         graphicContext = canvas.getGraphicsContext2D();
         stage.setTitle("Better Snake");
         stage.setScene(getGameScene());
-
+        GameManager.getInstance();
         stage.setResizable(false);
         stage.show();
 
@@ -110,7 +110,6 @@ public class GameWindow extends Application{
     }
 
     public GameWindow(){
-        System.out.println("init");
         instance = this;
     }
 

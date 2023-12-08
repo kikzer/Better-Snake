@@ -9,17 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//TODO Scenes in Factories umwandeln maybe
 public class UiManager {
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
-    private Snake player;
-
-    private final FoodManager foodManager;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private static UiManager instance;
 
     public static UiManager getInstance() {
         if (instance == null) {
@@ -38,9 +31,6 @@ public class UiManager {
 
     public Stage getCurrentStage() {
         return currentStage;
-    }
-    public void setPlayer(Snake player) {
-        this.player = player;
     }
 
     public ArrayList<Scene> getScenes() {

@@ -11,7 +11,15 @@ public class FoodManager {
     private final FoodNames[] foodNames = FoodNames.values();
     private final Random rnd = new Random();
 
+    private static FoodManager instance;
     private Boolean foodExisting = false;
+
+    public static FoodManager getInstance(){
+        if(instance == null){
+            instance = new FoodManager();
+        }
+        return instance;
+    }
 
     public void createFood(){
         currentFood=FoodFactory.createFood(randomFood(),new Position(randomCoordinate(),randomCoordinate()));

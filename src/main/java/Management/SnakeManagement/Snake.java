@@ -13,7 +13,6 @@ public class Snake {
 
     private final ArrayList<Position> positions = new ArrayList<Position>();
 
-
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
     private final int[] directionX = {0, 0, 1, -1};
     private final int[] directionY = {-1, 1, 0, 0};
@@ -24,11 +23,9 @@ public class Snake {
 
     private boolean growing = false;
 
-
     private Directions directionEnum = Directions.UP;
 
     private static Snake instance;
-
 
     private Snake() {
         positions.add(new Position(10 * GameField.SIZE_BLOCK, 5 * GameField.SIZE_BLOCK));
@@ -69,7 +66,6 @@ public class Snake {
             }
         }
     }
-
 
     public int getDirection() {
         return direction;
