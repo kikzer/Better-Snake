@@ -7,6 +7,7 @@ import Environment.IObject;
 import Environment.Obstacle.Treasure;
 import Environment.Position;
 import Management.Interface.GameWindow;
+import Management.SnakeManagement.Snake;
 
 import java.util.Random;
 
@@ -31,15 +32,23 @@ public class ObjectManager {
     }
 
     public void createFood() {
-        currentFood = FoodFactory.createFood(randomFood(), new Position(randomCoordinate(), randomCoordinate()));
+        currentFood = FoodFactory.createFood(randomFood(), randomCoordinate());
     }
 
     private FoodNames randomFood() {
         return foodNames[rnd.nextInt(foodNames.length - 1)];
     }
 
-    private Integer randomCoordinate() {
-        return rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK;
+    private Position randomCoordinate() {
+        Position coordinate = new Position(rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK,
+                rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK);
+        for ( Position position : Snake.getInstance().getPositions()) {
+            if(position.equals(coordinate)){
+                randomCoordinate();
+                break;
+            }
+        }
+        return coordinate;
     }
 
     public Boolean getFoodExisting() {
@@ -63,7 +72,11 @@ public class ObjectManager {
     }
 
     public void createObstacle() {
-        currenObject = new Treasure(new Position(randomCoordinate(), randomCoordinate()));
+        currenObject = new Treasure(randomCoordinate());
+    }
+
+    public void setCurrenObject(IObject currenObject) {
+        this.currenObject = currenObject;
     }
 
     public IObject getCurrenObject() {
