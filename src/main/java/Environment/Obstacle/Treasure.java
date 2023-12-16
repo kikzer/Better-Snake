@@ -1,27 +1,17 @@
 package Environment.Obstacle;
 
+import Environment.GameField;
+import Environment.AObject;
 import Environment.Position;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
-public class Treasure extends AObstacle {
+public class Treasure extends AObject {
 
-    public Treasure(int x, int y) {
-        super(x, y);
+    public Treasure(Position position) {
+        super(position);
+        setAppearance(new Image("file:src/main/java/Environment/Obstacle/ObstacleImages/box.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
     }
 
 
-    @Override
-    public void show(GraphicsContext graphicsContext) {
 
-    }
-
-    @Override
-    public Position getPosition() {
-        return null;
-    }
-
-    @Override
-    public void setPosition(Position position) {
-
-    }
 }
