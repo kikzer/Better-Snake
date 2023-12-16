@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class UiManager {
-    private ArrayList<Scene> scenes = new ArrayList<>();
+    private final ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
-    private Label scoreField = new Label();
+    private final Label scoreField = new Label();
     private static UiManager instance;
 
     private UiManager() {
@@ -39,28 +39,10 @@ public class UiManager {
             ObjectManager.getInstance().getCurrenObject().show(GameWindow.getInstance().getGraphicContext());
     }
 
-    public Stage getCurrentStage() {
-        return currentStage;
-    }
 
-    public ArrayList<Scene> getScenes() {
-        return scenes;
-    }
-
-    public void setScenes(ArrayList<Scene> scenes) {
-        this.scenes = scenes;
-    }
-
-    public void setCurrentStage(Stage currentStage) {
-        this.currentStage = currentStage;
-    }
 
     public Label getScoreField() {
         return scoreField;
-    }
-
-    public void setScoreField(Label scoreField) {
-        this.scoreField = scoreField;
     }
 
 }

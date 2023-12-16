@@ -76,10 +76,6 @@ public class GameManager {
         return gameTick;
     }
 
-    public void setGameTick(Timer gameTick) {
-        this.gameTick = gameTick;
-    }
-
     public TimerTask getMoveSnake() {
         return moveSnake;
     }
