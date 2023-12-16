@@ -66,6 +66,10 @@ public class ObjectManager {
         currenObject = new Treasure(new Position(randomCoordinate(), randomCoordinate()));
     }
 
+    public void setCurrenObject(IObject currenObject) {
+        this.currenObject = currenObject;
+    }
+
     public IObject getCurrenObject() {
         return currenObject;
     }

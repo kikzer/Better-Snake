@@ -39,13 +39,16 @@ public class GameManager {
         return instance;
     }
 
-    private void spawnTreasure(){
+    private void spawnTreasure() {
         int storage = 0;
-        if(ObjectManager.getInstance().getObstacleExisting()){
-            storage = Score.getInstance().getScore();
-            
+        if (ObjectManager.getInstance().getCurrenObject() == null && !ObjectManager.getInstance().getObstacleExisting()) {
+            ObjectManager.getInstance().setObstacleExisting(true);
+            ObjectManager.getInstance().createObstacle();
+        }else{
+            if(Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null){
+                ObjectManager.getInstance().setObstacleExisting(false);
+            }
         }
-
     }
 
     private void updateGameState() {
@@ -53,19 +56,15 @@ public class GameManager {
             ObjectManager.getInstance().setFoodExisting(true);
             ObjectManager.getInstance().createFood();
         }
-
-        if (!ObjectManager.getInstance().getObstacleExisting()) {
-            ObjectManager.getInstance().setObstacleExisting(true);
-            ObjectManager.getInstance().createObstacle();
-        }
+        spawnTreasure();
         for (int i = 1; i < Snake.getInstance().getPositions().size() - 1; i++) {
             if (Snake.getInstance().getPositions().get(i).getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
                     Snake.getInstance().getPositions().get(i).getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY()) {
                 ObjectManager.getInstance().createFood();
             }
         }
-        if (ObjectManager.getInstance().getCurrenObject().getPosition().getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
-                ObjectManager.getInstance().getCurrenObject().getPosition().getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY()) {
+        if (ObjectManager.getInstance().getCurrenObject() != null && (ObjectManager.getInstance().getCurrenObject().getPosition().getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
+                ObjectManager.getInstance().getCurrenObject().getPosition().getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY())) {
 
             ObjectManager.getInstance().createFood();
         }
@@ -120,15 +119,15 @@ public class GameManager {
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getFoodPoint());
 
-        } else if (ObjectManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+        } else if (ObjectManager.getInstance().getCurrenObject() != null && (ObjectManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
-                ObjectManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
+                ObjectManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK)) {
             if (ObjectManager.getInstance().getCurrenObject().isBlocked()) {
                 Snake.getInstance().setGameOver(true);
             } else {
                 Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
-                ObjectManager.getInstance().createObstacle();
+                ObjectManager.getInstance().setCurrenObject(null);
             }
 
         } else {

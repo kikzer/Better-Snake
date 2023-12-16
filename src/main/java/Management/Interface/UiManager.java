@@ -17,11 +17,11 @@ public class UiManager {
     private Label scoreField = new Label();
     private static UiManager instance;
 
-    private UiManager(){
+    private UiManager() {
         scoreField.setTextFill(Color.BLACK);
         scoreField.setFont(new Font("Balloon", 24));
         scoreField.setTranslateY(GameWindow.HEIGHT);
-        scoreField.setTranslateX(GameField.SIZEBLOCK*2);
+        scoreField.setTranslateX(GameField.SIZEBLOCK * 2);
     }
 
     public static UiManager getInstance() {
@@ -35,7 +35,8 @@ public class UiManager {
         GameWindow.getInstance().updateBackground();
         Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
         ObjectManager.getInstance().getCurrentFood().show(GameWindow.getInstance().getGraphicContext());
-        ObjectManager.getInstance().getCurrenObject().show(GameWindow.getInstance().getGraphicContext());
+        if (ObjectManager.getInstance().getCurrenObject() != null)
+            ObjectManager.getInstance().getCurrenObject().show(GameWindow.getInstance().getGraphicContext());
     }
 
     public Stage getCurrentStage() {
