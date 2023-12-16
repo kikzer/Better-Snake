@@ -3,7 +3,7 @@ package Environment.Food;
 import Environment.IObject;
 import Environment.Position;
 
-public class FoodFactory implements IObjectFactory {
+public class FoodFactory{
 
     public static IObject createFood(FoodNames foodType, Position position){
         switch(foodType){

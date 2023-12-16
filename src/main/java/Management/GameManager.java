@@ -39,26 +39,35 @@ public class GameManager {
         return instance;
     }
 
-    private void updateGameState() {
-        if (!FoodManager.getInstance().getFoodExisting()) {
-            FoodManager.getInstance().setFoodExisting(true);
-            FoodManager.getInstance().createFood();
+    private void spawnTreasure(){
+        int storage = 0;
+        if(ObjectManager.getInstance().getObstacleExisting()){
+            storage = Score.getInstance().getScore();
+            
         }
 
-        if (!ObstacleManager.getInstance().getObstacleExisting()) {
-            ObstacleManager.getInstance().setObstacleExisting(true);
-            ObstacleManager.getInstance().createObstacle();
+    }
+
+    private void updateGameState() {
+        if (!ObjectManager.getInstance().getFoodExisting()) {
+            ObjectManager.getInstance().setFoodExisting(true);
+            ObjectManager.getInstance().createFood();
+        }
+
+        if (!ObjectManager.getInstance().getObstacleExisting()) {
+            ObjectManager.getInstance().setObstacleExisting(true);
+            ObjectManager.getInstance().createObstacle();
         }
         for (int i = 1; i < Snake.getInstance().getPositions().size() - 1; i++) {
-            if (Snake.getInstance().getPositions().get(i).getX() == FoodManager.getInstance().getCurrentFood().getPosition().getX() &&
-                    Snake.getInstance().getPositions().get(i).getY() == FoodManager.getInstance().getCurrentFood().getPosition().getY()) {
-                FoodManager.getInstance().createFood();
+            if (Snake.getInstance().getPositions().get(i).getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
+                    Snake.getInstance().getPositions().get(i).getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY()) {
+                ObjectManager.getInstance().createFood();
             }
         }
-        if (ObstacleManager.getInstance().getCurrenObject().getPosition().getX() == FoodManager.getInstance().getCurrentFood().getPosition().getX() &&
-                ObstacleManager.getInstance().getCurrenObject().getPosition().getY() == FoodManager.getInstance().getCurrentFood().getPosition().getY()) {
+        if (ObjectManager.getInstance().getCurrenObject().getPosition().getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
+                ObjectManager.getInstance().getCurrenObject().getPosition().getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY()) {
 
-            FoodManager.getInstance().createFood();
+            ObjectManager.getInstance().createFood();
         }
 
         checkCollision();
@@ -103,11 +112,11 @@ public class GameManager {
 
 
     public void checkCollision() {
-        if (FoodManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
-                FoodManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
-                FoodManager.getInstance().getCurrentFood().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
-                FoodManager.getInstance().getCurrentFood().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
-            FoodManager.getInstance().createFood();
+        if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+                ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
+                ObjectManager.getInstance().getCurrentFood().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
+                ObjectManager.getInstance().getCurrentFood().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
+            ObjectManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + 1);
 
@@ -119,7 +128,7 @@ public class GameManager {
                 Snake.getInstance().setGameOver(true);
             } else {
                 Score.getInstance().setScore(Score.getInstance().getScore() + 5);
-                ObstacleManager.getInstance().createObstacle();
+                ObjectManager.getInstance().createObstacle();
             }
 
         } else {
