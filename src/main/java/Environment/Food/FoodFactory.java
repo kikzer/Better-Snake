@@ -1,7 +1,6 @@
 package Environment.Food;
 
 import Environment.IObject;
-import Environment.IObjectFactory;
 import Environment.Position;
 
 public class FoodFactory implements IObjectFactory {

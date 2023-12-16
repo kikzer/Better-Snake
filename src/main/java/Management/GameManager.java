@@ -111,12 +111,11 @@ public class GameManager {
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + 1);
 
-            System.out.println("Counter: " + Score.getInstance().getScore());
-        } else if (ObstacleManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
-                ObstacleManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
-                ObstacleManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
-                ObstacleManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
-            if (ObstacleManager.getInstance().getCurrenObject().isBlocked()) {
+        } else if (ObjectManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+                ObjectManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
+                ObjectManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
+                ObjectManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
+            if (ObjectManager.getInstance().getCurrenObject().isBlocked()) {
                 Snake.getInstance().setGameOver(true);
             } else {
                 Score.getInstance().setScore(Score.getInstance().getScore() + 5);
