@@ -16,6 +16,8 @@ import java.util.TimerTask;
 
 public class GameManager {
     private static GameManager instance;
+
+    private boolean gameWon = false;
     public Timer gameTick = new Timer();
     TimerTask moveSnake = new TimerTask() {
         @Override
@@ -48,6 +50,20 @@ public class GameManager {
             if(Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null){
                 ObjectManager.getInstance().setObstacleExisting(false);
             }
+        }
+    }
+
+    //TODO DO IT
+    private void checkWinningCondition(){
+        int destinationSize = 0;
+        for (int i = 0; i < GameWindow.WIDTH/GameField.SIZEBLOCK; i++) {
+            for (int j = 0; j < GameWindow.HEIGHT/GameField.SIZEBLOCK; j++) {
+                /*
+                CHECK EVERY TILE ==> IS TILE FREE
+                --> IF EVERY TILE IS BLOCKED BY THE PLAYER OR A WALL THAN THE GAME IS WON
+                 */
+            }
+
         }
     }
 
