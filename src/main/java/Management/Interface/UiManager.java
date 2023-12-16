@@ -1,13 +1,10 @@
 package Management.Interface;
 
 import Environment.GameField;
-import Management.FoodManager;
-import Management.ObstacleManager;
+import Management.ObjectManager;
 import Management.SnakeManagement.Snake;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -37,8 +34,8 @@ public class UiManager {
     public void updateGameField() {
         GameWindow.getInstance().updateBackground();
         Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
-        FoodManager.getInstance().getCurrentFood().show(GameWindow.getInstance().getGraphicContext());
-        ObstacleManager.getInstance().getCurrenObject().show(GameWindow.getInstance().getGraphicContext());
+        ObjectManager.getInstance().getCurrentFood().show(GameWindow.getInstance().getGraphicContext());
+        ObjectManager.getInstance().getCurrenObject().show(GameWindow.getInstance().getGraphicContext());
     }
 
     public Stage getCurrentStage() {
