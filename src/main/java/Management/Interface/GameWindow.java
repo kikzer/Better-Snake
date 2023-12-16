@@ -30,7 +30,7 @@ public class GameWindow extends Application{
 
 
     private final Group root = new Group(canvas);
-    private final Scene gameScene = new Scene(root, WIDTH, HEIGHT);
+    private final Scene gameScene = new Scene(root, WIDTH, HEIGHT+50);
 
     public static GameWindow getInstance(){
         if(instance == null){

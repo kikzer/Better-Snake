@@ -1,28 +1,15 @@
 package Environment.Obstacle;
 
+import Environment.GameField;
+import Environment.AObject;
 import Environment.Position;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
-public class Wall extends AObstacle {
+public class Wall extends AObject {
 
-    public Wall(int x, int y) {
-        super(x, y);
-    }
-
-
-
-    @Override
-    public void show(GraphicsContext graphicsContext) {
-
-    }
-
-    @Override
-    public Position getPosition() {
-        return null;
-    }
-
-    @Override
-    public void setPosition(Position position) {
-
+    public Wall(Position position) {
+        super(position);
+        setBlocked(true);
+        setAppearance(new Image("file:src/main/java/Environment/Obstacle/ObstacleImages/wallBlock.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
     }
 }

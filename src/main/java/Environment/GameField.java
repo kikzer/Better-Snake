@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 
 public class GameField {
-    public static final int SIZE_BLOCK = 25;
+    public static final int SIZEBLOCK = 25;
     private final int row = GameWindow.WIDTH /getSizeBlock();
 
     private final Canvas canvas;
@@ -39,7 +39,7 @@ public class GameField {
     }
 
     public int getSizeBlock() {
-        return SIZE_BLOCK;
+        return SIZEBLOCK;
     }
 
     public int getRow() {

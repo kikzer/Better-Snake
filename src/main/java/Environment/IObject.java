@@ -9,5 +9,9 @@ public interface IObject {
 
     void setPosition(Position position);
 
+    boolean isBlocked();
+
+    void setBlocked(boolean blocked);
+
 }
 

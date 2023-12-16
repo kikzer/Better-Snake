@@ -28,11 +28,21 @@ public class Snake {
     private static Snake instance;
 
     private Snake() {
-        positions.add(new Position(10 * GameField.SIZE_BLOCK, 5 * GameField.SIZE_BLOCK));
+        positions.add(new Position(10 * GameField.SIZEBLOCK, 5 * GameField.SIZEBLOCK));
         for (int i = 1; i < 8; i++) {
-            positions.add(new Position(10 * GameField.SIZE_BLOCK, (5 * GameField.SIZE_BLOCK - (GameField.SIZE_BLOCK*i))));
+            positions.add(new Position(10 * GameField.SIZEBLOCK, (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
         }
 
+    }
+
+    public void reset(){
+        direction = 1;
+        positions.clear();
+        positions.add(new Position(10 * GameField.SIZEBLOCK, 5 * GameField.SIZEBLOCK));
+        for (int i = 1; i < 8; i++) {
+            positions.add(new Position(10 * GameField.SIZEBLOCK, (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
+        }
+        gameOver = false;
     }
 
     public static Snake getInstance(){
@@ -100,8 +110,8 @@ public class Snake {
 
         if (!gameOver) {
             decideDirections();
-            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameField.SIZE_BLOCK,
-                    positions.get(0).getY() + getDirectionY()[getDirections()] * GameField.SIZE_BLOCK));
+            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameField.SIZEBLOCK,
+                    positions.get(0).getY() + getDirectionY()[getDirections()] * GameField.SIZEBLOCK));
 
             if (!growing) {
                 positions.remove(positions.size() - 1);
@@ -120,13 +130,13 @@ public class Snake {
 
     private void checkBorder() {
         if (positions.get(0).getX() < 0) {
-            positions.get(0).setX(GameWindow.WIDTH - GameField.SIZE_BLOCK);
-        } else if (positions.get(0).getX() > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
+            positions.get(0).setX(GameWindow.WIDTH - GameField.SIZEBLOCK);
+        } else if (positions.get(0).getX() > GameWindow.WIDTH - GameField.SIZEBLOCK) {
             positions.get(0).setX(0);
-        } else if (positions.get(0).getY() > GameWindow.WIDTH - GameField.SIZE_BLOCK) {
+        } else if (positions.get(0).getY() > GameWindow.WIDTH - GameField.SIZEBLOCK) {
             positions.get(0).setY(0);
         } else if (positions.get(0).getY() < 0) {
-            positions.get(0).setY(GameWindow.WIDTH - GameField.SIZE_BLOCK);
+            positions.get(0).setY(GameWindow.WIDTH - GameField.SIZEBLOCK);
         }
     }
 
@@ -136,9 +146,9 @@ public class Snake {
 
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.GREENYELLOW);
-        positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK));
+        positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK));
         graphicsContext.setFill(Color.RED);
-        graphicsContext.fillRect(positions.get(0).getX(), positions.get(0).getY(), GameField.SIZE_BLOCK, GameField.SIZE_BLOCK);
+        graphicsContext.fillRect(positions.get(0).getX(), positions.get(0).getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK);
 
     }
 
