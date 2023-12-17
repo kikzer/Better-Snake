@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * manages the visual part of the game and creates the score in the lower left corner
+ * of the game window
+ */
 public class UiManager {
     private final ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
@@ -31,6 +35,11 @@ public class UiManager {
         return instance;
     }
 
+    /**
+     * updates the visual part of the Game.
+     * it also has a safety modification, so that treasure can only be shown
+     * if it's not null
+     */
     public void updateGameField() {
         GameWindow.getInstance().updateBackground();
         Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
