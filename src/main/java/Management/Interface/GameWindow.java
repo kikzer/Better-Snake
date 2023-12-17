@@ -4,7 +4,6 @@ import Environment.GameField;
 import Management.GameManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -16,8 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * by using the Application class, the GameWindow is the start point of
@@ -50,10 +47,6 @@ public class GameWindow extends Application{
 
     }
 
-    public Group getRoot() {
-        return root;
-    }
-
     public Scene getGameScene() {
         return gameScene;
     }
@@ -64,10 +57,6 @@ public class GameWindow extends Application{
 
     public GraphicsContext getGraphicContext() {
         return graphicContext;
-    }
-
-    public Canvas getCanvas() {
-        return canvas;
     }
 
     /**
