@@ -74,20 +74,6 @@ public class GameManager {
         }
     }
 
-    //TODO DO IT
-    private void checkWinningCondition(){
-        int destinationSize = 0;
-        for (int i = 0; i < GameWindow.WIDTH/GameField.SIZEBLOCK; i++) {
-            for (int j = 0; j < GameWindow.HEIGHT/GameField.SIZEBLOCK; j++) {
-                /*
-                CHECK EVERY TILE ==> IS TILE FREE
-                --> IF EVERY TILE IS BLOCKED BY THE PLAYER OR A WALL THAN THE GAME IS WON
-                 */
-            }
-
-        }
-    }
-
     /**
      * updates the position of food and the treasure-box on the field.
      * if food and treasure are on the same tile, a new position of the food will be generated.
