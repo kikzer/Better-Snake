@@ -5,6 +5,9 @@ import Environment.AObject;
 import Environment.Position;
 import javafx.scene.image.Image;
 
+/**
+ * a treasure box which can be placed in a 2D Environment using the Position class
+ */
 public class Treasure extends AObject {
 
 
