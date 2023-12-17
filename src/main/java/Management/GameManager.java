@@ -19,6 +19,10 @@ public class GameManager {
 
     private boolean gameWon = false;
     public Timer gameTick = new Timer();
+
+    /**
+     * Tick system which makes it possible to have a working game flow using Runnable
+     */
     TimerTask moveSnake = new TimerTask() {
         @Override
         public void run() {
@@ -41,6 +45,9 @@ public class GameManager {
         return instance;
     }
 
+    /**
+     * spawns a Treasure-box every 15 points on a random tile of the game field
+     */
     private void spawnTreasure() {
         int storage = 0;
         if (ObjectManager.getInstance().getCurrenObject() == null && !ObjectManager.getInstance().getObstacleExisting()) {
@@ -67,6 +74,10 @@ public class GameManager {
         }
     }
 
+    /**
+     * updates the position of food and the treasure-box on the field.
+     * if food and treasure are on the same tile, a new position of the food will be generated.
+     */
     private void updateGameState() {
         if (!ObjectManager.getInstance().getFoodExisting()) {
             ObjectManager.getInstance().setFoodExisting(true);
@@ -96,6 +107,10 @@ public class GameManager {
         return moveSnake;
     }
 
+    /**
+     * uses key inputs to let the snake move and reset the game
+     * @param gameScene main scene of the game Snake
+     */
     public void keyHandler(Scene gameScene) {
         gameScene.setOnKeyPressed(keyEvent -> {
             switch (keyEvent.getCode()) {
@@ -122,6 +137,12 @@ public class GameManager {
     }
 
 
+    /**
+     * checks if the player is on an eatable or obstacle object.
+     * if the player is on one, it creates a new eatable object or if
+     * it is a wall its game over.
+     * in addition, there will be added points to the score if the object was eatable
+     */
     public void checkCollision() {
         if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
@@ -150,6 +171,9 @@ public class GameManager {
         });
     }
 
+    /**
+     * resets the gamestate to the starting position
+     */
     public void gameReset() {
         Snake.getInstance().reset();
         Score.getInstance().reset();
