@@ -9,6 +9,11 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * this class represents the player aka the snake, which is being used to play
+ * the game better snake. the snake can move, kill itself, has a death animation when it's dead
+ * and can't walk out of the game field because of a teleport function.
+ */
 public class Snake {
 
     private final ArrayList<Position> positions = new ArrayList<Position>();
@@ -35,6 +40,9 @@ public class Snake {
 
     }
 
+    /**
+     * resets the snake to it's starting position and condition
+     */
     public void reset(){
         direction = 1;
         positions.clear();
@@ -52,6 +60,10 @@ public class Snake {
         return instance;
     }
 
+    /**
+     * by using enum entries, the direction of the snake gets managed.
+     * it's also impossible to do a 180, so that the snake instantly dies
+     */
     private void decideDirections() {
         switch (getDirectionEnum()) {
             case UP -> {
@@ -89,6 +101,10 @@ public class Snake {
         this.gameOver = gameOver;
     }
 
+    /**
+     * if the snake ate itself, it slowly gets deleted tick by tick from the tail to the head
+     * (until the list is only one big)
+     */
     public void selfDestroy() {
         if (gameOver) {
             if (positions.size() - 1 > 0) {
@@ -106,6 +122,9 @@ public class Snake {
 
     }
 
+    /**
+     * lets the snake move, if it isn't dead, by 25px per tick
+     */
     public void move() {
 
         if (!gameOver) {
@@ -128,6 +147,9 @@ public class Snake {
         this.growing = growing;
     }
 
+    /**
+     * if the snake moves out of the border, it gets teleported on the other side where it went out
+     */
     private void checkBorder() {
         if (positions.get(0).getX() < 0) {
             positions.get(0).setX(GameWindow.WIDTH - GameField.SIZEBLOCK);
@@ -144,6 +166,10 @@ public class Snake {
         return positions;
     }
 
+    /**
+     * draws the player. the head has the color red and the body the color greenyellow
+     * @param graphicsContext lets the draw function draw and needs to be out of the GameWindow class
+     */
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.GREENYELLOW);
         positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK));
