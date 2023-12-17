@@ -2,7 +2,10 @@ package Management.Interface;
 
 import javafx.stage.Stage;
 
-
+/**
+ * creates a score for the game Better Snake with different Score points for different
+ * eatable Objects
+ */
 public class Score {
     private static Score instance;
     private int score = 0;
