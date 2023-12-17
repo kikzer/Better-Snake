@@ -11,6 +11,10 @@ import Management.SnakeManagement.Snake;
 
 import java.util.Random;
 
+/**
+ * manages the creation of the different food and the treasure by using random coordinates and
+ * selectors which decide randomly
+ */
 public class ObjectManager {
     public IObject currentFood;
     private final FoodNames[] foodNames = FoodNames.values();
@@ -39,6 +43,11 @@ public class ObjectManager {
         return foodNames[rnd.nextInt(foodNames.length - 1)];
     }
 
+    /**
+     * generates a random Position object within the gamefield and checks if it is on the current player position.
+     * if so, it creates new coordinates in 2D
+     * @return Position object with random coordinates
+     */
     private Position randomCoordinate() {
         Position coordinate = new Position(rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK,
                 rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK);
