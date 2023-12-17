@@ -35,10 +35,17 @@ public class ObjectManager {
         return instance;
     }
 
+    /**
+     * creates a random Food object using random coordinates
+     */
     public void createFood() {
         currentFood = FoodFactory.createFood(randomFood(), randomCoordinate());
     }
 
+    /**
+     * picks a random food in the enum class
+     * @return Enum type of food
+     */
     private FoodNames randomFood() {
         return foodNames[rnd.nextInt(foodNames.length - 1)];
     }
@@ -80,6 +87,9 @@ public class ObjectManager {
         this.obstacleExisting = obstacleExisting;
     }
 
+    /**
+     * creates a treasure on a random tile
+     */
     public void createObstacle() {
         currenObject = new Treasure(randomCoordinate());
     }
