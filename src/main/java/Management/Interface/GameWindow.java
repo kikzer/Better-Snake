@@ -2,6 +2,7 @@ package Management.Interface;
 
 import Environment.GameField;
 import Management.GameManager;
+import Management.ObjectManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -97,6 +98,7 @@ public class GameWindow extends Application{
         stage.setTitle("Better Snake");
         stage.setScene(getGameScene());
         root.getChildren().add(UiManager.getInstance().getScoreField());
+        ObjectManager.getInstance().createWallStructures();
         GameManager.getInstance();
         stage.setResizable(false);
         stage.show();

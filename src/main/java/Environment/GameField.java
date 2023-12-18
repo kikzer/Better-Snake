@@ -1,6 +1,8 @@
 package Environment;
 
+import Environment.Obstacle.ObstacleFactory;
 import Management.Interface.GameWindow;
+import Management.ObjectManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;

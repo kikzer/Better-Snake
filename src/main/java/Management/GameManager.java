@@ -43,7 +43,6 @@ public class GameManager {
         int storage = 0;
         if(ObjectManager.getInstance().getObstacleExisting()){
             storage = Score.getInstance().getScore();
-            
         }
 
     }

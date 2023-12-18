@@ -4,6 +4,8 @@ import Environment.Food.FoodFactory;
 import Environment.Food.FoodNames;
 import Environment.GameField;
 import Environment.IObject;
+import Environment.IWallStructure;
+import Environment.Obstacle.ObstacleFactory;
 import Environment.Obstacle.Treasure;
 import Environment.Position;
 import Management.Interface.GameWindow;
@@ -12,6 +14,7 @@ import java.util.Random;
 
 public class ObjectManager {
     public IObject currentFood;
+    public IWallStructure[] wallStructures = new IWallStructure[4];
     private final FoodNames[] foodNames = FoodNames.values();
     private final Random rnd = new Random();
 
@@ -32,6 +35,12 @@ public class ObjectManager {
 
     public void createFood() {
         currentFood = FoodFactory.createFood(randomFood(), new Position(randomCoordinate(), randomCoordinate()));
+    }
+
+    public void createWallStructures(){
+        for(int i = 0; i < 4; i++){
+            wallStructures[i] = ObstacleFactory.createObstacle(i+1);
+        }
     }
 
     private FoodNames randomFood() {
@@ -68,5 +77,9 @@ public class ObjectManager {
 
     public IObject getCurrenObject() {
         return currenObject;
+    }
+
+    public IWallStructure[] getWallStructures() {
+        return wallStructures;
     }
 }
