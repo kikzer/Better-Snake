@@ -32,7 +32,7 @@ public class WallStructure {
                 return new Position(8,17);
             }
             default->{
-                return new Position(8,8);
+                return null;
             }
         }
     }
