@@ -5,7 +5,6 @@ import Management.GameManager;
 import Management.ObjectManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -17,9 +16,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
+/**
+ * by using the Application class, the GameWindow is the start point of
+ * the game Better Snake.
+ * from there on, the game gets created and started using the thread in the start() method.
+ */
 public class GameWindow extends Application{
 
     public final static int WIDTH = 600, HEIGHT = 600;
@@ -46,10 +48,6 @@ public class GameWindow extends Application{
 
     }
 
-    public Group getRoot() {
-        return root;
-    }
-
     public Scene getGameScene() {
         return gameScene;
     }
@@ -62,10 +60,10 @@ public class GameWindow extends Application{
         return graphicContext;
     }
 
-    public Canvas getCanvas() {
-        return canvas;
-    }
-
+    /**
+     * if the game has been lost, it switches to the game over screen, which lets the game restart
+     * @param stage better snake stage (program window)
+     */
     public void createGameOverScene(Stage stage) {
         StackPane root = new StackPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -93,6 +91,11 @@ public class GameWindow extends Application{
         stage.show();
     }
 
+    /**
+     * creates the game scene, so that Better Snake can be played. in addition, starts the game tick
+     * @param stage better snake stage (program window)
+     * @throws IOException important for GameManager
+     */
     public void createGame(Stage stage) throws IOException {
         graphicContext = canvas.getGraphicsContext2D();
         stage.setTitle("Better Snake");
