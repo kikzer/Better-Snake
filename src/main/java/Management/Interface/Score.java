@@ -7,6 +7,8 @@ public class Score {
     private static Score instance;
     private int score = 0;
 
+    private final int foodPoint = 1, treasurePoint = 5;
+
     public static Score getInstance(){
         if(instance == null){
             instance = new Score();
@@ -24,5 +26,13 @@ public class Score {
 
     public void reset(){
         score = 0;
+    }
+
+    public int getFoodPoint() {
+        return foodPoint;
+    }
+
+    public int getTreasurePoint() {
+        return treasurePoint;
     }
 }

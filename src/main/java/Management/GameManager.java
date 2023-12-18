@@ -117,7 +117,7 @@ public class GameManager {
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
             ObjectManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
-            Score.getInstance().setScore(Score.getInstance().getScore() + 1);
+            Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getFoodPoint());
 
         } else if (ObjectManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
@@ -126,7 +126,7 @@ public class GameManager {
             if (ObjectManager.getInstance().getCurrenObject().isBlocked()) {
                 Snake.getInstance().setGameOver(true);
             } else {
-                Score.getInstance().setScore(Score.getInstance().getScore() + 5);
+                Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
                 ObjectManager.getInstance().createObstacle();
             }
 
