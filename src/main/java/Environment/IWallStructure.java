@@ -1,5 +1,6 @@
 package Environment;
 
+import Environment.Obstacle.Wall;
 import Environment.Obstacle.WallForms;
 
 public interface IWallStructure {
@@ -8,4 +9,6 @@ public interface IWallStructure {
     void createStructure(WallForms form);
 
     void showStructure();
+
+    Wall[] getWalls();
 }

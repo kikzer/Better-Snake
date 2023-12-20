@@ -1,6 +1,8 @@
 package Management;
 
 import Environment.GameField;
+import Environment.IWallStructure;
+import Environment.Obstacle.Wall;
 import Management.Interface.GameWindow;
 import Management.Interface.Score;
 import Management.Interface.UiManager;
@@ -49,22 +51,18 @@ public class GameManager {
      * spawns a Treasure-box every 15 points on a random tile of the game field
      */
     private void spawnTreasure() {
-        int storage = 0;
-
-        if(ObjectManager.getInstance().getObstacleExisting()){
-            storage = Score.getInstance().getScore();
-
         if (ObjectManager.getInstance().getCurrenObject() == null && !ObjectManager.getInstance().getObstacleExisting()) {
             ObjectManager.getInstance().setObstacleExisting(true);
             ObjectManager.getInstance().createObstacle();
+            System.out.println("new treasure");
         }else{
             if(Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null){
                 ObjectManager.getInstance().setObstacleExisting(false);
+                System.out.println("no treasure");
             }
         }
     }
 
-    //TODO DO IT
     private void checkWinningCondition(){
         int destinationSize = 0;
         for (int i = 0; i < GameWindow.WIDTH/GameField.SIZEBLOCK; i++) {
@@ -99,6 +97,7 @@ public class GameManager {
 
             ObjectManager.getInstance().createFood();
         }
+
         checkCollision();
     }
 

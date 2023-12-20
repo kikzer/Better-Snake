@@ -79,6 +79,7 @@ public class WallStructure implements IWallStructure {
         this.form = form;
     }
 
+    @Override
     public Wall[] getWalls() {
         return walls;
     }
