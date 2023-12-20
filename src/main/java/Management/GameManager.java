@@ -3,6 +3,7 @@ package Management;
 import Environment.GameField;
 import Environment.IWallStructure;
 import Environment.Obstacle.Wall;
+import Environment.Obstacle.WallStructure;
 import Management.Interface.GameWindow;
 import Management.Interface.Score;
 import Management.Interface.UiManager;
@@ -55,18 +56,18 @@ public class GameManager {
             ObjectManager.getInstance().setObstacleExisting(true);
             ObjectManager.getInstance().createObstacle();
             System.out.println("new treasure");
-        }else{
-            if(Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null){
+        } else {
+            if (Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null) {
                 ObjectManager.getInstance().setObstacleExisting(false);
                 System.out.println("no treasure");
             }
         }
     }
 
-    private void checkWinningCondition(){
+    private void checkWinningCondition() {
         int destinationSize = 0;
-        for (int i = 0; i < GameWindow.WIDTH/GameField.SIZEBLOCK; i++) {
-            for (int j = 0; j < GameWindow.HEIGHT/GameField.SIZEBLOCK; j++) {
+        for (int i = 0; i < GameWindow.WIDTH / GameField.SIZEBLOCK; i++) {
+            for (int j = 0; j < GameWindow.HEIGHT / GameField.SIZEBLOCK; j++) {
                 /*
                 CHECK EVERY TILE ==> IS TILE FREE
                 --> IF EVERY TILE IS BLOCKED BY THE PLAYER OR A WALL THAN THE GAME IS WON
@@ -111,6 +112,7 @@ public class GameManager {
 
     /**
      * uses key inputs to let the snake move and reset the game
+     *
      * @param gameScene main scene of the game Snake
      */
     public void keyHandler(Scene gameScene) {
@@ -146,6 +148,14 @@ public class GameManager {
      * in addition, there will be added points to the score if the object was eatable
      */
     public void checkCollision() {
+        for (IWallStructure wallStructure: ObjectManager.getInstance().getWallStructures()) {
+            for (Wall wall : wallStructure.getWalls()) {
+                if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
+                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
+                    Snake.getInstance().setGameOver(true);
+                }
+            }
+        }
         if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
@@ -158,12 +168,8 @@ public class GameManager {
                 ObjectManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK)) {
-            if (ObjectManager.getInstance().getCurrenObject().isBlocked()) {
-                Snake.getInstance().setGameOver(true);
-            } else {
-                Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
-                ObjectManager.getInstance().setCurrenObject(null);
-            }
+            Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
+            ObjectManager.getInstance().setCurrenObject(null);
 
         } else {
             Snake.getInstance().setGrowing(false);
@@ -179,5 +185,7 @@ public class GameManager {
     public void gameReset() {
         Snake.getInstance().reset();
         Score.getInstance().reset();
+        ObjectManager.getInstance().createObstacle();
+        ObjectManager.getInstance().createFood();
     }
 }

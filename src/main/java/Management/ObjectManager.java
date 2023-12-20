@@ -7,6 +7,7 @@ import Environment.IObject;
 import Environment.IWallStructure;
 import Environment.Obstacle.ObstacleFactory;
 import Environment.Obstacle.Treasure;
+import Environment.Obstacle.Wall;
 import Environment.Position;
 import Management.Interface.GameWindow;
 import Management.SnakeManagement.Snake;
@@ -55,6 +56,15 @@ public class ObjectManager {
             if(position.equals(coordinate)){
                 randomCoordinate();
                 break;
+            }
+        }
+        for (IWallStructure wallStructure: getWallStructures()) {
+            for (Wall wall : wallStructure.getWalls()) {
+                if (wall.getPosition().getX() == coordinate.getX() &&
+                        coordinate.getY() == wall.getPosition().getY()){
+                    randomCoordinate();
+                    break;
+                }
             }
         }
         return coordinate;

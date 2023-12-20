@@ -66,8 +66,8 @@ public class WallStructure implements IWallStructure {
 
     @Override
     public void showStructure() {
-        for(int i = 0; i< walls.length;i++){
-            walls[i].show(GameWindow.getInstance().getGraphicContext());
+        for (Wall wall : walls) {
+            wall.show(GameWindow.getInstance().getGraphicContext());
         }
     }
 

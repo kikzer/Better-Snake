@@ -28,14 +28,16 @@ public class Snake {
 
     private boolean growing = false;
 
+    private Position startPosition = new Position(10 * GameField.SIZEBLOCK + 50, 5 * GameField.SIZEBLOCK);
+
     private Directions directionEnum = Directions.UP;
 
     private static Snake instance;
 
     private Snake() {
-        positions.add(new Position(10 * GameField.SIZEBLOCK, 5 * GameField.SIZEBLOCK));
+        positions.add(startPosition);
         for (int i = 1; i < 8; i++) {
-            positions.add(new Position(10 * GameField.SIZEBLOCK, (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
+            positions.add(new Position(startPosition.getX(), (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
         }
 
     }
@@ -46,9 +48,9 @@ public class Snake {
     public void reset(){
         direction = 1;
         positions.clear();
-        positions.add(new Position(10 * GameField.SIZEBLOCK, 5 * GameField.SIZEBLOCK));
+        positions.add(startPosition);
         for (int i = 1; i < 8; i++) {
-            positions.add(new Position(10 * GameField.SIZEBLOCK, (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
+            positions.add(new Position(startPosition.getX(), (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
         }
         gameOver = false;
     }
