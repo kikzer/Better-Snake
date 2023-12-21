@@ -125,19 +125,19 @@ public class GameManager {
             switch (keyEvent.getCode()) {
                 case UP -> {
                     Snake.getInstance().setDirectionEnum(Directions.UP);
-                    keyInputLogger.log(Level.INFO, "UP-Button pressed");
+                    keyInputLogger.log(Level.TRACE, "UP-Button pressed");
                 }
                 case DOWN -> {
                     Snake.getInstance().setDirectionEnum(Directions.DOWN);
-                    keyInputLogger.log(Level.INFO, "DOWN-Button pressed");
+                    keyInputLogger.log(Level.TRACE, "DOWN-Button pressed");
                 }
                 case LEFT -> {
                     Snake.getInstance().setDirectionEnum(Directions.LEFT);
-                    keyInputLogger.log(Level.INFO, "LEFT-Button pressed");
+                    keyInputLogger.log(Level.TRACE, "LEFT-Button pressed");
                 }
                 case RIGHT -> {
                     Snake.getInstance().setDirectionEnum(Directions.RIGHT);
-                    keyInputLogger.log(Level.INFO, "RIGHT-Button pressed");
+                    keyInputLogger.log(Level.TRACE, "RIGHT-Button pressed");
                 }
                 case R -> {
                     if (Snake.getInstance().isGameOver()) {

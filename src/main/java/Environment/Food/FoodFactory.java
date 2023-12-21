@@ -2,6 +2,7 @@ package Environment.Food;
 
 import Environment.IObject;
 import Environment.Position;
+import Exceptions.InvalidFoodTypeException;
 
 public class FoodFactory{
 
@@ -23,7 +24,7 @@ public class FoodFactory{
                 return new Banana(position);
             }
             default ->{
-                return null;
+                throw new InvalidFoodTypeException(String.valueOf(foodType));
             }
         }
     }
