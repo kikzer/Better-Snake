@@ -11,6 +11,7 @@ import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -124,15 +125,19 @@ public class GameManager {
             switch (keyEvent.getCode()) {
                 case UP -> {
                     Snake.getInstance().setDirectionEnum(Directions.UP);
+                    keyInputLogger.log(Level.INFO, "UP-Button pressed");
                 }
                 case DOWN -> {
                     Snake.getInstance().setDirectionEnum(Directions.DOWN);
+                    keyInputLogger.log(Level.INFO, "DOWN-Button pressed");
                 }
                 case LEFT -> {
                     Snake.getInstance().setDirectionEnum(Directions.LEFT);
+                    keyInputLogger.log(Level.INFO, "LEFT-Button pressed");
                 }
                 case RIGHT -> {
                     Snake.getInstance().setDirectionEnum(Directions.RIGHT);
+                    keyInputLogger.log(Level.INFO, "RIGHT-Button pressed");
                 }
                 case R -> {
                     if (Snake.getInstance().isGameOver()) {
