@@ -11,6 +11,8 @@ import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -19,6 +21,8 @@ import java.util.TimerTask;
 
 public class GameManager {
     private static GameManager instance;
+
+    private static final Logger keyInputLogger = LogManager.getLogger(GameManager.class);
 
     private boolean gameWon = false;
     public Timer gameTick = new Timer();
