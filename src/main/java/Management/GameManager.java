@@ -3,7 +3,6 @@ package Management;
 import Environment.GameField;
 import Environment.IWallStructure;
 import Environment.Obstacle.Wall;
-import Environment.Obstacle.WallStructure;
 import Management.Interface.GameWindow;
 import Management.Interface.Score;
 import Management.Interface.UiManager;
@@ -16,14 +15,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameManager {
     private static GameManager instance;
 
-    private static final Logger keyInputLogger = LogManager.getLogger(GameManager.class);
+    private static final Logger gameManagerLogger = LogManager.getLogger(GameManager.class);
 
     private boolean gameWon = false;
     public Timer gameTick = new Timer();
@@ -48,6 +46,7 @@ public class GameManager {
 
     public static GameManager getInstance() throws IOException {
         if (instance == null) {
+            gameManagerLogger.log(Level.DEBUG, "GameManager instance created");
             instance = new GameManager();
         }
         return instance;
@@ -60,11 +59,10 @@ public class GameManager {
         if (ObjectManager.getInstance().getCurrenObject() == null && !ObjectManager.getInstance().getObstacleExisting()) {
             ObjectManager.getInstance().setObstacleExisting(true);
             ObjectManager.getInstance().createObstacle();
-            System.out.println("new treasure");
+            gameManagerLogger.log(Level.DEBUG, "treasure spawned");
         } else {
             if (Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null) {
                 ObjectManager.getInstance().setObstacleExisting(false);
-                System.out.println("no treasure");
             }
         }
     }
@@ -125,19 +123,19 @@ public class GameManager {
             switch (keyEvent.getCode()) {
                 case UP -> {
                     Snake.getInstance().setDirectionEnum(Directions.UP);
-                    keyInputLogger.log(Level.TRACE, "UP-Button pressed");
+                    gameManagerLogger.log(Level.TRACE, "UP-Button pressed");
                 }
                 case DOWN -> {
                     Snake.getInstance().setDirectionEnum(Directions.DOWN);
-                    keyInputLogger.log(Level.TRACE, "DOWN-Button pressed");
+                    gameManagerLogger.log(Level.TRACE, "DOWN-Button pressed");
                 }
                 case LEFT -> {
                     Snake.getInstance().setDirectionEnum(Directions.LEFT);
-                    keyInputLogger.log(Level.TRACE, "LEFT-Button pressed");
+                    gameManagerLogger.log(Level.TRACE, "LEFT-Button pressed");
                 }
                 case RIGHT -> {
                     Snake.getInstance().setDirectionEnum(Directions.RIGHT);
-                    keyInputLogger.log(Level.TRACE, "RIGHT-Button pressed");
+                    gameManagerLogger.log(Level.TRACE, "RIGHT-Button pressed");
                 }
                 case R -> {
                     if (Snake.getInstance().isGameOver()) {
@@ -162,6 +160,7 @@ public class GameManager {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
                         wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
                     Snake.getInstance().setGameOver(true);
+                    gameManagerLogger.log(Level.DEBUG, "Snake ran into wall!");
                 }
             }
         }
@@ -169,6 +168,7 @@ public class GameManager {
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK) {
+            gameManagerLogger.log(Level.DEBUG, "Food eaten");
             ObjectManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getFoodPoint());
@@ -177,6 +177,7 @@ public class GameManager {
                 ObjectManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
                 ObjectManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK)) {
+            gameManagerLogger.log(Level.DEBUG, "Treasure opened");
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
             ObjectManager.getInstance().setCurrenObject(null);
 
@@ -196,5 +197,6 @@ public class GameManager {
         Score.getInstance().reset();
         ObjectManager.getInstance().createObstacle();
         ObjectManager.getInstance().createFood();
+        gameManagerLogger.log(Level.DEBUG, "Game reseted");
     }
 }
