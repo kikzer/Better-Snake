@@ -2,9 +2,13 @@ package Management.SnakeManagement;
 
 import Environment.GameField;
 import Environment.Position;
+import Management.GameManager;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,6 +38,7 @@ public class Snake {
 
     private static Snake instance;
 
+    private static final Logger snakeLogger = LogManager.getLogger(Snake.class);
     private Snake() {
         positions.add(startPosition);
         for (int i = 1; i < 8; i++) {
@@ -53,11 +58,13 @@ public class Snake {
             positions.add(new Position(startPosition.getX(), (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
         }
         gameOver = false;
+        snakeLogger.log(Level.DEBUG, "Snake reseted");
     }
 
     public static Snake getInstance(){
         if (instance == null){
             instance = new Snake();
+            snakeLogger.log(Level.DEBUG, "Snake instance created");
         }
         return instance;
     }
@@ -71,21 +78,25 @@ public class Snake {
             case UP -> {
                 if (getDirections() != 1) {
                     setDirection(0);
+                    snakeLogger.log(Level.TRACE, "Direction changed to UP");
                 }
             }
             case DOWN -> {
                 if (getDirections() != 0) {
                     setDirection(1);
+                    snakeLogger.log(Level.TRACE, "Direction changed to DOWN");
                 }
             }
             case LEFT -> {
                 if (getDirections() != 2) {
                     setDirection(3);
+                    snakeLogger.log(Level.TRACE, "Direction changed to LEFT");
                 }
             }
             case RIGHT -> {
                 if (getDirections() != 3) {
                     setDirection(2);
+                    snakeLogger.log(Level.TRACE, "Direction changed to RIGHT");
                 }
             }
         }
@@ -147,6 +158,9 @@ public class Snake {
 
     public void setGrowing(boolean growing) {
         this.growing = growing;
+        if(growing){
+            snakeLogger.log(Level.DEBUG, "Snake growed");
+        }
     }
 
     /**
@@ -177,7 +191,6 @@ public class Snake {
         positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK));
         graphicsContext.setFill(Color.RED);
         graphicsContext.fillRect(positions.get(0).getX(), positions.get(0).getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK);
-
     }
 
     public Directions getDirectionEnum() {
