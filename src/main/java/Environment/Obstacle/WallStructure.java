@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class WallStructure implements IWallStructure {
@@ -24,18 +23,20 @@ public class WallStructure implements IWallStructure {
         wallstructureLogger.log(Level.DEBUG, "Created Wallstructure Object");
     }
     public Position spawnFirstBlock(int quarterNumber){
+        final int width = GameWindow.WIDTH/GameField.SIZEBLOCK;
+        final int height = GameWindow.WIDTH/GameField.SIZEBLOCK;
         switch(quarterNumber){
             case 1 ->{
-                return new Position(8*GameField.SIZEBLOCK,8*GameField.SIZEBLOCK);
+                return new Position((width/4)*GameField.SIZEBLOCK,(height/4)*GameField.SIZEBLOCK);
             }
             case 2 ->{
-                return new Position(17*GameField.SIZEBLOCK,8*GameField.SIZEBLOCK);
+                return new Position(((width*3)/4)*GameField.SIZEBLOCK,(height/4)*GameField.SIZEBLOCK);
             }
             case 3 ->{
-                return new Position(17*GameField.SIZEBLOCK,17*GameField.SIZEBLOCK);
+                return new Position(((width*3)/4)*GameField.SIZEBLOCK,((height*3)/4)*GameField.SIZEBLOCK);
             }
             case 4 ->{
-                return new Position(8*GameField.SIZEBLOCK,17*GameField.SIZEBLOCK);
+                return new Position((width/4)*GameField.SIZEBLOCK,((height*3)/4)*GameField.SIZEBLOCK);
             }
             default->{
                 return null;

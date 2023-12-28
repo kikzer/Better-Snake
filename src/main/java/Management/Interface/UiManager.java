@@ -38,7 +38,6 @@ public class UiManager {
 
     public void updateGameField() {
         GameWindow.getInstance().updateBackground();
-        Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
         ObjectManager.getInstance().getCurrentFood().show(GameWindow.getInstance().getGraphicContext());
         if(ObjectManager.getInstance().getCurrenTreasure() != null){
             ObjectManager.getInstance().getCurrenTreasure().show(GameWindow.getInstance().getGraphicContext());
@@ -46,6 +45,8 @@ public class UiManager {
         for(int i = 0; i < ObjectManager.getInstance().getWallStructures().length;i++){
             ObjectManager.getInstance().getWallStructures()[i].showStructure();
         }
+        Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
+
     }
 
     public Stage getCurrentStage() {
