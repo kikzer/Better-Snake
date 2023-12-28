@@ -27,7 +27,7 @@ public class GameManager {
     private boolean gameWon = false;
     public Timer gameTick = new Timer();
 
-
+    private int gameSpeed = 200;
 
     /**
      * Tick system which makes it possible to have a working game flow using Runnable
@@ -46,7 +46,7 @@ public class GameManager {
     };
 
     private GameManager() {
-        getGameTick().schedule(getMoveSnake(), 0, 200);
+        getGameTick().schedule(getMoveSnake(), 0, gameSpeed);
     }
 
     public static GameManager getInstance() throws IOException {
@@ -167,6 +167,7 @@ public class GameManager {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
                         wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
                     Snake.getInstance().setGameOver(true);
+                    gameSpeed = 5;
                 }
             }
         }
@@ -212,6 +213,15 @@ public class GameManager {
         ObjectManager.getInstance().createTreasure();
         ObjectManager.getInstance().createFood();
         ObjectManager.getInstance().createWallStructures();
+        gameSpeed = 200;
         gameManagerLogger.log(Level.DEBUG, "Game reseted");
+    }
+
+    public int getGameSpeed() {
+        return gameSpeed;
+    }
+
+    public void setGameSpeed(int gameSpeed) {
+        this.gameSpeed = gameSpeed;
     }
 }
