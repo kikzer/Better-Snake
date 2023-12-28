@@ -37,8 +37,9 @@ public class GameManager {
     TimerTask moveSnake = new TimerTask() {
         @Override
         public void run() {
-            Snake.getInstance().move();
-            if(!Snake.getInstance().isGameOver() || !gameWon) {
+
+            if((!Snake.getInstance().isGameOver())) {
+                Snake.getInstance().move();
                 updateGameState();
             }else {
                 Score.getInstance().updateHighScoreFile();
@@ -93,7 +94,6 @@ public class GameManager {
             wallAmount += structure.getWalls().size();
         }
         winningCondition = (GameField.SIZEBLOCK*GameField.SIZEBLOCK)-wallAmount;
-        System.out.println(winningCondition);
     }
 
     private void checkWinningCondition() {
