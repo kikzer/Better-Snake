@@ -11,6 +11,9 @@ import Environment.Obstacle.Wall;
 import Environment.Position;
 import Management.Interface.GameWindow;
 import Management.SnakeManagement.Snake;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
@@ -23,6 +26,7 @@ public class ObjectManager {
     public IObject currenObject;
     private Boolean obstacleExisting = false;
 
+    private static final Logger objectManagerLogger = LogManager.getLogger(ObjectManager.class);
 
 
     private static ObjectManager instance;
@@ -31,6 +35,7 @@ public class ObjectManager {
     public static ObjectManager getInstance() {
         if (instance == null) {
             instance = new ObjectManager();
+            objectManagerLogger.log(Level.DEBUG, "ObjectManager instance created!");
         }
         return instance;
     }
@@ -54,6 +59,7 @@ public class ObjectManager {
                 rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK);
         for ( Position position : Snake.getInstance().getPositions()) {
             if(position.equals(coordinate)){
+                objectManagerLogger.log(Level.DEBUG, "Coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" invalid (on Snake) creating new coordinate");
                 randomCoordinate();
                 break;
             }
@@ -62,11 +68,13 @@ public class ObjectManager {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.getPosition().getX() == coordinate.getX() &&
                         coordinate.getY() == wall.getPosition().getY()){
+                    objectManagerLogger.log(Level.DEBUG, "Coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" invalid (on Wall) creating new coordinate");
                     randomCoordinate();
                     break;
                 }
             }
         }
+        objectManagerLogger.log(Level.DEBUG, "New valid coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" created");
         return coordinate;
     }
 
