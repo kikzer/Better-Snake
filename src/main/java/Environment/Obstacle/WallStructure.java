@@ -4,6 +4,9 @@ import Environment.GameField;
 import Environment.IWallStructure;
 import Environment.Position;
 import Management.Interface.GameWindow;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,10 +16,12 @@ public class WallStructure implements IWallStructure {
     Random rnd = new Random();
     Wall[] walls = new Wall[4];
     WallForms[] formsArray = WallForms.values();
+    private static final Logger wallstructureLogger = LogManager.getLogger(WallStructure.class);
     public WallStructure(int quarterNumber){
         walls[0] = new Wall(spawnFirstBlock(quarterNumber));
         form = formsArray[rnd.nextInt(0,4)];
         createStructure(form);
+        wallstructureLogger.log(Level.DEBUG, "Created Wallstructure Object");
     }
     public Position spawnFirstBlock(int quarterNumber){
         switch(quarterNumber){
@@ -61,6 +66,9 @@ public class WallStructure implements IWallStructure {
                 walls[2] = new Wall(new Position(walls[1].getPosition().getX(),walls[1].getPosition().getY()+GameField.SIZEBLOCK));
                 walls[3] = new Wall(new Position(walls[2].getPosition().getX()+GameField.SIZEBLOCK,walls[2].getPosition().getY()));
             }
+        }
+        for(Wall wall : walls){
+            wallstructureLogger.log(Level.DEBUG, "Wall created at X: "+wall.getPosition().getX()+", Y: "+wall.getPosition().getY());
         }
     }
 
