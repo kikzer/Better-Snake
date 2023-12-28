@@ -41,6 +41,7 @@ public class Snake {
     private static final Logger snakeLogger = LogManager.getLogger(Snake.class);
     private Snake() {
         positions.add(startPosition);
+        positions.add(new Position(startPosition.getX(),startPosition.getY()-GameField.SIZEBLOCK));
     }
 
     /**
@@ -51,6 +52,7 @@ public class Snake {
         directionEnum = Directions.DOWN;
         positions.clear();
         positions.add(startPosition);
+        positions.add(new Position(startPosition.getX(),startPosition.getY()-GameField.SIZEBLOCK));
         gameOver = false;
         snakeLogger.log(Level.DEBUG, "Snake reseted");
     }

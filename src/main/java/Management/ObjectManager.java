@@ -5,6 +5,7 @@ import Environment.Food.FoodNames;
 import Environment.GameField;
 import Environment.IObject;
 import Environment.Obstacle.*;
+import Environment.Obstacle.ShapeForm.CrossWall;
 import Environment.Obstacle.ShapeForm.Wall;
 import Environment.Position;
 import Management.Interface.GameWindow;
@@ -18,25 +19,21 @@ import java.util.Random;
 public class ObjectManager {
 
     private final Position[] spawnPositions = {
-            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*3),(((GameWindow.HEIGHT/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*2)),
-            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK)+(GameField.SIZEBLOCK),(((GameWindow.HEIGHT/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*2)),
-            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK)+(GameField.SIZEBLOCK),((GameWindow.HEIGHT/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK),
-            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*3),((GameWindow.HEIGHT/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK)
+            new Position((((GameWindow.WIDTH / GameField.SIZEBLOCK) / 4) * GameField.SIZEBLOCK) - (GameField.SIZEBLOCK * 3), (((GameWindow.HEIGHT / GameField.SIZEBLOCK) / 4) * GameField.SIZEBLOCK) - (GameField.SIZEBLOCK * 2)),
+            new Position((((GameWindow.WIDTH / GameField.SIZEBLOCK * 3) / 4) * GameField.SIZEBLOCK) + (GameField.SIZEBLOCK), (((GameWindow.HEIGHT / GameField.SIZEBLOCK) / 4) * GameField.SIZEBLOCK) - (GameField.SIZEBLOCK * 2)),
+            new Position((((GameWindow.WIDTH / GameField.SIZEBLOCK * 3) / 4) * GameField.SIZEBLOCK) + (GameField.SIZEBLOCK), ((GameWindow.HEIGHT / GameField.SIZEBLOCK * 3) / 4) * GameField.SIZEBLOCK),
+            new Position((((GameWindow.WIDTH / GameField.SIZEBLOCK) / 4) * GameField.SIZEBLOCK) - (GameField.SIZEBLOCK * 3), ((GameWindow.HEIGHT / GameField.SIZEBLOCK * 3) / 4) * GameField.SIZEBLOCK)
     };
+    private final ObstacleNames[] obstacleNames = ObstacleNames.values();
+    public IObject treasure;
+    private Boolean treasureExisting = false;
     public IObject currentFood;
     public IShape[] wallStructures = new IShape[5];
     private final FoodNames[] foodNames = FoodNames.values();
-    private final ObstacleNames[] obstacleNames = ObstacleNames.values();
-    private final Random rnd = new Random();
-
-    public IObject treasure;
-    private Boolean treasureExisting = false;
-
-    private static final Logger objectManagerLogger = LogManager.getLogger(ObjectManager.class);
-
-
-    private static ObjectManager instance;
     private Boolean foodExisting = false;
+    private final Random rnd = new Random();
+    private static final Logger objectManagerLogger = LogManager.getLogger(ObjectManager.class);
+    private static ObjectManager instance;
 
     public static ObjectManager getInstance() {
         if (instance == null) {
@@ -50,43 +47,40 @@ public class ObjectManager {
         currentFood = FoodFactory.createFood(randomFood(), randomCoordinate());
     }
 
-    public void createWallStructures(){
-        for(int i = 0; i < 4; i++){
-            wallStructures[i] = ObstacleFactory.createWallStructure(randomObstacle(), spawnPositions[i]);
-        }
-        wallStructures[wallStructures.length-1] = new CrossWall(new Position(((GameWindow.WIDTH/GameField.SIZEBLOCK)/2)*GameField.SIZEBLOCK,((GameWindow.HEIGHT/GameField.SIZEBLOCK)/2)*GameField.SIZEBLOCK));
-
-    }
-
     private FoodNames randomFood() {
         return foodNames[rnd.nextInt(foodNames.length - 1)];
-    }
-
-
-    private ObstacleNames randomObstacle() {
-        return obstacleNames[rnd.nextInt(foodNames.length - 1)];
     }
 
     private Position randomCoordinate() {
         Position coordinate = new Position(rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK,
                 rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK);
-        for ( Position position : Snake.getInstance().getPositions()) {
-            if(position.getY() == coordinate.getY() && position.getX() == coordinate.getX()){
-                objectManagerLogger.log(Level.DEBUG, "Coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" invalid (on Snake) creating new coordinate");
+        for (Position position : Snake.getInstance().getPositions()) {
+            if (position.getY() == coordinate.getY() && position.getX() == coordinate.getX()) {
+                objectManagerLogger.log(Level.DEBUG, "Coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " invalid (on Snake) creating new coordinate");
                 return randomCoordinate();
             }
         }
-        for (IShape wallStructure: getWallStructures()) {
+        for (IShape wallStructure : getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.getPosition().getX() == coordinate.getX() &&
-                        coordinate.getY() == wall.getPosition().getY()){
-                    objectManagerLogger.log(Level.DEBUG, "Coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" invalid (on Wall) creating new coordinate");
+                        coordinate.getY() == wall.getPosition().getY()) {
+                    objectManagerLogger.log(Level.DEBUG, "Coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " invalid (on Wall) creating new coordinate");
                     return randomCoordinate();
                 }
             }
         }
-        objectManagerLogger.log(Level.DEBUG, "New valid coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" created");
+        objectManagerLogger.log(Level.DEBUG, "New valid coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " created");
         return coordinate;
+    }
+
+    private ObstacleNames randomObstacle() {
+        return obstacleNames[rnd.nextInt(foodNames.length - 1)];
+    }
+    public void createWallStructures() {
+        for (int i = 0; i < 4; i++) {
+            wallStructures[i] = ObstacleFactory.createWallStructure(randomObstacle(), spawnPositions[i]);
+        }
+        wallStructures[wallStructures.length - 1] = new CrossWall(new Position(((GameWindow.WIDTH / GameField.SIZEBLOCK) / 2) * GameField.SIZEBLOCK, ((GameWindow.HEIGHT / GameField.SIZEBLOCK) / 2) * GameField.SIZEBLOCK));
     }
 
     public Boolean getFoodExisting() {
@@ -122,6 +116,8 @@ public class ObjectManager {
     }
 
     public void setCurrenTreasure(IObject currenObject) {
-        this.treasure =currenObject;
+        this.treasure = currenObject;
     }
+
+
 }
