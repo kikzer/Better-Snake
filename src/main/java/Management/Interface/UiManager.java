@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class UiManager {
     private Stage currentStage;
     private Label scoreField = new Label();
     private static UiManager instance;
+    private static final Logger uiManagerLogger = LogManager.getLogger(UiManager.class);
 
     private UiManager(){
         scoreField.setTextFill(Color.BLACK);
@@ -27,6 +31,7 @@ public class UiManager {
     public static UiManager getInstance() {
         if (instance == null) {
             instance = new UiManager();
+            uiManagerLogger.log(Level.DEBUG, "UiManager instamce created");
         }
         return instance;
     }
