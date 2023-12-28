@@ -14,6 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -34,10 +37,12 @@ public class GameWindow extends Application{
 
     private final Group root = new Group(canvas);
     private final Scene gameScene = new Scene(root, WIDTH, HEIGHT+50);
+    private static final Logger gameWindowLogger = LogManager.getLogger(GameWindow.class);
 
     public static GameWindow getInstance(){
         if(instance == null){
             instance = new GameWindow();
+            gameWindowLogger.log(Level.DEBUG, "GameWindow instance created");
         }
         return instance;
     }
@@ -45,7 +50,6 @@ public class GameWindow extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {
         createGame(primaryStage);
-
     }
 
     public Scene getGameScene() {
@@ -89,6 +93,7 @@ public class GameWindow extends Application{
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        gameWindowLogger.log(Level.DEBUG, "Game Over Screen successfully created");
     }
 
     /**
@@ -105,11 +110,13 @@ public class GameWindow extends Application{
         GameManager.getInstance();
         stage.setResizable(false);
         stage.show();
+        gameWindowLogger.log(Level.DEBUG, "Game successfully created");
 
         stage.setOnCloseRequest(event -> {
             try {
                 GameManager.getInstance().getGameTick().cancel();
             } catch (IOException e) {
+                gameWindowLogger.log(Level.FATAL, "Failed cancelling of the gameTick, throwing RuntimeException");
                 throw new RuntimeException(e);
             }
         });
