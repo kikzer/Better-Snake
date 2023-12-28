@@ -1,7 +1,7 @@
 package Management;
 
 import Environment.GameField;
-import Environment.IWallStructure;
+import Environment.Obstacle.IShape;
 import Environment.Obstacle.Wall;
 import Management.Interface.GameWindow;
 import Management.Interface.Score;
@@ -160,7 +160,7 @@ public class GameManager {
      * in addition, there will be added points to the score if the object was eatable
      */
     public void checkCollision() {
-        for (IWallStructure wallStructure: ObjectManager.getInstance().getWallStructures()) {
+        for (IShape wallStructure: ObjectManager.getInstance().getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
                         wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
@@ -209,6 +209,7 @@ public class GameManager {
         Score.getInstance().reset();
         ObjectManager.getInstance().createTreasure();
         ObjectManager.getInstance().createFood();
+        ObjectManager.getInstance().createWallStructures();
         gameManagerLogger.log(Level.DEBUG, "Game reseted");
     }
 }

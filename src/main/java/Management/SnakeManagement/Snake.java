@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public class Snake {
 
-    private final ArrayList<Position> positions = new ArrayList<Position>();
+    private final ArrayList<Position> positions = new ArrayList<>();
 
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
     private final int[] directionX = {0, 0, 1, -1};
@@ -32,7 +32,7 @@ public class Snake {
 
     private boolean growing = false;
 
-    private Position startPosition = new Position(10 * GameField.SIZEBLOCK + 50, 5 * GameField.SIZEBLOCK);
+    private final Position startPosition = new Position(10 *( GameField.SIZEBLOCK*5), 5 * GameField.SIZEBLOCK);
 
     private Directions directionEnum = Directions.UP;
 
@@ -41,10 +41,6 @@ public class Snake {
     private static final Logger snakeLogger = LogManager.getLogger(Snake.class);
     private Snake() {
         positions.add(startPosition);
-        for (int i = 1; i < 8; i++) {
-            positions.add(new Position(startPosition.getX(), (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
-        }
-
     }
 
     /**

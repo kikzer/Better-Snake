@@ -4,10 +4,7 @@ import Environment.Food.FoodFactory;
 import Environment.Food.FoodNames;
 import Environment.GameField;
 import Environment.IObject;
-import Environment.IWallStructure;
-import Environment.Obstacle.ObstacleFactory;
-import Environment.Obstacle.Treasure;
-import Environment.Obstacle.Wall;
+import Environment.Obstacle.*;
 import Environment.Position;
 import Management.Interface.GameWindow;
 import Management.SnakeManagement.Snake;
@@ -18,9 +15,17 @@ import org.apache.logging.log4j.Logger;
 import java.util.Random;
 
 public class ObjectManager {
+
+    private final Position[] spawnPositions = {
+            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*3),(((GameWindow.HEIGHT/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*2)),
+            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK)+(GameField.SIZEBLOCK),(((GameWindow.HEIGHT/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*2)),
+            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK)+(GameField.SIZEBLOCK),((GameWindow.HEIGHT/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK),
+            new Position((((GameWindow.WIDTH/GameField.SIZEBLOCK)/4)*GameField.SIZEBLOCK)-(GameField.SIZEBLOCK*3),((GameWindow.HEIGHT/GameField.SIZEBLOCK*3)/4)*GameField.SIZEBLOCK)
+    };
     public IObject currentFood;
-    public IWallStructure[] wallStructures = new IWallStructure[4];
+    public IShape[] wallStructures = new IShape[5];
     private final FoodNames[] foodNames = FoodNames.values();
+    private final ObstacleNames[] obstacleNames = ObstacleNames.values();
     private final Random rnd = new Random();
 
     public IObject treasure;
@@ -46,12 +51,19 @@ public class ObjectManager {
 
     public void createWallStructures(){
         for(int i = 0; i < 4; i++){
-            wallStructures[i] = ObstacleFactory.createObstacle(i+1);
+            wallStructures[i] = ObstacleFactory.createWallStructure(randomObstacle(), spawnPositions[i]);
         }
+        wallStructures[wallStructures.length-1] = new CrossWall(new Position(((GameWindow.WIDTH/GameField.SIZEBLOCK)/2)*GameField.SIZEBLOCK,((GameWindow.HEIGHT/GameField.SIZEBLOCK)/2)*GameField.SIZEBLOCK));
+
     }
 
     private FoodNames randomFood() {
         return foodNames[rnd.nextInt(foodNames.length - 1)];
+    }
+
+
+    private ObstacleNames randomObstacle() {
+        return obstacleNames[rnd.nextInt(foodNames.length - 1)];
     }
 
     private Position randomCoordinate() {
@@ -63,7 +75,7 @@ public class ObjectManager {
                 return randomCoordinate();
             }
         }
-        for (IWallStructure wallStructure: getWallStructures()) {
+        for (IShape wallStructure: getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.getPosition().getX() == coordinate.getX() &&
                         coordinate.getY() == wall.getPosition().getY()){
@@ -104,7 +116,7 @@ public class ObjectManager {
         return treasure;
     }
 
-    public IWallStructure[] getWallStructures() {
+    public IShape[] getWallStructures() {
         return wallStructures;
     }
 
