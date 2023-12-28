@@ -40,8 +40,8 @@ public class UiManager {
         GameWindow.getInstance().updateBackground();
         Snake.getInstance().draw(GameWindow.getInstance().getGraphicContext());
         ObjectManager.getInstance().getCurrentFood().show(GameWindow.getInstance().getGraphicContext());
-        if(ObjectManager.getInstance().getCurrenObject() != null){
-            ObjectManager.getInstance().getCurrenObject().show(GameWindow.getInstance().getGraphicContext());
+        if(ObjectManager.getInstance().getCurrenTreasure() != null){
+            ObjectManager.getInstance().getCurrenTreasure().show(GameWindow.getInstance().getGraphicContext());
         }
         for(int i = 0; i < ObjectManager.getInstance().getWallStructures().length;i++){
             ObjectManager.getInstance().getWallStructures()[i].showStructure();

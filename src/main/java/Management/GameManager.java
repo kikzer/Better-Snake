@@ -56,14 +56,24 @@ public class GameManager {
      * spawns a Treasure-box every 15 points on a random tile of the game field
      */
     private void spawnTreasure() {
-        if (ObjectManager.getInstance().getCurrenObject() == null && !ObjectManager.getInstance().getObstacleExisting()) {
-            ObjectManager.getInstance().setObstacleExisting(true);
-            ObjectManager.getInstance().createObstacle();
+        if (ObjectManager.getInstance().getCurrenTreasure() == null && !ObjectManager.getInstance().getTreasureExisting()) {
+            ObjectManager.getInstance().setTreasureExisting(true);
+            ObjectManager.getInstance().createTreasure();
             gameManagerLogger.log(Level.DEBUG, "treasure spawned");
         } else {
-            if (Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenObject() == null) {
-                ObjectManager.getInstance().setObstacleExisting(false);
+            if (Score.getInstance().getScore() % 15 == 0 && ObjectManager.getInstance().getCurrenTreasure() == null) {
+                ObjectManager.getInstance().setTreasureExisting(false);
             }
+        }
+    }
+
+    /**
+     * spawns Food if the previous food has been eaten
+     */
+    private void spawnFood(){
+        if (!ObjectManager.getInstance().getFoodExisting()) {
+            ObjectManager.getInstance().setFoodExisting(true);
+            ObjectManager.getInstance().createFood();
         }
     }
 
@@ -85,19 +95,11 @@ public class GameManager {
      * if food and treasure are on the same tile, a new position of the food will be generated.
      */
     private void updateGameState() {
-        if (!ObjectManager.getInstance().getFoodExisting()) {
-            ObjectManager.getInstance().setFoodExisting(true);
-            ObjectManager.getInstance().createFood();
-        }
+        spawnFood();
         spawnTreasure();
-        for (int i = 1; i < Snake.getInstance().getPositions().size() - 1; i++) {
-            if (Snake.getInstance().getPositions().get(i).getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
-                    Snake.getInstance().getPositions().get(i).getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY()) {
-                ObjectManager.getInstance().createFood();
-            }
-        }
-        if (ObjectManager.getInstance().getCurrenObject() != null && (ObjectManager.getInstance().getCurrenObject().getPosition().getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
-                ObjectManager.getInstance().getCurrenObject().getPosition().getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY())) {
+
+        if (ObjectManager.getInstance().getCurrenTreasure() != null && (ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() == ObjectManager.getInstance().getCurrentFood().getPosition().getX() &&
+                ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() == ObjectManager.getInstance().getCurrentFood().getPosition().getY())) {
 
             ObjectManager.getInstance().createFood();
         }
@@ -172,13 +174,13 @@ public class GameManager {
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getFoodPoint());
 
-        } else if (ObjectManager.getInstance().getCurrenObject() != null && (ObjectManager.getInstance().getCurrenObject().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
-                ObjectManager.getInstance().getCurrenObject().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
-                ObjectManager.getInstance().getCurrenObject().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
-                ObjectManager.getInstance().getCurrenObject().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK)) {
+        } else if (ObjectManager.getInstance().getCurrenTreasure() != null && (ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+                ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
+                ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + GameField.SIZEBLOCK &&
+                ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() + GameField.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + GameField.SIZEBLOCK)) {
             gameManagerLogger.log(Level.DEBUG, "Treasure opened");
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
-            ObjectManager.getInstance().setCurrenObject(null);
+            ObjectManager.getInstance().setCurrenTreasure(null);
 
         } else {
             Snake.getInstance().setGrowing(false);
@@ -194,7 +196,7 @@ public class GameManager {
     public void gameReset() {
         Snake.getInstance().reset();
         Score.getInstance().reset();
-        ObjectManager.getInstance().createObstacle();
+        ObjectManager.getInstance().createTreasure();
         ObjectManager.getInstance().createFood();
         gameManagerLogger.log(Level.DEBUG, "Game reseted");
     }

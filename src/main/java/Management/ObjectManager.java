@@ -23,8 +23,8 @@ public class ObjectManager {
     private final FoodNames[] foodNames = FoodNames.values();
     private final Random rnd = new Random();
 
-    public IObject currenObject;
-    private Boolean obstacleExisting = false;
+    public IObject treasure;
+    private Boolean treasureExisting = false;
 
     private static final Logger objectManagerLogger = LogManager.getLogger(ObjectManager.class);
 
@@ -58,10 +58,9 @@ public class ObjectManager {
         Position coordinate = new Position(rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK,
                 rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK);
         for ( Position position : Snake.getInstance().getPositions()) {
-            if(position.equals(coordinate)){
+            if(position.getY() == coordinate.getY() && position.getX() == coordinate.getX()){
                 objectManagerLogger.log(Level.DEBUG, "Coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" invalid (on Snake) creating new coordinate");
-                randomCoordinate();
-                break;
+                return randomCoordinate();
             }
         }
         for (IWallStructure wallStructure: getWallStructures()) {
@@ -69,8 +68,7 @@ public class ObjectManager {
                 if (wall.getPosition().getX() == coordinate.getX() &&
                         coordinate.getY() == wall.getPosition().getY()){
                     objectManagerLogger.log(Level.DEBUG, "Coordinate X: "+coordinate.getX()+", Y: "+coordinate.getY()+" invalid (on Wall) creating new coordinate");
-                    randomCoordinate();
-                    break;
+                    return randomCoordinate();
                 }
             }
         }
@@ -90,27 +88,27 @@ public class ObjectManager {
         return currentFood;
     }
 
-    public Boolean getObstacleExisting() {
-        return obstacleExisting;
+    public Boolean getTreasureExisting() {
+        return treasureExisting;
     }
 
-    public void setObstacleExisting(Boolean obstacleExisting) {
-        this.obstacleExisting = obstacleExisting;
+    public void setTreasureExisting(Boolean obstacleExisting) {
+        this.treasureExisting = obstacleExisting;
     }
 
-    public void createObstacle() {
-        currenObject = new Treasure(randomCoordinate());
+    public void createTreasure() {
+        treasure = new Treasure(randomCoordinate());
     }
 
-    public IObject getCurrenObject() {
-        return currenObject;
+    public IObject getCurrenTreasure() {
+        return treasure;
     }
 
     public IWallStructure[] getWallStructures() {
         return wallStructures;
     }
 
-    public void setCurrenObject(IObject currenObject) {
-        this.currenObject=currenObject;
+    public void setCurrenTreasure(IObject currenObject) {
+        this.treasure =currenObject;
     }
 }
