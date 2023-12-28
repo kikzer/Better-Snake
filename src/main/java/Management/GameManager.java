@@ -29,6 +29,8 @@ public class GameManager {
 
     private int gameSpeed = 200;
 
+    private int winningCondition = 0;
+
     /**
      * Tick system which makes it possible to have a working game flow using Runnable
      */
@@ -36,7 +38,7 @@ public class GameManager {
         @Override
         public void run() {
             Snake.getInstance().move();
-            if(!Snake.getInstance().isGameOver()) {
+            if(!Snake.getInstance().isGameOver() || !gameWon) {
                 updateGameState();
             }else {
                 Score.getInstance().updateHighScoreFile();
@@ -49,6 +51,7 @@ public class GameManager {
 
     private GameManager() {
         getGameTick().schedule(getMoveSnake(), 0, gameSpeed);
+        createWinningCondition();
     }
 
     public static GameManager getInstance() throws IOException {
@@ -84,16 +87,18 @@ public class GameManager {
         }
     }
 
-    private void checkWinningCondition() {
-        int destinationSize = 0;
-        for (int i = 0; i < GameWindow.WIDTH / GameField.SIZEBLOCK; i++) {
-            for (int j = 0; j < GameWindow.HEIGHT / GameField.SIZEBLOCK; j++) {
-                /*
-                CHECK EVERY TILE ==> IS TILE FREE
-                --> IF EVERY TILE IS BLOCKED BY THE PLAYER OR A WALL THAN THE GAME IS WON
-                 */
-            }
+    private void createWinningCondition() {
+        int wallAmount = 0;
+        for(IShape structure : ObjectManager.getInstance().getWallStructures()){
+            wallAmount += structure.getWalls().size();
+        }
+        winningCondition = (GameField.SIZEBLOCK*GameField.SIZEBLOCK)-wallAmount;
+        System.out.println(winningCondition);
+    }
 
+    private void checkWinningCondition() {
+        if(winningCondition == Snake.getInstance().getPositions().size()){
+            gameWon = true;
         }
     }
 
@@ -112,6 +117,7 @@ public class GameManager {
         }
 
         checkCollision();
+        checkWinningCondition();
     }
 
     public Timer getGameTick() {
@@ -219,6 +225,7 @@ public class GameManager {
         ObjectManager.getInstance().createTreasure();
         ObjectManager.getInstance().createFood();
         ObjectManager.getInstance().createWallStructures();
+        createWinningCondition();
         gameSpeed = 200;
         gameManagerLogger.log(Level.DEBUG, "Game reseted");
     }
