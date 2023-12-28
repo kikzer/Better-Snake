@@ -160,7 +160,6 @@ public class GameManager {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
                         wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
                     Snake.getInstance().setGameOver(true);
-                    gameManagerLogger.log(Level.DEBUG, "Snake ran into wall!");
                 }
             }
         }

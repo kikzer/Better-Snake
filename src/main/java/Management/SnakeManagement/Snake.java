@@ -112,6 +112,7 @@ public class Snake {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+        snakeLogger.log(Level.DEBUG, "Snake ran into wall!");
     }
 
     /**
