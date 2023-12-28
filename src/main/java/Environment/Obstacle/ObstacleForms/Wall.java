@@ -1,4 +1,4 @@
-package Environment.Obstacle.ShapeForm;
+package Environment.Obstacle.ObstacleForms;
 
 import Environment.GameField;
 import Environment.AObject;

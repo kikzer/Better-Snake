@@ -1,6 +1,6 @@
 package Environment.Obstacle;
 
-import Environment.Obstacle.ShapeForm.Wall;
+import Environment.Obstacle.ObstacleForms.Wall;
 import Environment.Position;
 import Management.Interface.GameWindow;
 

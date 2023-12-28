@@ -2,7 +2,7 @@ package Management;
 
 import Environment.GameField;
 import Environment.Obstacle.IShape;
-import Environment.Obstacle.ShapeForm.Wall;
+import Environment.Obstacle.ObstacleForms.Wall;
 import Management.Interface.GameWindow;
 import Management.Interface.Score;
 import Management.Interface.UiManager;

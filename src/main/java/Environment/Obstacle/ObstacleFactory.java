@@ -1,9 +1,9 @@
 package Environment.Obstacle;
 
-import Environment.Obstacle.ShapeForm.LWall;
-import Environment.Obstacle.ShapeForm.LineWall;
-import Environment.Obstacle.ShapeForm.TWall;
-import Environment.Obstacle.ShapeForm.ZWall;
+import Environment.Obstacle.ObstacleForms.LWall;
+import Environment.Obstacle.ObstacleForms.LineWall;
+import Environment.Obstacle.ObstacleForms.TWall;
+import Environment.Obstacle.ObstacleForms.ZWall;
 import Environment.Position;
 
 public class ObstacleFactory {
