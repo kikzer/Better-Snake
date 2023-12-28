@@ -48,11 +48,9 @@ public class Snake {
      */
     public void reset(){
         direction = 1;
+        directionEnum = Directions.DOWN;
         positions.clear();
         positions.add(startPosition);
-        for (int i = 1; i < 8; i++) {
-            positions.add(new Position(startPosition.getX(), (5 * GameField.SIZEBLOCK - (GameField.SIZEBLOCK *i))));
-        }
         gameOver = false;
         snakeLogger.log(Level.DEBUG, "Snake reseted");
     }
