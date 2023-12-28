@@ -163,7 +163,7 @@ public class GameManager {
         for (IWallStructure wallStructure: ObjectManager.getInstance().getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
-                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()&&!Snake.getInstance().isGameOver()){
+                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
                     Snake.getInstance().setGameOver(true);
                 }
             }
