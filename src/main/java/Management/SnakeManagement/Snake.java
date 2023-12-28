@@ -124,14 +124,6 @@ public class Snake {
             if (positions.size() - 1 > 0) {
                 positions.remove(positions.size() - 1);
             }
-        } else {
-            for (int i = 1; i < positions.size(); i++) {
-
-                if ((Objects.equals(positions.get(0).getX(), positions.get(i).getX())) && (Objects.equals(positions.get(0).getY(), positions.get(i).getY()))) {
-                    gameOver = true;
-                    break;
-                }
-            }
         }
     }
 

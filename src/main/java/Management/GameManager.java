@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,7 +34,9 @@ public class GameManager {
         @Override
         public void run() {
             Snake.getInstance().move();
-            updateGameState();
+            if(!Snake.getInstance().isGameOver()) {
+                updateGameState();
+            }
             UiManager.getInstance().updateGameField();
             keyHandler(GameWindow.getInstance().getGameScene());
             Snake.getInstance().selfDestroy();
@@ -163,6 +166,14 @@ public class GameManager {
                         wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()&&!Snake.getInstance().isGameOver()){
                     Snake.getInstance().setGameOver(true);
                 }
+            }
+        }
+        for (int i = 1; i < Snake.getInstance().getPositions().size(); i++) {
+
+            if ((Objects.equals(Snake.getInstance().getPositions().get(0).getX(), Snake.getInstance().getPositions().get(i).getX())) &&
+                    (Objects.equals(Snake.getInstance().getPositions().get(0).getY(), Snake.getInstance().getPositions().get(i).getY()))) {
+                Snake.getInstance().setGameOver(true);
+                break;
             }
         }
         if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
