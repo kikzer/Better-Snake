@@ -106,6 +106,7 @@ public class GameWindow extends Application{
         stage.setTitle("Better Snake");
         stage.setScene(getGameScene());
         root.getChildren().add(UiManager.getInstance().getScoreField());
+        root.getChildren().add(UiManager.getInstance().getHighScoreField());
         ObjectManager.getInstance().createWallStructures();
         GameManager.getInstance();
         stage.setResizable(false);

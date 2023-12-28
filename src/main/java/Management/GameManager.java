@@ -38,6 +38,8 @@ public class GameManager {
             Snake.getInstance().move();
             if(!Snake.getInstance().isGameOver()) {
                 updateGameState();
+            }else {
+                Score.getInstance().updateHighScoreFile();
             }
             UiManager.getInstance().updateGameField();
             keyHandler(GameWindow.getInstance().getGameScene());
@@ -200,7 +202,11 @@ public class GameManager {
             Snake.getInstance().setGrowing(false);
         }
         Platform.runLater(() -> {
-            UiManager.getInstance().getScoreField().setText(String.valueOf(Score.getInstance().getScore()));
+            if(Score.getInstance().getHighScore() <= Score.getInstance().getScore()){
+                Score.getInstance().setHighScore(Score.getInstance().getScore());
+            }
+            UiManager.getInstance().getScoreField().setText("Score: " + Score.getInstance().getScore());
+            UiManager.getInstance().getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
         });
     }
 

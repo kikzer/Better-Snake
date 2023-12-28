@@ -18,14 +18,20 @@ public class UiManager {
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;
     private Label scoreField = new Label();
+    private Label highScoreField = new Label();
     private static UiManager instance;
     private static final Logger uiManagerLogger = LogManager.getLogger(UiManager.class);
 
     private UiManager(){
         scoreField.setTextFill(Color.BLACK);
         scoreField.setFont(new Font("Balloon", 24));
-        scoreField.setTranslateY(GameWindow.HEIGHT);
-        scoreField.setTranslateX(GameField.SIZEBLOCK*2);
+        scoreField.setTranslateY(GameWindow.HEIGHT+5);
+        scoreField.setTranslateX(GameField.SIZEBLOCK);
+
+        highScoreField.setTextFill(Color.BLACK);
+        highScoreField.setFont(new Font("Balloon", 24));
+        highScoreField.setTranslateY(GameWindow.HEIGHT+5);
+        highScoreField.setTranslateX(GameField.SIZEBLOCK*17);
     }
 
     public static UiManager getInstance() {
@@ -73,4 +79,11 @@ public class UiManager {
         this.scoreField = scoreField;
     }
 
+    public Label getHighScoreField() {
+        return highScoreField;
+    }
+
+    public void setHighScoreField(Label highScoreField) {
+        this.highScoreField = highScoreField;
+    }
 }
