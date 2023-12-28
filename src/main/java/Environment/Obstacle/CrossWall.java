@@ -1,6 +1,7 @@
 package Environment.Obstacle;
 
 import Environment.GameField;
+import Environment.Obstacle.ShapeForm.Wall;
 import Environment.Position;
 
 public class CrossWall extends AShape {

@@ -5,6 +5,7 @@ import Environment.Food.FoodNames;
 import Environment.GameField;
 import Environment.IObject;
 import Environment.Obstacle.*;
+import Environment.Obstacle.ShapeForm.Wall;
 import Environment.Position;
 import Management.Interface.GameWindow;
 import Management.SnakeManagement.Snake;

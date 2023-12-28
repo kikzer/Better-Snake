@@ -1,9 +1,10 @@
-package Environment.Obstacle;
+package Environment.Obstacle.ShapeForm;
 
 import Environment.GameField;
+import Environment.Obstacle.AShape;
 import Environment.Position;
 
-public class LineWall extends AShape{
+public class LineWall extends AShape {
 
     public LineWall(Position startingPosition){
         super(startingPosition);

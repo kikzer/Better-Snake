@@ -1,6 +1,7 @@
-package Environment.Obstacle;
+package Environment.Obstacle.ShapeForm;
 
 import Environment.GameField;
+import Environment.Obstacle.AShape;
 import Environment.Position;
 
 public class TWall extends AShape {

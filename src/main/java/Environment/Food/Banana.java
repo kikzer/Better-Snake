@@ -9,6 +9,6 @@ public class Banana extends AObject {
 
     public Banana(Position position) {
         super(position);
-        setAppearance(new Image("file:src/main/java/Environment/FoodImages/banana.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
+        setAppearance(new Image("file:src/main/java/Environment/Food/FoodImages/banana.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
     }
 }

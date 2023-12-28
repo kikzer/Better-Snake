@@ -9,6 +9,6 @@ public class Kiwi extends AObject {
 
     public Kiwi(Position position) {
         super(position);
-        setAppearance(new Image("file:src/main/java/Environment/FoodImages/kiwi.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
+        setAppearance(new Image("file:src/main/java/Environment/Food/FoodImages/kiwi.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
     }
 }

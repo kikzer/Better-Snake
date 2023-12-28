@@ -9,6 +9,6 @@ public class Cherry extends AObject {
 
     public Cherry(Position position) {
         super(position);
-        setAppearance(new Image("file:src/main/java/Environment/FoodImages/cherry.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
+        setAppearance(new Image("file:src/main/java/Environment/Food/FoodImages/cherry.png", GameField.SIZEBLOCK, GameField.SIZEBLOCK,true,true));
     }
 }
