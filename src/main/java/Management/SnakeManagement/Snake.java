@@ -32,7 +32,7 @@ public class Snake {
 
     private boolean growing = false;
 
-    private final Position startPosition = new Position(10 *( GameField.SIZEBLOCK*5), 5 * GameField.SIZEBLOCK);
+    private final Position startPosition = new Position(GameField.SIZEBLOCK, GameField.SIZEBLOCK);
 
     private Directions directionEnum = Directions.UP;
 
@@ -138,10 +138,6 @@ public class Snake {
             }
             checkBorder();
         }
-    }
-
-    public boolean isGrowing() {
-        return growing;
     }
 
     public void setGrowing(boolean growing) {
