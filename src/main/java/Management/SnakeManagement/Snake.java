@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Objects;
  */
 public class Snake {
 
-    private final ArrayList<Position> positions = new ArrayList<>();
+    private final List<Position> positions = new ArrayList<>();
 
     //Pos 0 = up, Pos 1 = down, Pos 2 = right, Pos 3 = left
     private final int[] directionX = {0, 0, 1, -1};
@@ -162,13 +163,13 @@ public class Snake {
         }
     }
 
-    public ArrayList<Position> getPositions() {
+    public List<Position> getPositions() {
         return positions;
     }
 
     /**
      * draws the player. the head has the color red and the body the color greenyellow
-     * @param graphicsContext lets the draw function draw and needs to be out of the GameWindow class
+     * @param graphicsContext lets the draw function draw and needs to be from the GameWindow class
      */
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(Color.GREENYELLOW);

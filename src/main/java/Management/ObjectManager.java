@@ -57,11 +57,12 @@ public class ObjectManager {
     private Position randomCoordinate() {
         Position coordinate = new Position(rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK,
                 rnd.nextInt(GameWindow.WIDTH / GameField.SIZEBLOCK) * GameField.SIZEBLOCK);
-        for (Position position : Snake.getInstance().getPositions()) {
-            if (position.getY() == coordinate.getY() && position.getX() == coordinate.getX()) {
-                objectManagerLogger.log(Level.DEBUG, "Coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " invalid (on Snake) creating new coordinate");
-                return randomCoordinate();
-            }
+        boolean foodOnSnake = Snake.getInstance().getPositions().parallelStream()
+                .anyMatch(position -> position.getY() == coordinate.getY() && position.getX() == coordinate.getX());
+
+        if (foodOnSnake) {
+            objectManagerLogger.log(Level.DEBUG, "Coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " invalid (on Snake) creating new coordinate");
+            return randomCoordinate();
         }
         for (IShape wallStructure : getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
