@@ -1,5 +1,9 @@
 package Environment;
 
+/**
+ * This class represents the coordinate calculation of the game Better Snake.
+ * It needs an x and y position to make a 2D location
+ */
 public class Position {
     private int x,y;
 
