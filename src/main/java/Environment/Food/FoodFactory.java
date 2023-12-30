@@ -11,6 +11,12 @@ import org.apache.logging.log4j.Logger;
 public class FoodFactory{
     private static final Logger foodFactoryLogger = LogManager.getLogger(FoodFactory.class);
 
+    /**
+     * Factory which can create all types of food in the enum foodnames
+     * @param foodType enum value out of the enum FoodNames
+     * @param position x and y position as a Position object
+     * @return IObject object in the form of a fruit
+     */
     public static IObject createFood(FoodNames foodType, Position position){
         switch(foodType){
             case CHERRY -> {
