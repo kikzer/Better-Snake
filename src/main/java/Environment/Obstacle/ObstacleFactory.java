@@ -8,7 +8,13 @@ import Environment.Position;
 
 public class ObstacleFactory {
 
-    public static Environment.Obstacle.IShape createWallStructure(final ObstacleNames typeWall, final Position startingPosition){
+    /**
+     * Factory which can create all types of wall structures in the enum ObstacleNames
+     * @param typeWall enum value out of the enum ObstacleNames
+     * @param startingPosition x and y position as a Position object
+     * @return IShape object in the form of a wall structure
+     */
+    public static IShape createWallStructure(final ObstacleNames typeWall, final Position startingPosition){
         switch (typeWall){
             case LINEWALL -> {
                 return new LineWall(startingPosition);
