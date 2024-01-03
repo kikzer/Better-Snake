@@ -12,8 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 
 public class GameField {
-    public static final int SIZEBLOCK = 25;
-    private final int row = GameWindow.WIDTH /getSizeBlock();
+    private final int row = GameWindow.getInstance().getWidth() /GameWindow.getInstance().getSizeBlock();
 
     private final Canvas canvas;
 
@@ -40,13 +39,9 @@ public class GameField {
                 } else {
                     graphicsContext.setFill(Color.DARKGREEN);
                 }
-                graphicsContext.fillRect(i * getSizeBlock(), j * getSizeBlock(), getSizeBlock(), getSizeBlock());
+                graphicsContext.fillRect(i * GameWindow.getInstance().getSizeBlock(), j * GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock());
             }
         }
-    }
-
-    public int getSizeBlock() {
-        return SIZEBLOCK;
     }
 
     public int getRow() {

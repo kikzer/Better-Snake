@@ -25,13 +25,13 @@ public class UiManager {
     private UiManager(){
         scoreField.setTextFill(Color.BLACK);
         scoreField.setFont(new Font("Balloon", 24));
-        scoreField.setTranslateY(GameWindow.HEIGHT+5);
-        scoreField.setTranslateX(GameField.SIZEBLOCK);
+        scoreField.setTranslateY(GameWindow.getInstance().getHeight()+5);
+        scoreField.setTranslateX(GameWindow.getInstance().getSizeBlock());
 
         highScoreField.setTextFill(Color.BLACK);
         highScoreField.setFont(new Font("Balloon", 24));
-        highScoreField.setTranslateY(GameWindow.HEIGHT+5);
-        highScoreField.setTranslateX(GameField.SIZEBLOCK*17);
+        highScoreField.setTranslateY(GameWindow.getInstance().getHeight()+5);
+        highScoreField.setTranslateX(GameWindow.getInstance().getSizeBlock()*17);
     }
 
     public static UiManager getInstance() {

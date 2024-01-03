@@ -29,16 +29,19 @@ import java.util.Objects;
  */
 public class GameWindow extends Application{
 
-    public final static int WIDTH = 600, HEIGHT = 600;
+
+    private final int width = 600, height = width;
+
+    private final int sizeBlock = 25;
 
     private static GameWindow instance;
 
-    private final Canvas canvas = new Canvas(WIDTH, HEIGHT);;
+    private final Canvas canvas = new Canvas(width, height);;
     private GraphicsContext graphicContext;
 
 
     private final Group root = new Group(canvas);
-    private final Scene gameScene = new Scene(root, WIDTH, HEIGHT+50);
+    private final Scene gameScene = new Scene(root, width, height+50);
     private static final Logger gameWindowLogger = LogManager.getLogger(GameWindow.class);
 
     public static GameWindow getInstance(){
@@ -58,6 +61,10 @@ public class GameWindow extends Application{
         return gameScene;
     }
 
+    public int getSizeBlock() {
+        return sizeBlock;
+    }
+
     public void updateBackground() {
         GameField.getInstance(canvas).createGameField(getGraphicContext());
     }
@@ -66,13 +73,22 @@ public class GameWindow extends Application{
         return graphicContext;
     }
 
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     /**
      * if the game has been lost, it switches to the game over screen, which lets the game restart
      * @param stage better snake stage (program window)
      */
     public void createGameOverScene(Stage stage) {
         StackPane root = new StackPane();
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        Scene scene = new Scene(root, width, height);
         Button btn = new Button("Reset");
 
         btn.setMaxWidth(200);

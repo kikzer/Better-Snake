@@ -34,16 +34,19 @@ public class Snake {
 
     private boolean growing = false;
 
-    private final Position startPosition = new Position(GameField.SIZEBLOCK, GameField.SIZEBLOCK);
+    private final Position startPosition = new Position(GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock());
 
     private Directions directionEnum = Directions.UP;
 
     private static Snake instance;
 
+    private Image snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
+    private final Image snakeBody = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeBlock.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
+
     private static final Logger snakeLogger = LogManager.getLogger(Snake.class);
     private Snake() {
         positions.add(startPosition);
-        positions.add(new Position(startPosition.getX(),startPosition.getY()-GameField.SIZEBLOCK));
+        positions.add(new Position(startPosition.getX(),startPosition.getY()-GameWindow.getInstance().getSizeBlock()));
     }
 
     /**
@@ -54,8 +57,9 @@ public class Snake {
         directionEnum = Directions.DOWN;
         positions.clear();
         positions.add(startPosition);
-        positions.add(new Position(startPosition.getX(),startPosition.getY()-GameField.SIZEBLOCK));
+        positions.add(new Position(startPosition.getX(),startPosition.getY()-GameWindow.getInstance().getSizeBlock()));
         gameOver = false;
+        snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
         snakeLogger.log(Level.DEBUG, "Snake reseted");
     }
 
@@ -76,21 +80,28 @@ public class Snake {
             case UP -> {
                 if (getDirections() != 1) {
                     setDirection(0);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadUp.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
+                    snakeLogger.log(Level.TRACE, "Direction changed to UP");
                 }
             }
             case DOWN -> {
                 if (getDirections() != 0) {
                     setDirection(1);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
+                    snakeLogger.log(Level.TRACE, "Direction changed to DOWN");
                 }
             }
             case LEFT -> {
                 if (getDirections() != 2) {
                     setDirection(3);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadLeft.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
+                    snakeLogger.log(Level.TRACE, "Direction changed to LEFT");
                 }
             }
             case RIGHT -> {
                 if (getDirections() != 3) {
                     setDirection(2);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadRight.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true);
                     snakeLogger.log(Level.TRACE, "Direction changed to RIGHT");
                 }
             }
@@ -129,8 +140,8 @@ public class Snake {
 
         if (!gameOver) {
             decideDirections();
-            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameField.SIZEBLOCK,
-                    positions.get(0).getY() + getDirectionY()[getDirections()] * GameField.SIZEBLOCK));
+            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameWindow.getInstance().getSizeBlock(),
+                    positions.get(0).getY() + getDirectionY()[getDirections()] * GameWindow.getInstance().getSizeBlock()));
 
             if (!growing) {
                 positions.remove(positions.size() - 1);
@@ -151,13 +162,13 @@ public class Snake {
      */
     private void checkBorder() {
         if (positions.get(0).getX() < 0) {
-            positions.get(0).setX(GameWindow.WIDTH - GameField.SIZEBLOCK);
-        } else if (positions.get(0).getX() > GameWindow.WIDTH - GameField.SIZEBLOCK) {
+            positions.get(0).setX(GameWindow.getInstance().getWidth() - GameWindow.getInstance().getSizeBlock());
+        } else if (positions.get(0).getX() > GameWindow.getInstance().getWidth() - GameWindow.getInstance().getSizeBlock()) {
             positions.get(0).setX(0);
-        } else if (positions.get(0).getY() > GameWindow.WIDTH - GameField.SIZEBLOCK) {
+        } else if (positions.get(0).getY() > GameWindow.getInstance().getHeight() - GameWindow.getInstance().getSizeBlock()) {
             positions.get(0).setY(0);
         } else if (positions.get(0).getY() < 0) {
-            positions.get(0).setY(GameWindow.WIDTH - GameField.SIZEBLOCK);
+            positions.get(0).setY(GameWindow.getInstance().getHeight() - GameWindow.getInstance().getSizeBlock());
         }
     }
 
@@ -170,10 +181,8 @@ public class Snake {
      * @param graphicsContext lets the draw function draw and needs to be from the GameWindow class
      */
     public void draw(GraphicsContext graphicsContext) {
-        graphicsContext.setFill(Color.GREENYELLOW);
-        positions.stream().forEach(position -> graphicsContext.fillRect(position.getX(), position.getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK));
-        graphicsContext.setFill(Color.RED);
-        graphicsContext.fillRect(positions.get(0).getX(), positions.get(0).getY(), GameField.SIZEBLOCK, GameField.SIZEBLOCK);
+        positions.stream().skip(1).forEach(position -> graphicsContext.drawImage(snakeBody,position.getX(), position.getY()));
+        graphicsContext.drawImage(snakeHead,positions.get(0).getX(), positions.get(0).getY());
     }
 
     public Directions getDirectionEnum() {
