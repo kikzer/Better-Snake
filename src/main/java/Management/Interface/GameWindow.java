@@ -129,7 +129,7 @@ public class GameWindow extends Application{
         GameManager.getInstance();
         stage.setResizable(false);
 
-        Image icon = new Image("file:src/main/java/Environment/Food/FoodImages/apple.png");
+        Image icon = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadRight.png");
         stage.getIcons().add(icon);
 
 
