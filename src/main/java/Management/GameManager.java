@@ -88,6 +88,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * Setting winningCondition depending on the size of the gamefield.
+     */
     private void createWinningCondition() {
         int wallAmount = 0;
         for(IShape structure : ObjectManager.getInstance().getWallStructures()){
@@ -96,6 +99,9 @@ public class GameManager {
         winningCondition = (GameWindow.getInstance().getSizeBlock()*GameWindow.getInstance().getSizeBlock())-wallAmount-GameWindow.getInstance().getSizeBlock();
     }
 
+    /**
+     *Checks if winnning condition is met or not.
+     */
     private void checkWinningCondition() {
         if(winningCondition == Snake.getInstance().getPositions().size()){
             gameWon = true;

@@ -46,14 +46,24 @@ public class ObjectManager {
         return instance;
     }
 
+    /**
+     * Creates one new randomized food for the snake to eat
+     */
     public void createFood() {
         currentFood = FoodFactory.createFood(randomFood(), randomCoordinate());
     }
 
+    /**
+     * @return Random value of the FoodNames Enum
+     */
     private FoodNames randomFood() {
         return foodNames[rnd.nextInt(foodNames.length - 1)];
     }
 
+    /**
+     * A recursive Method to generate randomized Coordinates for a Position object
+     * @return a random generated Position object
+     */
     private Position randomCoordinate() {
         Position coordinate = new Position(rnd.nextInt(GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) * GameWindow.getInstance().getSizeBlock(),
                 rnd.nextInt(GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) * GameWindow.getInstance().getSizeBlock());
@@ -78,10 +88,16 @@ public class ObjectManager {
         return coordinate;
     }
 
+    /**
+     * @return random value of ObstacleNames Enum
+     */
     private ObstacleNames randomObstacle() {
         return obstacleNames[rnd.nextInt(foodNames.length - 1)];
     }
 
+    /**
+     * Method creates big wallstructure obstacles as the gamefield is created
+     */
     public void createWallStructures() {
         for (int i = 0; i < 4; i++) {
             wallStructures[i] = ObstacleFactory.createWallStructure(randomObstacle(), spawnPositions[i]);
