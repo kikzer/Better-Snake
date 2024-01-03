@@ -9,7 +9,10 @@ import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +26,8 @@ public class GameManager {
     private static GameManager instance;
 
     private static final Logger gameManagerLogger = LogManager.getLogger(GameManager.class);
+
+    private boolean switchScene = false;
 
     private boolean gameWon = true;
     public Timer gameTick = new Timer();
@@ -51,7 +56,7 @@ public class GameManager {
     };
 
     private GameManager() {
-        getGameTick().schedule(getMoveSnake(), 0, gameSpeed);
+        gameTick.schedule(moveSnake, 0, gameSpeed );
         createWinningCondition();
     }
 
@@ -124,6 +129,24 @@ public class GameManager {
 
         checkCollision();
         checkWinningCondition();
+        if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
+            switchScene = true;
+            //gameOver();
+
+        }
+    }
+    private void gameOver() {
+        Platform.runLater(() -> {
+            try {
+                Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/path/to/your/GameOverScene.fxml")));
+                Scene gameOverScene = new Scene(root);
+                currentStage.setScene(gameOverScene);
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public Timer getGameTick() {
@@ -181,7 +204,6 @@ public class GameManager {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
                         wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()&&!Snake.getInstance().isGameOver()){
                     Snake.getInstance().setGameOver(true);
-                    gameSpeed = 5;
                 }
             }
         }

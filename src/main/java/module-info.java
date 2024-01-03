@@ -6,4 +6,6 @@ module SE2StartupProject {
 
     opens Management.Interface;
     exports Management.Interface to javafx.graphics;
+    exports Management.Interface.Scenes to javafx.graphics;
+    opens Management.Interface.Scenes;
 }

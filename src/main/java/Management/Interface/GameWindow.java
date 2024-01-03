@@ -2,6 +2,7 @@ package Management.Interface;
 
 import Environment.GameField;
 import Management.GameManager;
+import Management.Interface.Scenes.StartScene;
 import Management.ObjectManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -54,7 +55,7 @@ public class GameWindow extends Application{
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        createGame(primaryStage);
+        StartScene.getInstance().createScene(primaryStage);
     }
 
     public Scene getGameScene() {

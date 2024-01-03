@@ -10,12 +10,12 @@
     <Rectangle arcHeight="5.0" arcWidth="5.0" height="607.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
     <Button layoutX="183.0" layoutY="357.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="234.0" text="Reset">
         <font>
-          <Font size="16.0" />
+            <Font size="16.0" />
         </font>
     </Button>
     <Text fill="WHITE" layoutX="191.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over">
         <font>
-          <Font size="44.0" />
+            <Font size="44.0" />
         </font>
     </Text>
 </AnchorPane>

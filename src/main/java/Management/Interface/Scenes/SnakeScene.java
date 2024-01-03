@@ -1,4 +1,4 @@
-package Management.Interface;
+package Management.Interface.Scenes;
 
 public enum SnakeScene {
     GAMEOVER,

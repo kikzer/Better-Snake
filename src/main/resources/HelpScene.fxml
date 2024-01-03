@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Management.Interface.Scenes.SceneController">
+    <children>
+        <Label layoutX="230.0" layoutY="29.0" prefHeight="67.0" prefWidth="135.0" text="Controls">
+            <font>
+                <Font size="35.0" />
+            </font>
+        </Label>
+        <Button layoutX="199.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToMainMenuScene" prefHeight="67.0" prefWidth="204.0" text="Main Menu">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Button>
+        <Label layoutX="54.0" layoutY="193.0" prefHeight="59.0" prefWidth="495.0" text="    W: Up      A: Left      S: Down     D: Right">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Label>
+        <Label layoutX="100.0" layoutY="108.0" prefHeight="67.0" prefWidth="390.0" text="                   R: Restart" textAlignment="CENTER">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
