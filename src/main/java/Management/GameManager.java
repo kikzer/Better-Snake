@@ -179,7 +179,7 @@ public class GameManager {
         for (IShape wallStructure: ObjectManager.getInstance().getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
-                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()){
+                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()&&!Snake.getInstance().isGameOver()){
                     Snake.getInstance().setGameOver(true);
                     gameSpeed = 5;
                 }
@@ -188,7 +188,7 @@ public class GameManager {
         for (int i = 1; i < Snake.getInstance().getPositions().size(); i++) {
 
             if ((Objects.equals(Snake.getInstance().getPositions().get(0).getX(), Snake.getInstance().getPositions().get(i).getX())) &&
-                    (Objects.equals(Snake.getInstance().getPositions().get(0).getY(), Snake.getInstance().getPositions().get(i).getY()))) {
+                    (Objects.equals(Snake.getInstance().getPositions().get(0).getY(), Snake.getInstance().getPositions().get(i).getY()))&&!Snake.getInstance().isGameOver()) {
                 Snake.getInstance().setGameOver(true);
                 break;
             }
