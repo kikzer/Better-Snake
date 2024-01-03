@@ -42,6 +42,9 @@ public class UiManager {
         return instance;
     }
 
+    /**
+     * Method updates all elements on the gamefield to display the current game frame.
+     */
     public void updateGameField() {
         GameWindow.getInstance().updateBackground();
         ObjectManager.getInstance().getCurrentFood().show(GameWindow.getInstance().getGraphicContext());

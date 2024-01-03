@@ -31,6 +31,11 @@ public class GameField {
         return instance;
     }
 
+    /**
+     * This Method creates the green/darkgreen pattern in the background of the gamefield.
+     * It is called everytime the frame gets updated.
+     * @param graphicsContext
+     */
     public void createGameField(GraphicsContext graphicsContext){
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getRow(); j++) {

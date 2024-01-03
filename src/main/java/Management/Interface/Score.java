@@ -46,6 +46,9 @@ public class Score {
         this.highScore = highscore;
     }
 
+    /**
+     * Method reads text file where Highscore is stored and saves value in highScore variable.
+     */
     private void readHighScoreFile(){
         String path = "src/main/resources/HighScore.txt";
 
@@ -55,10 +58,13 @@ public class Score {
                 highScore = Integer.parseInt(lines.get(0));
             }
         } catch (IOException e) {
-            scoreLogger.log(Level.DEBUG, "HighScore.txt couldn't be read");
+            scoreLogger.log(Level.ERROR, "HighScore.txt couldn't be read");
         }
     }
 
+    /**
+     * When the current score is higher than the current highscore this method updates the highscore to be the current score.
+     */
     public void updateHighScoreFile(){
         String pfad = "src/main/resources/HighScore.txt"; // Ersetzen Sie dies durch den Pfad zu Ihrer Datei
         String content = "" + highScore;
