@@ -6,6 +6,7 @@ import Environment.Position;
 
 public class LWall extends AShape {
 
+
     public LWall(Position startingPosition) {
         super(startingPosition);
         getWalls().add(new Wall(startingPosition));

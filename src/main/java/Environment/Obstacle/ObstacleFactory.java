@@ -24,18 +24,23 @@ public class ObstacleFactory {
     public static IShape createWallStructure(final ObstacleNames typeWall, final Position startingPosition) {
         switch (typeWall) {
             case LINEWALL -> {
+                obstacleFactoryLogger.log(Level.DEBUG, "Wall of type Line created!");
                 return new LineWall(startingPosition);
             }
             case TWALL -> {
+                obstacleFactoryLogger.log(Level.DEBUG, "Wall of type T-shaped created!");
                 return new TWall(startingPosition);
             }
             case LWALL -> {
+                obstacleFactoryLogger.log(Level.DEBUG, "Wall of type L-shaped created!");
                 return new LWall(startingPosition);
             }
             case ZWALL -> {
+                obstacleFactoryLogger.log(Level.DEBUG, "Wall of type Z-shaped created!");
                 return new ZWall(startingPosition);
             }
             default -> {
+                obstacleFactoryLogger.log(Level.ERROR, "Walltype not delivered!");
                 return null;
             }
         }

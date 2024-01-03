@@ -45,8 +45,4 @@ public abstract class AObject implements IObject {
     public void show(GraphicsContext graphicsContext){
         graphicsContext.drawImage(appearance, position.getX(),position.getY());
     }
-
-
-
-
 }

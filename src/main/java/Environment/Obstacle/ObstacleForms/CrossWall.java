@@ -6,6 +6,7 @@ import Environment.Position;
 
 public class CrossWall extends AShape {
 
+
     public CrossWall(Position startingPosition) {
         super(startingPosition);
         getWalls().add(new Wall(startingPosition));

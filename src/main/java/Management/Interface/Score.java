@@ -29,6 +29,7 @@ public class Score {
     public static Score getInstance(){
         if(instance == null){
             instance = new Score();
+            scoreLogger.log(Level.DEBUG, "Instance of Score-class created!");
         }
         return instance;
     }

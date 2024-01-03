@@ -22,6 +22,7 @@ public class GameField {
     private GameField(final Canvas canvas){
         this.canvas = canvas;
     }
+    private static final Logger gameFieldLogger = LogManager.getLogger(GameField.class);
 
     public static GameField getInstance(final Canvas canvas){
         if (instance == null){
@@ -34,12 +35,12 @@ public class GameField {
     public void createGameField(GraphicsContext graphicsContext){
         for (int i = 0; i < getRow(); i++) {
             for (int j = 0; j < getRow(); j++) {
-                if((i+j) % 2 == 0){
+                if ((i + j) % 2 == 0) {
                     graphicsContext.setFill(Color.GREEN);
-                }else{
+                } else {
                     graphicsContext.setFill(Color.DARKGREEN);
                 }
-                graphicsContext.fillRect(i*getSizeBlock(), j*getSizeBlock(), getSizeBlock(),getSizeBlock());
+                graphicsContext.fillRect(i * getSizeBlock(), j * getSizeBlock(), getSizeBlock(), getSizeBlock());
             }
         }
     }

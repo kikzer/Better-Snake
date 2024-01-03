@@ -124,6 +124,4 @@ public class ObjectManager {
     public void setCurrenTreasure(IObject currenObject) {
         this.treasure = currenObject;
     }
-
-
 }
