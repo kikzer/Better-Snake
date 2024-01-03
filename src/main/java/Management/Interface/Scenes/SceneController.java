@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.io.IOException;
+import java.util.Objects;
 
 public class SceneController {
 
@@ -23,7 +24,7 @@ public class SceneController {
     private Parent root;
 
     public void switchToMainMenuScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenuScene.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainMenuScene.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -31,7 +32,7 @@ public class SceneController {
     }
 
     public void switchToHelpScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("HelpScene.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("HelpScene.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

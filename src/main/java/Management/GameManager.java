@@ -22,6 +22,10 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Main manager class of the project. It handles most of the games logic including the gametick.
+ * It updates the gamestate, tells other manager classes what to do and is responsible for the player inputs.
+ */
 public class GameManager {
     private static GameManager instance;
 
@@ -131,7 +135,7 @@ public class GameManager {
         checkWinningCondition();
         if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
             switchScene = true;
-            //gameOver();
+            gameOver();
 
         }
     }
@@ -139,7 +143,7 @@ public class GameManager {
         Platform.runLater(() -> {
             try {
                 Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/path/to/your/GameOverScene.fxml")));
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GameOverScene.fxml")));
                 Scene gameOverScene = new Scene(root);
                 currentStage.setScene(gameOverScene);
                 currentStage.show();
@@ -153,9 +157,6 @@ public class GameManager {
         return gameTick;
     }
 
-    public TimerTask getMoveSnake() {
-        return moveSnake;
-    }
 
     /**
      * uses key inputs to let the snake move and reset the game
@@ -256,6 +257,7 @@ public class GameManager {
         createWinningCondition();
         gameSpeed = 200;
         gameManagerLogger.log(Level.DEBUG, "Game reseted");
+        switchScene = false;
     }
 
     public int getGameSpeed() {

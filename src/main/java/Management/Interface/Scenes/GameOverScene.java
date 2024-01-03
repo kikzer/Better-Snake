@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-
+import java.util.Objects;
 
 
 public class GameOverScene {
@@ -22,7 +21,7 @@ public class GameOverScene {
 
     public void createGameOverScene(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GameOverScene.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("GameOverScene.fxml")));
 
         Scene scene = new Scene(root);
 
