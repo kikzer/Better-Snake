@@ -11,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * by using the Application class, the GameWindow is the start point of
@@ -110,9 +112,13 @@ public class GameWindow extends Application{
         ObjectManager.getInstance().createWallStructures();
         GameManager.getInstance();
         stage.setResizable(false);
+
+        Image icon = new Image("file:src/main/java/Environment/Food/FoodImages/apple.png");
+        stage.getIcons().add(icon);
+
+
         stage.show();
         gameWindowLogger.log(Level.DEBUG, "Game successfully created");
-
         stage.setOnCloseRequest(event -> {
             try {
                 GameManager.getInstance().getGameTick().cancel();

@@ -5,6 +5,7 @@ import Environment.Position;
 import Management.GameManager;
 import Management.Interface.GameWindow;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -75,19 +76,16 @@ public class Snake {
             case UP -> {
                 if (getDirections() != 1) {
                     setDirection(0);
-                    snakeLogger.log(Level.TRACE, "Direction changed to UP");
                 }
             }
             case DOWN -> {
                 if (getDirections() != 0) {
                     setDirection(1);
-                    snakeLogger.log(Level.TRACE, "Direction changed to DOWN");
                 }
             }
             case LEFT -> {
                 if (getDirections() != 2) {
                     setDirection(3);
-                    snakeLogger.log(Level.TRACE, "Direction changed to LEFT");
                 }
             }
             case RIGHT -> {

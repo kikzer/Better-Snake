@@ -73,6 +73,7 @@ public class ObjectManager {
                 }
             }
         }
+
         objectManagerLogger.log(Level.DEBUG, "New valid coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " created");
         return coordinate;
     }
@@ -80,6 +81,7 @@ public class ObjectManager {
     private ObstacleNames randomObstacle() {
         return obstacleNames[rnd.nextInt(foodNames.length - 1)];
     }
+
     public void createWallStructures() {
         for (int i = 0; i < 4; i++) {
             wallStructures[i] = ObstacleFactory.createWallStructure(randomObstacle(), spawnPositions[i]);

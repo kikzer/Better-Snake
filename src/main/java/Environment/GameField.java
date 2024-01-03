@@ -6,6 +6,9 @@ import Management.ObjectManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class GameField {
@@ -23,6 +26,7 @@ public class GameField {
     public static GameField getInstance(final Canvas canvas){
         if (instance == null){
             instance = new GameField(canvas);
+            gameFieldLogger.log(Level.DEBUG, "Instance of GameField-Class created");
         }
         return instance;
     }

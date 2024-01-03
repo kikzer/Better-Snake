@@ -93,7 +93,7 @@ public class GameManager {
         for(IShape structure : ObjectManager.getInstance().getWallStructures()){
             wallAmount += structure.getWalls().size();
         }
-        winningCondition = (GameField.SIZEBLOCK*GameField.SIZEBLOCK)-wallAmount;
+        winningCondition = (GameField.SIZEBLOCK*GameField.SIZEBLOCK)-wallAmount-GameField.SIZEBLOCK;
     }
 
     private void checkWinningCondition() {
