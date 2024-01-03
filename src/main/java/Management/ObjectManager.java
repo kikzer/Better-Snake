@@ -19,6 +19,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
+/**
+ * A Manager class to handle all Objects which are shown on screen, such as food walls and treasure chests, but not the player.
+ * To create the objects, it uses factories.
+ */
 public class ObjectManager {
 
     private final Position[] spawnPositions = {

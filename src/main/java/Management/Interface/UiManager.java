@@ -14,6 +14,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
+/**
+ * This class manages the ui of the program.
+ * It draws everything on screen.
+ */
 public class UiManager {
     private ArrayList<Scene> scenes = new ArrayList<>();
     private Stage currentStage;

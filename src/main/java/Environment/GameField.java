@@ -10,7 +10,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
+/**
+ * This class represents the gamefield.
+ * It is responsible for creating and managing the gamefield.
+ * The gamefield is designed as a pattern of alternating green and dark green squares.
+ */
 public class GameField {
     private final int row = GameWindow.getInstance().getWidth() /GameWindow.getInstance().getSizeBlock();
 
