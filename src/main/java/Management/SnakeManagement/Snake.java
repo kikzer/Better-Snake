@@ -32,12 +32,10 @@ public class Snake {
 
     private final Position startPosition = new Position(MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK);
 
-    private Directions directionEnum = Directions.UP;
+    private Directions directionEnum = Directions.DOWN;
 
     private static Snake instance;
 
-    private Image snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
-    private final Image snakeBody = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeBlock.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
 
     private static final Logger snakeLogger = LogManager.getLogger(Snake.class);
 
@@ -56,7 +54,6 @@ public class Snake {
         positions.add(startPosition);
         positions.add(new Position(startPosition.getX(), startPosition.getY() - MetaDataHelper.SIZEBLOCK));
         gameOver = false;
-        snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
         snakeLogger.log(Level.DEBUG, "Snake reseted");
     }
 
@@ -77,28 +74,24 @@ public class Snake {
             case UP -> {
                 if (getDirections() != 1) {
                     setDirection(0);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadUp.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to UP");
                 }
             }
             case DOWN -> {
                 if (getDirections() != 0) {
                     setDirection(1);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to DOWN");
                 }
             }
             case LEFT -> {
                 if (getDirections() != 2) {
                     setDirection(3);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadLeft.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to LEFT");
                 }
             }
             case RIGHT -> {
                 if (getDirections() != 3) {
                     setDirection(2);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadRight.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to RIGHT");
                 }
             }
@@ -173,15 +166,6 @@ public class Snake {
         return positions;
     }
 
-    /**
-     * draws the player. the head has the color red and the body the color greenyellow
-     *
-     * @param graphicsContext lets the draw function draw and needs to be from the GameWindow class
-     */
-    public void draw(GraphicsContext graphicsContext) {
-        positions.stream().skip(1).forEach(position -> graphicsContext.drawImage(snakeBody, position.getX(), position.getY()));
-        graphicsContext.drawImage(snakeHead, positions.get(0).getX(), positions.get(0).getY());
-    }
 
     public Directions getDirectionEnum() {
         return directionEnum;
