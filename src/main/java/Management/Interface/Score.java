@@ -83,7 +83,7 @@ public class Score {
      * When the current score is higher than the current highscore this method updates the highscore to be the current score.
      */
     public void updateHighScoreFile(){
-        String pfad = "src/main/resources/HighScore.txt"; // Ersetzen Sie dies durch den Pfad zu Ihrer Datei
+        String pfad = "src/main/resources/HighScore.txt";
         String content = "" + highScore;
 
         try {
@@ -93,6 +93,20 @@ public class Score {
         }
     }
 
+    /**
+     * Überladung der Methode updateHighScoreFile
+     * Sie dient ausschließlich dazu die ürsprungliche Methode testbar zu machen.
+     * @param pfad
+     */
+    public void updateHighScoreFile(String pfad){
+        String content = "" + highScore;
+
+        try {
+            Files.write(Paths.get(pfad), content.getBytes());
+        } catch (IOException e) {
+            scoreLogger.log(Level.ERROR, "HighScore.txt couldn't be updated");
+        }
+    }
 
 
     public int getScore() {
