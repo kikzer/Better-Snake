@@ -63,6 +63,23 @@ public class Score {
     }
 
     /**
+     * Überladung der Methode readHighScoreFile.
+     * Sie dient ausschließlich dazu die ürsprungliche Methode testbar zu machen.
+     * @param path
+     */
+    public void readHighScoreFile(String path){
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(path));
+            if (!lines.isEmpty()) {
+                highScore = Integer.parseInt(lines.get(0));
+            }
+        } catch (IOException e) {
+            scoreLogger.log(Level.ERROR, "HighScore.txt couldn't be read");
+        }
+    }
+
+    /**
      * When the current score is higher than the current highscore this method updates the highscore to be the current score.
      */
     public void updateHighScoreFile(){
@@ -72,7 +89,7 @@ public class Score {
         try {
             Files.write(Paths.get(pfad), content.getBytes());
         } catch (IOException e) {
-            scoreLogger.log(Level.DEBUG, "HighScore.txt couldn't be updated");
+            scoreLogger.log(Level.ERROR, "HighScore.txt couldn't be updated");
         }
     }
 
@@ -85,6 +102,10 @@ public class Score {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public void resetInstance(){
+        this.instance = null;
+    };
 
     public void reset(){
         score = 0;

@@ -14,8 +14,8 @@ public class SnakeTest {
     @Test
     public void testStartPosition() {
 
-        assertEquals(new Position(GameField.SIZEBLOCK, GameField.SIZEBLOCK).getX(), Snake.getInstance().getPositions().get(0).getX());
-        assertEquals(new Position(GameField.SIZEBLOCK, GameField.SIZEBLOCK).getY(), Snake.getInstance().getPositions().get(0).getY());
+        assertEquals(new Position(GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock()).getX(), Snake.getInstance().getPositions().get(0).getX());
+        assertEquals(new Position(GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock()).getY(), Snake.getInstance().getPositions().get(0).getY());
         assertEquals(2, Snake.getInstance().getPositions().size());
     }
 
@@ -64,7 +64,7 @@ public class SnakeTest {
         Snake.getInstance().setGameOver(true);
         Snake.getInstance().setDirection(2);
         Snake.getInstance().setDirectionEnum(Directions.LEFT);
-        Snake.getInstance().getPositions().add(new Position(10 * (GameField.SIZEBLOCK * 5), (5 * GameField.SIZEBLOCK)-GameField.SIZEBLOCK*2));
+        Snake.getInstance().getPositions().add(new Position(10 * (GameWindow.getInstance().getSizeBlock() * 5), (5 * GameWindow.getInstance().getSizeBlock())-GameWindow.getInstance().getSizeBlock()*2));
 
         Snake.getInstance().reset();
         assertFalse(Snake.getInstance().isGameOver());
@@ -75,19 +75,19 @@ public class SnakeTest {
 
     @Test
     public void checkBorderTest(){
-        Snake.getInstance().getPositions().get(0).setY(GameWindow.WIDTH+GameField.SIZEBLOCK);
+        Snake.getInstance().getPositions().get(0).setY(GameWindow.getInstance().getWidth()+GameWindow.getInstance().getSizeBlock());
         Snake.getInstance().move();
         assertEquals(0,Snake.getInstance().getPositions().get(0).getY());
 
-        Snake.getInstance().getPositions().get(0).setY(-GameField.SIZEBLOCK*2);
+        Snake.getInstance().getPositions().get(0).setY(-GameWindow.getInstance().getSizeBlock()*2);
         Snake.getInstance().move();
-        assertEquals(GameWindow.WIDTH-GameField.SIZEBLOCK,Snake.getInstance().getPositions().get(0).getY());
+        assertEquals(GameWindow.getInstance().getWidth()-GameWindow.getInstance().getSizeBlock(),Snake.getInstance().getPositions().get(0).getY());
 
-        Snake.getInstance().getPositions().get(0).setX(-GameField.SIZEBLOCK*2);
+        Snake.getInstance().getPositions().get(0).setX(-GameWindow.getInstance().getSizeBlock()*2);
         Snake.getInstance().move();
-        assertEquals(GameWindow.WIDTH-GameField.SIZEBLOCK,Snake.getInstance().getPositions().get(0).getX());
+        assertEquals(GameWindow.getInstance().getWidth()-GameWindow.getInstance().getSizeBlock(),Snake.getInstance().getPositions().get(0).getX());
 
-        Snake.getInstance().getPositions().get(0).setX(GameWindow.WIDTH+GameField.SIZEBLOCK);
+        Snake.getInstance().getPositions().get(0).setX(GameWindow.getInstance().getWidth()+GameWindow.getInstance().getSizeBlock());
         Snake.getInstance().move();
         assertEquals(0,Snake.getInstance().getPositions().get(0).getX());
     }
