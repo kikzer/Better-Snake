@@ -1,22 +1,20 @@
 package Environment;
 
-import Environment.IObject;
-import Environment.Position;
+import Environment.Images.ImageFactory;
+import Management.MetaDataHelper;
+import Management.ObjectManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class AObject implements IObject {
-    private Image appearance;
     private Position position;
+
+    private String appearance;
 
     private boolean blocked = false;
 
     public AObject(Position position){
         this.position = position;
-    }
-
-    public Image getAppearance() {
-        return appearance;
     }
 
     public Position getPosition() {
@@ -25,10 +23,6 @@ public abstract class AObject implements IObject {
 
     public void setPosition(Position position) {
         this.position = position;
-    }
-
-    public void setAppearance(Image appearance) {
-        this.appearance = appearance;
     }
 
     @Override
@@ -41,8 +35,11 @@ public abstract class AObject implements IObject {
         this.blocked = blocked;
     }
 
-    @Override
-    public void show(GraphicsContext graphicsContext){
-        graphicsContext.drawImage(appearance, position.getX(),position.getY());
+    public String getAppearance(){
+        return appearance;
+    }
+
+    public void setAppearance(String appearance) {
+        this.appearance = appearance;
     }
 }

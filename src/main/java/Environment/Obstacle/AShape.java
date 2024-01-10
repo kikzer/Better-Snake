@@ -18,12 +18,6 @@ public class AShape implements IShape{
     public AShape(Position startingPosition){
         this.startingPosition = startingPosition;
     }
-    @Override
-    public void showStructure() {
-        for (Wall wall : walls) {
-            wall.show(GameWindow.getInstance().getGraphicContext());
-        }
-    }
 
     @Override
     public List<Wall> getWalls() {

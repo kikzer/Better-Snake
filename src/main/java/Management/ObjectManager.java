@@ -32,10 +32,14 @@ public class ObjectManager {
             new Position((((MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) / 4) * MetaDataHelper.SIZEBLOCK) - (MetaDataHelper.SIZEBLOCK * 3), ((MetaDataHelper.HEIGHT / MetaDataHelper.SIZEBLOCK * 3) / 4) * MetaDataHelper.SIZEBLOCK)
     };
     private final ObstacleNames[] obstacleNames = ObstacleNames.values();
-    public IObject treasure;
+    private IObject treasure;
     private Boolean treasureExisting = false;
-    public IObject currentFood;
-    public IShape[] wallStructures = new IShape[5];
+
+
+
+    private IObject currentFood;
+    private FoodNames currentFoodEnum;
+    private IShape[] wallStructures = new IShape[5];
     private final FoodNames[] foodNames = FoodNames.values();
     private Boolean foodExisting = false;
     private final Random rnd = new Random();
@@ -54,7 +58,8 @@ public class ObjectManager {
      * Creates one new randomized food for the snake to eat
      */
     public void createFood() {
-        currentFood = FoodFactory.createFood(randomFood(), randomCoordinate());
+        currentFoodEnum = randomFood();
+        currentFood = FoodFactory.createFood(currentFoodEnum, randomCoordinate());
     }
 
     /**
@@ -90,6 +95,14 @@ public class ObjectManager {
 
         objectManagerLogger.log(Level.DEBUG, "New valid coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " created");
         return coordinate;
+    }
+
+    public FoodNames getCurrentFoodEnum() {
+        return currentFoodEnum;
+    }
+
+    public void setCurrentFoodEnum(FoodNames currentFoodEnum) {
+        this.currentFoodEnum = currentFoodEnum;
     }
 
     /**

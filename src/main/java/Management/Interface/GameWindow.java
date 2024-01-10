@@ -3,6 +3,7 @@ package Management.Interface;
 import Environment.GameField;
 import Management.GameManager;
 import Management.Interface.Scenes.StartScene;
+import Management.MetaDataHelper;
 import Management.ObjectManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -31,18 +32,14 @@ import java.util.Objects;
 public class GameWindow extends Application{
 
 
-    private final int width = 600, height = width;
-
-    private final int sizeBlock = 25;
-
     private static GameWindow instance;
 
-    private final Canvas canvas = new Canvas(width, height);;
+    private final Canvas canvas = new Canvas(MetaDataHelper.WIDTH, MetaDataHelper.HEIGHT);;
     private GraphicsContext graphicContext;
 
 
     private final Group root = new Group(canvas);
-    private final Scene gameScene = new Scene(root, width, height+50);
+    private final Scene gameScene = new Scene(root, MetaDataHelper.WIDTH, MetaDataHelper.HEIGHT +50);
     private static final Logger gameWindowLogger = LogManager.getLogger(GameWindow.class);
 
     public static GameWindow getInstance(){
@@ -55,7 +52,8 @@ public class GameWindow extends Application{
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        StartScene.getInstance().createScene(primaryStage);
+        //StartScene.getInstance().createScene(primaryStage);
+        createGame(primaryStage);
     }
 
     public Scene getGameScene() {
@@ -76,7 +74,7 @@ public class GameWindow extends Application{
      */
     public void createGameOverScene(Stage stage) {
         StackPane root = new StackPane();
-        Scene scene = new Scene(root, width, height);
+        Scene scene = new Scene(root, MetaDataHelper.WIDTH, MetaDataHelper.HEIGHT);
         Button btn = new Button("Reset");
 
         btn.setMaxWidth(200);

@@ -135,7 +135,7 @@ public class GameManager {
         checkWinningCondition();
         if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
             switchScene = true;
-            gameOver();
+            //gameOver();
 
         }
     }

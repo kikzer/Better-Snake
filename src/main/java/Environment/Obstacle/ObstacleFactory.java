@@ -1,6 +1,4 @@
 package Environment.Obstacle;
-
-import Environment.Food.FoodFactory;
 import Environment.Obstacle.ObstacleForms.LWall;
 import Environment.Obstacle.ObstacleForms.LineWall;
 import Environment.Obstacle.ObstacleForms.TWall;

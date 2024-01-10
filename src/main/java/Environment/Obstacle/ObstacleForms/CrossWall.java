@@ -4,6 +4,7 @@ import Environment.GameField;
 import Environment.Obstacle.AShape;
 import Environment.Position;
 import Management.Interface.GameWindow;
+import Management.MetaDataHelper;
 
 public class CrossWall extends AShape {
 
@@ -13,14 +14,14 @@ public class CrossWall extends AShape {
         getWalls().add(new Wall(startingPosition));
 
 
-        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() + (GameWindow.getInstance().getSizeBlock()))));
-        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() + (GameWindow.getInstance().getSizeBlock() * 2))));
-        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() - (GameWindow.getInstance().getSizeBlock() * 2))));
-        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() - (GameWindow.getInstance().getSizeBlock()))));
+        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() + (MetaDataHelper.SIZEBLOCK))));
+        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() + (MetaDataHelper.SIZEBLOCK * 2))));
+        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() - (MetaDataHelper.SIZEBLOCK * 2))));
+        getWalls().add(new Wall(new Position(startingPosition.getX(), startingPosition.getY() - (MetaDataHelper.SIZEBLOCK))));
 
-        getWalls().add(new Wall(new Position(startingPosition.getX() + (GameWindow.getInstance().getSizeBlock()), startingPosition.getY())));
-        getWalls().add(new Wall(new Position(startingPosition.getX() + (GameWindow.getInstance().getSizeBlock() * 2), startingPosition.getY())));
-        getWalls().add(new Wall(new Position(startingPosition.getX() - (GameWindow.getInstance().getSizeBlock() * 2), startingPosition.getY())));
-        getWalls().add(new Wall(new Position(startingPosition.getX() - (GameWindow.getInstance().getSizeBlock()), startingPosition.getY())));
+        getWalls().add(new Wall(new Position(startingPosition.getX() + (MetaDataHelper.SIZEBLOCK), startingPosition.getY())));
+        getWalls().add(new Wall(new Position(startingPosition.getX() + (MetaDataHelper.SIZEBLOCK * 2), startingPosition.getY())));
+        getWalls().add(new Wall(new Position(startingPosition.getX() - (MetaDataHelper.SIZEBLOCK * 2), startingPosition.getY())));
+        getWalls().add(new Wall(new Position(startingPosition.getX() - (MetaDataHelper.SIZEBLOCK), startingPosition.getY())));
     }
 }

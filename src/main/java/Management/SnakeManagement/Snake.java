@@ -1,19 +1,15 @@
 package Management.SnakeManagement;
 
-import Environment.GameField;
 import Environment.Position;
-import Management.GameManager;
-import Management.Interface.GameWindow;
+import Management.MetaDataHelper;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * this class represents the player aka the snake, which is being used to play
@@ -34,20 +30,20 @@ public class Snake {
 
     private boolean growing = false;
 
-    private final Position startPosition = new Position(GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock());
+    private final Position startPosition = new Position(MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK);
 
     private Directions directionEnum = Directions.UP;
 
     private static Snake instance;
 
-    private Image snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
-    private final Image snakeBody = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeBlock.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
+    private Image snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
+    private final Image snakeBody = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeBlock.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
 
     private static final Logger snakeLogger = LogManager.getLogger(Snake.class);
 
     private Snake() {
         positions.add(startPosition);
-        positions.add(new Position(startPosition.getX(), startPosition.getY() - GameWindow.getInstance().getSizeBlock()));
+        positions.add(new Position(startPosition.getX(), startPosition.getY() - MetaDataHelper.SIZEBLOCK));
     }
 
     /**
@@ -58,9 +54,9 @@ public class Snake {
         directionEnum = Directions.DOWN;
         positions.clear();
         positions.add(startPosition);
-        positions.add(new Position(startPosition.getX(), startPosition.getY() - GameWindow.getInstance().getSizeBlock()));
+        positions.add(new Position(startPosition.getX(), startPosition.getY() - MetaDataHelper.SIZEBLOCK));
         gameOver = false;
-        snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
+        snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
         snakeLogger.log(Level.DEBUG, "Snake reseted");
     }
 
@@ -81,28 +77,28 @@ public class Snake {
             case UP -> {
                 if (getDirections() != 1) {
                     setDirection(0);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadUp.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadUp.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to UP");
                 }
             }
             case DOWN -> {
                 if (getDirections() != 0) {
                     setDirection(1);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadDown.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to DOWN");
                 }
             }
             case LEFT -> {
                 if (getDirections() != 2) {
                     setDirection(3);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadLeft.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadLeft.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to LEFT");
                 }
             }
             case RIGHT -> {
                 if (getDirections() != 3) {
                     setDirection(2);
-                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadRight.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), true, true);
+                    snakeHead = new Image("file:src/main/java/Management/SnakeManagement/SnakeImages/snakeHeadRight.png", MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, true, true);
                     snakeLogger.log(Level.TRACE, "Direction changed to RIGHT");
                 }
             }
@@ -141,8 +137,8 @@ public class Snake {
 
         if (!gameOver) {
             decideDirections();
-            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * GameWindow.getInstance().getSizeBlock(),
-                    positions.get(0).getY() + getDirectionY()[getDirections()] * GameWindow.getInstance().getSizeBlock()));
+            positions.add(0, new Position(positions.get(0).getX() + getDirectionX()[getDirections()] * MetaDataHelper.SIZEBLOCK,
+                    positions.get(0).getY() + getDirectionY()[getDirections()] * MetaDataHelper.SIZEBLOCK));
 
             if (!growing) {
                 positions.remove(positions.size() - 1);
@@ -163,13 +159,13 @@ public class Snake {
      */
     private void checkBorder() {
         if (positions.get(0).getX() < 0) {
-            positions.get(0).setX(GameWindow.getInstance().getWidth() - GameWindow.getInstance().getSizeBlock());
-        } else if (positions.get(0).getX() > GameWindow.getInstance().getWidth() - GameWindow.getInstance().getSizeBlock()) {
+            positions.get(0).setX(MetaDataHelper.WIDTH - MetaDataHelper.SIZEBLOCK);
+        } else if (positions.get(0).getX() > MetaDataHelper.WIDTH - MetaDataHelper.SIZEBLOCK) {
             positions.get(0).setX(0);
-        } else if (positions.get(0).getY() > GameWindow.getInstance().getHeight() - GameWindow.getInstance().getSizeBlock()) {
+        } else if (positions.get(0).getY() > MetaDataHelper.HEIGHT - MetaDataHelper.SIZEBLOCK) {
             positions.get(0).setY(0);
         } else if (positions.get(0).getY() < 0) {
-            positions.get(0).setY(GameWindow.getInstance().getHeight() - GameWindow.getInstance().getSizeBlock());
+            positions.get(0).setY(MetaDataHelper.HEIGHT - MetaDataHelper.SIZEBLOCK);
         }
     }
 

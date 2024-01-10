@@ -4,11 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public interface IObject {
 
-    /**
-     * shows the current object on the game scene
-     * @param graphicsContext makes the object visible
-     */
-    void show(GraphicsContext graphicsContext);
+   String getAppearance();
 
     /**
      * gives back the current position object of the IObject object
@@ -33,6 +29,6 @@ public interface IObject {
      * @param blocked boolean
      */
     void setBlocked(boolean blocked);
-
 }
+
 

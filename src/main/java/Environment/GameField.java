@@ -2,6 +2,7 @@ package Environment;
 
 import Environment.Obstacle.ObstacleFactory;
 import Management.Interface.GameWindow;
+import Management.MetaDataHelper;
 import Management.ObjectManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
