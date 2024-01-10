@@ -62,25 +62,12 @@ public class GameWindow extends Application{
         return gameScene;
     }
 
-    public int getSizeBlock() {
-        return sizeBlock;
-    }
-
     public void updateBackground() {
         GameField.getInstance(canvas).createGameField(getGraphicContext());
     }
 
     public GraphicsContext getGraphicContext() {
         return graphicContext;
-    }
-
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     /**

@@ -26,10 +26,10 @@ import java.util.Random;
 public class ObjectManager {
 
     private final Position[] spawnPositions = {
-            new Position((((GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) / 4) * GameWindow.getInstance().getSizeBlock()) - (GameWindow.getInstance().getSizeBlock() * 3), (((GameWindow.getInstance().getHeight() / GameWindow.getInstance().getSizeBlock()) / 4) * GameWindow.getInstance().getSizeBlock()) - (GameWindow.getInstance().getSizeBlock() * 2)),
-            new Position((((GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock() * 3) / 4) * GameWindow.getInstance().getSizeBlock()) + (GameWindow.getInstance().getSizeBlock()), (((GameWindow.getInstance().getHeight() / GameWindow.getInstance().getSizeBlock()) / 4) * GameWindow.getInstance().getSizeBlock()) - (GameWindow.getInstance().getSizeBlock() * 2)),
-            new Position((((GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock() * 3) / 4) * GameWindow.getInstance().getSizeBlock()) + (GameWindow.getInstance().getSizeBlock()), ((GameWindow.getInstance().getHeight() / GameWindow.getInstance().getSizeBlock() * 3) / 4) * GameWindow.getInstance().getSizeBlock()),
-            new Position((((GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) / 4) * GameWindow.getInstance().getSizeBlock()) - (GameWindow.getInstance().getSizeBlock() * 3), ((GameWindow.getInstance().getHeight() / GameWindow.getInstance().getSizeBlock() * 3) / 4) * GameWindow.getInstance().getSizeBlock())
+            new Position((((MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) / 4) * MetaDataHelper.SIZEBLOCK) - (MetaDataHelper.SIZEBLOCK * 3), (((MetaDataHelper.HEIGHT / MetaDataHelper.SIZEBLOCK) / 4) * MetaDataHelper.SIZEBLOCK) - (MetaDataHelper.SIZEBLOCK * 2)),
+            new Position((((MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK * 3) / 4) * MetaDataHelper.SIZEBLOCK) + (MetaDataHelper.SIZEBLOCK), (((MetaDataHelper.HEIGHT / MetaDataHelper.SIZEBLOCK) / 4) * MetaDataHelper.SIZEBLOCK) - (MetaDataHelper.SIZEBLOCK * 2)),
+            new Position((((MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK * 3) / 4) * MetaDataHelper.SIZEBLOCK) + (MetaDataHelper.SIZEBLOCK), ((MetaDataHelper.HEIGHT / MetaDataHelper.SIZEBLOCK * 3) / 4) * MetaDataHelper.SIZEBLOCK),
+            new Position((((MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) / 4) * MetaDataHelper.SIZEBLOCK) - (MetaDataHelper.SIZEBLOCK * 3), ((MetaDataHelper.HEIGHT / MetaDataHelper.SIZEBLOCK * 3) / 4) * MetaDataHelper.SIZEBLOCK)
     };
     private final ObstacleNames[] obstacleNames = ObstacleNames.values();
     public IObject treasure;
@@ -69,8 +69,8 @@ public class ObjectManager {
      * @return a random generated Position object
      */
     private Position randomCoordinate() {
-        Position coordinate = new Position(rnd.nextInt(GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) * GameWindow.getInstance().getSizeBlock(),
-                rnd.nextInt(GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) * GameWindow.getInstance().getSizeBlock());
+        Position coordinate = new Position(rnd.nextInt(MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) * MetaDataHelper.SIZEBLOCK,
+                rnd.nextInt(MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) * MetaDataHelper.SIZEBLOCK);
         boolean foodOnSnake = Snake.getInstance().getPositions().parallelStream()
                 .anyMatch(position -> position.getY() == coordinate.getY() && position.getX() == coordinate.getX());
 
@@ -106,7 +106,7 @@ public class ObjectManager {
         for (int i = 0; i < 4; i++) {
             wallStructures[i] = ObstacleFactory.createWallStructure(randomObstacle(), spawnPositions[i]);
         }
-        wallStructures[wallStructures.length - 1] = new CrossWall(new Position(((GameWindow.getInstance().getWidth() / GameWindow.getInstance().getSizeBlock()) / 2) * GameWindow.getInstance().getSizeBlock(), ((GameWindow.getInstance().getHeight() / GameWindow.getInstance().getSizeBlock()) / 2) * GameWindow.getInstance().getSizeBlock()));
+        wallStructures[wallStructures.length - 1] = new CrossWall(new Position(((MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) / 2) * MetaDataHelper.SIZEBLOCK, ((MetaDataHelper.HEIGHT / MetaDataHelper.SIZEBLOCK) / 2) * MetaDataHelper.SIZEBLOCK));
     }
 
     public Boolean getFoodExisting() {

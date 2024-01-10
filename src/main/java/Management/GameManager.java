@@ -105,7 +105,7 @@ public class GameManager {
         for(IShape structure : ObjectManager.getInstance().getWallStructures()){
             wallAmount += structure.getWalls().size();
         }
-        winningCondition = (GameWindow.getInstance().getSizeBlock()*GameWindow.getInstance().getSizeBlock())-wallAmount-GameWindow.getInstance().getSizeBlock();
+        winningCondition = (MetaDataHelper.SIZEBLOCK*MetaDataHelper.SIZEBLOCK)-wallAmount-MetaDataHelper.SIZEBLOCK;
     }
 
     /**
@@ -218,8 +218,8 @@ public class GameManager {
         }
         if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
-                ObjectManager.getInstance().getCurrentFood().getPosition().getX() + GameWindow.getInstance().getSizeBlock() >= Snake.getInstance().getPositions().get(0).getX() + GameWindow.getInstance().getSizeBlock() &&
-                ObjectManager.getInstance().getCurrentFood().getPosition().getY() + GameWindow.getInstance().getSizeBlock() >= Snake.getInstance().getPositions().get(0).getY() + GameWindow.getInstance().getSizeBlock()) {
+                ObjectManager.getInstance().getCurrentFood().getPosition().getX() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + MetaDataHelper.SIZEBLOCK &&
+                ObjectManager.getInstance().getCurrentFood().getPosition().getY() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + MetaDataHelper.SIZEBLOCK) {
             gameManagerLogger.log(Level.DEBUG, "Food eaten");
             ObjectManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
@@ -227,8 +227,8 @@ public class GameManager {
 
         } else if (ObjectManager.getInstance().getCurrenTreasure() != null && (ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
-                ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() + GameWindow.getInstance().getSizeBlock() >= Snake.getInstance().getPositions().get(0).getX() + GameWindow.getInstance().getSizeBlock() &&
-                ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() + GameWindow.getInstance().getSizeBlock() >= Snake.getInstance().getPositions().get(0).getY() + GameWindow.getInstance().getSizeBlock())) {
+                ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + MetaDataHelper.SIZEBLOCK &&
+                ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + MetaDataHelper.SIZEBLOCK)) {
             gameManagerLogger.log(Level.DEBUG, "Treasure opened");
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getTreasurePoint());
             ObjectManager.getInstance().setCurrenTreasure(null);

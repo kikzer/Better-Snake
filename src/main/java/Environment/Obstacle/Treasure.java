@@ -16,7 +16,4 @@ public class Treasure extends AObject {
         super(position);
         setAppearance(new Image("file:src/main/java/Environment/Obstacle/ObstacleImages/box.png", GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(),true,true));
     }
-
-
-
 }

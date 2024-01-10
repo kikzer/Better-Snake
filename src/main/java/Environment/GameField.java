@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
  * The gamefield is designed as a pattern of alternating green and dark green squares.
  */
 public class GameField {
-    private final int row = GameWindow.getInstance().getWidth() /GameWindow.getInstance().getSizeBlock();
+    private final int row = MetaDataHelper.WIDTH /MetaDataHelper.SIZEBLOCK;
 
     private final Canvas canvas;
 
@@ -48,7 +48,7 @@ public class GameField {
                 } else {
                     graphicsContext.setFill(Color.DARKGREEN);
                 }
-                graphicsContext.fillRect(i * GameWindow.getInstance().getSizeBlock(), j * GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock(), GameWindow.getInstance().getSizeBlock());
+                graphicsContext.fillRect(i * MetaDataHelper.SIZEBLOCK, j * MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK);
             }
         }
     }
