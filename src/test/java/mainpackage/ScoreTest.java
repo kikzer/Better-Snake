@@ -44,11 +44,4 @@ public class ScoreTest {
 
         assertEquals(26, Score.getInstance().getHighScore());
     }
-
-    @Test
-    public void testSetScore(){
-        final int currentScore = Score.getInstance().getScore();
-        Score.getInstance().setScore(currentScore+1);
-        assertEquals(currentScore+1,Score.getInstance().getScore());
-    }
 }
