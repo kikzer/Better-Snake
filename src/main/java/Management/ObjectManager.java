@@ -36,7 +36,6 @@ public class ObjectManager {
     private Boolean treasureExisting = false;
 
 
-
     private IObject currentFood;
     private FoodNames currentFoodEnum;
     private IShape[] wallStructures = new IShape[5];
@@ -71,6 +70,7 @@ public class ObjectManager {
 
     /**
      * A recursive Method to generate randomized Coordinates for a Position object
+     *
      * @return a random generated Position object
      */
     private Position randomCoordinate() {
@@ -84,14 +84,17 @@ public class ObjectManager {
             return randomCoordinate();
         }
         for (IShape wallStructure : getWallStructures()) {
-            for (Wall wall : wallStructure.getWalls()) {
-                if (wall.getPosition().getX() == coordinate.getX() &&
-                        coordinate.getY() == wall.getPosition().getY()) {
-                    objectManagerLogger.log(Level.DEBUG, "Coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " invalid (on Wall) creating new coordinate");
-                    return randomCoordinate();
+            if (wallStructure != null) {
+                for (Wall wall : wallStructure.getWalls()) {
+                    if (wall.getPosition().getX() == coordinate.getX() &&
+                            coordinate.getY() == wall.getPosition().getY()) {
+                        objectManagerLogger.log(Level.DEBUG, "Coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " invalid (on Wall) creating new coordinate");
+                        return randomCoordinate();
+                    }
                 }
             }
         }
+
 
         objectManagerLogger.log(Level.DEBUG, "New valid coordinate X: " + coordinate.getX() + ", Y: " + coordinate.getY() + " created");
         return coordinate;
@@ -99,10 +102,6 @@ public class ObjectManager {
 
     public FoodNames getCurrentFoodEnum() {
         return currentFoodEnum;
-    }
-
-    public void setCurrentFoodEnum(FoodNames currentFoodEnum) {
-        this.currentFoodEnum = currentFoodEnum;
     }
 
     /**

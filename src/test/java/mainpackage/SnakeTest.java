@@ -14,7 +14,7 @@ public class SnakeTest {
 
     @Test
     public void testStartPosition() {
-
+        Snake.getInstance().reset();
         assertEquals(new Position(MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK).getX(), Snake.getInstance().getPositions().get(0).getX());
         assertEquals(new Position(MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK).getY(), Snake.getInstance().getPositions().get(0).getY());
         assertEquals(2, Snake.getInstance().getPositions().size());
@@ -70,7 +70,6 @@ public class SnakeTest {
         Snake.getInstance().reset();
         assertFalse(Snake.getInstance().isGameOver());
         assertEquals(1, Snake.getInstance().getDirection());
-        testStartPosition();
         assertEquals(Directions.DOWN, Snake.getInstance().getDirectionEnum());
     }
 

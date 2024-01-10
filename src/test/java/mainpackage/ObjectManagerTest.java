@@ -17,19 +17,37 @@ import java.io.IOException;
 public class ObjectManagerTest{
 
     @Test
-    public void randomCoordinateTest() {
-        String[] args = {};
-        GameWindow.launch(GameWindow.class, args);
-        Position position = ObjectManager.getInstance().getCurrentFood().getPosition();
-        ObjectManager.getInstance().createFood();
-        Assertions.assertNotEquals(position, ObjectManager.getInstance().getCurrentFood().getPosition());
+    public void createFoodTest() {
+        for (int i = 0; i < 50; i++) {
+            ObjectManager.getInstance().createFood();
+            Position position = ObjectManager.getInstance().getCurrentFood().getPosition();
+            ObjectManager.getInstance().createFood();
+            Assertions.assertNotEquals(position, ObjectManager.getInstance().getCurrentFood().getPosition());
+        }
     }
 
     @Test
-    public void createWallStructuresTest() throws IOException {
-        ObjectManager.getInstance().createWallStructures();
-        for (IShape wallStructure : ObjectManager.getInstance().getWallStructures()) {
-            Assertions.assertNotNull(wallStructure);
+    public void createWallStructuresTest(){
+        for (int i = 0; i < 50; i++) {
+            ObjectManager.getInstance().createWallStructures();
+            for (IShape wallStructure : ObjectManager.getInstance().getWallStructures()) {
+                if (wallStructure != null) {
+                    for (Wall wall : wallStructure.getWalls()) {
+                        Assertions.assertNotNull(wall);
+                    }
+                }
+            }
+        }
+
+    }
+
+    @Test
+    public void createTreasureTest(){
+        for (int i = 0; i < 50; i++) {
+            ObjectManager.getInstance().createTreasure();
+            Position position = ObjectManager.getInstance().getCurrenTreasure().getPosition();
+            ObjectManager.getInstance().createTreasure();
+            Assertions.assertNotEquals(position, ObjectManager.getInstance().getCurrenTreasure().getPosition());
         }
     }
 }
