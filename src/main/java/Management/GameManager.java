@@ -238,13 +238,15 @@ public class GameManager {
         } else {
             Snake.getInstance().setGrowing(false);
         }
-        Platform.runLater(() -> {
-            if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
-                Score.getInstance().setHighScore(Score.getInstance().getScore());
-            }
-            UiManager.getInstance().getScoreField().setText("Score: " + Score.getInstance().getScore());
-            UiManager.getInstance().getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
-        });
+        if(Platform.isFxApplicationThread()){
+            Platform.runLater(() -> {
+                if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
+                    Score.getInstance().setHighScore(Score.getInstance().getScore());
+                }
+                UiManager.getInstance().getScoreField().setText("Score: " + Score.getInstance().getScore());
+                UiManager.getInstance().getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
+            });
+        }
     }
 
     /**

@@ -34,8 +34,6 @@ public class ObjectManager {
     private final ObstacleNames[] obstacleNames = ObstacleNames.values();
     private IObject treasure;
     private Boolean treasureExisting = false;
-
-
     private IObject currentFood;
     private FoodNames currentFoodEnum;
     private IShape[] wallStructures = new IShape[5];

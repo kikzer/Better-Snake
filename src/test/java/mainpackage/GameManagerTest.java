@@ -7,8 +7,9 @@ import Management.GameManager;
 import Management.MetaDataHelper;
 import Management.ObjectManager;
 import Management.SnakeManagement.Snake;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.*;
+import Environment.IObject;
 
 import java.io.IOException;
 
@@ -33,5 +34,29 @@ public class GameManagerTest {
         }
         GameManager.getInstance();
         Assertions.assertTrue(GameManager.getInstance().isGameWon());
+    }
+
+    @BeforeEach
+    public void initializeGameManager() throws IOException {
+        GameManager.getInstance();
+        ObjectManager.getInstance();
+        Snake.getInstance();
+    }
+    @RepeatedTest(50)
+    public void testObjectManagerInitialization() throws IOException {
+        ObjectManager.getInstance().createWallStructures();
+        Assertions.assertInstanceOf(IObject.class, ObjectManager.getInstance().getCurrentFood());
+        //Checking if coordinates inside the gamefield
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrentFood().getPosition().getX()>=0);
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrentFood().getPosition().getX()<600);
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrentFood().getPosition().getY()>=0);
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrentFood().getPosition().getY()<600);
+
+        Assertions.assertInstanceOf(IObject.class, ObjectManager.getInstance().getCurrenTreasure());
+        //Checking if coordinates inside the gamefield
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrenTreasure().getPosition().getX()>=0);
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrenTreasure().getPosition().getX()<600);
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrenTreasure().getPosition().getY()>=0);
+        Assertions.assertTrue(ObjectManager.getInstance().getCurrenTreasure().getPosition().getY()<600);
     }
 }
