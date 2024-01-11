@@ -47,20 +47,20 @@ public class GameManager {
         @Override
         public void run() {
 
-            if(gameWon || (!Snake.getInstance().isGameOver())) {
+            if (gameWon || (!Snake.getInstance().isGameOver())) {
                 Snake.getInstance().move();
                 updateGameState();
                 UiManager.getInstance().updateGameField();
                 keyHandler(GameWindow.getInstance().getGameScene());
                 Snake.getInstance().selfDestroy();
-            }else {
+            } else {
                 Score.getInstance().updateHighScoreFile();
             }
         }
     };
 
     private GameManager() {
-        gameTick.schedule(moveSnake, 0, gameSpeed );
+        gameTick.schedule(moveSnake, 0, gameSpeed);
         createWinningCondition();
     }
 
@@ -90,7 +90,7 @@ public class GameManager {
     /**
      * spawns Food if the previous food has been eaten
      */
-    private void spawnFood(){
+    private void spawnFood() {
         if (!ObjectManager.getInstance().getFoodExisting()) {
             ObjectManager.getInstance().setFoodExisting(true);
             ObjectManager.getInstance().createFood();
@@ -102,17 +102,18 @@ public class GameManager {
      */
     private void createWinningCondition() {
         int wallAmount = 0;
-        for(IShape structure : ObjectManager.getInstance().getWallStructures()){
-            wallAmount += structure.getWalls().size();
+        for (IShape structure : ObjectManager.getInstance().getWallStructures()) {
+            if (structure != null)
+                wallAmount += structure.getWalls().size();
         }
-        winningCondition = (MetaDataHelper.SIZEBLOCK*MetaDataHelper.SIZEBLOCK)-wallAmount-MetaDataHelper.SIZEBLOCK;
+        winningCondition = (MetaDataHelper.SIZEBLOCK * MetaDataHelper.SIZEBLOCK) - wallAmount - MetaDataHelper.SIZEBLOCK;
     }
 
     /**
-     *Checks if winnning condition is met or not.
+     * Checks if winnning condition is met or not.
      */
     private void checkWinningCondition() {
-        if(winningCondition == Snake.getInstance().getPositions().size()){
+        if (winningCondition == Snake.getInstance().getPositions().size()) {
             gameWon = true;
         }
     }
@@ -139,6 +140,7 @@ public class GameManager {
 
         }
     }
+
     private void gameOver() {
         Platform.runLater(() -> {
             try {
@@ -200,10 +202,10 @@ public class GameManager {
      * in addition, there will be added points to the score if the object was eatable
      */
     public void checkCollision() {
-        for (IShape wallStructure: ObjectManager.getInstance().getWallStructures()) {
+        for (IShape wallStructure : ObjectManager.getInstance().getWallStructures()) {
             for (Wall wall : wallStructure.getWalls()) {
                 if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
-                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY()&&!Snake.getInstance().isGameOver()){
+                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY() && !Snake.getInstance().isGameOver()) {
                     Snake.getInstance().setGameOver(true);
                 }
             }
@@ -211,7 +213,7 @@ public class GameManager {
         for (int i = 1; i < Snake.getInstance().getPositions().size(); i++) {
 
             if ((Objects.equals(Snake.getInstance().getPositions().get(0).getX(), Snake.getInstance().getPositions().get(i).getX())) &&
-                    (Objects.equals(Snake.getInstance().getPositions().get(0).getY(), Snake.getInstance().getPositions().get(i).getY()))&&!Snake.getInstance().isGameOver()) {
+                    (Objects.equals(Snake.getInstance().getPositions().get(0).getY(), Snake.getInstance().getPositions().get(i).getY())) && !Snake.getInstance().isGameOver()) {
                 Snake.getInstance().setGameOver(true);
                 break;
             }
@@ -237,7 +239,7 @@ public class GameManager {
             Snake.getInstance().setGrowing(false);
         }
         Platform.runLater(() -> {
-            if(Score.getInstance().getHighScore() <= Score.getInstance().getScore()){
+            if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
                 Score.getInstance().setHighScore(Score.getInstance().getScore());
             }
             UiManager.getInstance().getScoreField().setText("Score: " + Score.getInstance().getScore());
@@ -260,11 +262,7 @@ public class GameManager {
         switchScene = false;
     }
 
-    public int getGameSpeed() {
-        return gameSpeed;
-    }
-
-    public void setGameSpeed(int gameSpeed) {
-        this.gameSpeed = gameSpeed;
+    public boolean isGameWon() {
+        return gameWon;
     }
 }
