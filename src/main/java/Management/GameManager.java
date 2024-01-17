@@ -203,10 +203,12 @@ public class GameManager {
      */
     public void checkCollision() {
         for (IShape wallStructure : ObjectManager.getInstance().getWallStructures()) {
-            for (Wall wall : wallStructure.getWalls()) {
-                if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
-                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY() && !Snake.getInstance().isGameOver()) {
-                    Snake.getInstance().setGameOver(true);
+            if (wallStructure != null) {
+                for (Wall wall : wallStructure.getWalls()) {
+                    if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
+                            wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY() && !Snake.getInstance().isGameOver()) {
+                        Snake.getInstance().setGameOver(true);
+                    }
                 }
             }
         }
@@ -218,7 +220,7 @@ public class GameManager {
                 break;
             }
         }
-        if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+        if (ObjectManager.getInstance().getCurrentFood() != null && ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getX() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + MetaDataHelper.SIZEBLOCK &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + MetaDataHelper.SIZEBLOCK) {
@@ -226,7 +228,6 @@ public class GameManager {
             ObjectManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getFoodPoint());
-
         } else if (ObjectManager.getInstance().getCurrenTreasure() != null && (ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + MetaDataHelper.SIZEBLOCK &&
