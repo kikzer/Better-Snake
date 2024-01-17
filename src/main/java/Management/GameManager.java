@@ -136,23 +136,7 @@ public class GameManager {
         checkWinningCondition();
         if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
             switchScene = true;
-            //gameOver();
-
         }
-    }
-
-    private void gameOver() {
-        Platform.runLater(() -> {
-            try {
-                Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GameOverScene.fxml")));
-                Scene gameOverScene = new Scene(root);
-                currentStage.setScene(gameOverScene);
-                currentStage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     public Timer getGameTick() {
@@ -238,15 +222,6 @@ public class GameManager {
 
         } else {
             Snake.getInstance().setGrowing(false);
-        }
-        if(Platform.isFxApplicationThread()){
-            Platform.runLater(() -> {
-                if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
-                    Score.getInstance().setHighScore(Score.getInstance().getScore());
-                }
-                UiManager.getInstance().getScoreField().setText("Score: " + Score.getInstance().getScore());
-                UiManager.getInstance().getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
-            });
         }
     }
 
