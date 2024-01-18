@@ -7,6 +7,7 @@ import Management.MetaDataHelper;
 import Management.ObjectManager;
 import Management.SnakeManagement.Snake;
 import Management.SnakeManagement.SnakeImages.SnakeImageFactory;
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -55,6 +56,15 @@ public class UiManager {
     public void updateGameField() {
         GameWindow.getInstance().updateBackground();
         createVisualObject();
+        if(Platform.isFxApplicationThread()){
+            Platform.runLater(() -> {
+                if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
+                    Score.getInstance().setHighScore(Score.getInstance().getScore());
+                }
+                getScoreField().setText("Score: " + Score.getInstance().getScore());
+                getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
+            });
+        }
     }
 
 

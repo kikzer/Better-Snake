@@ -4,8 +4,6 @@ import Environment.GameField;
 import Environment.Obstacle.IShape;
 import Environment.Obstacle.ObstacleForms.Wall;
 import Management.Interface.GameWindow;
-import Management.Interface.Scenes.SceneController;
-import Management.Interface.Scenes.StartScene;
 import Management.Interface.Score;
 import Management.Interface.UiManager;
 import Management.SnakeManagement.Directions;
@@ -24,10 +22,10 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-    /**
-     * Main manager class of the project. It handles most of the games logic including the gametick.
-     * It updates the gamestate, tells other manager classes what to do and is responsible for the player inputs.
-     */
+/**
+ * Main manager class of the project. It handles most of the games logic including the gametick.
+ * It updates the gamestate, tells other manager classes what to do and is responsible for the player inputs.
+ */
 public class GameManager {
     private static GameManager instance;
 
@@ -147,7 +145,7 @@ public class GameManager {
         Platform.runLater(() -> {
             try {
                 Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("GameOverScene.fxml")));
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GameOverScene.fxml")));
                 Scene gameOverScene = new Scene(root);
                 currentStage.setScene(gameOverScene);
                 currentStage.show();
@@ -195,6 +193,7 @@ public class GameManager {
             }
         });
     }
+
 
     /**
      * checks if the player is on an eatable or obstacle object.
@@ -248,20 +247,6 @@ public class GameManager {
                 UiManager.getInstance().getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
             });
         }
-        if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
-            switchScene = true;
-            Platform.runLater(() -> {
-                try {
-                    Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
-                    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("GameOverScene.fxml")));
-                    Scene gameOverScene = new Scene(root);
-                    currentStage.setScene(gameOverScene);
-                    currentStage.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }
     }
 
     /**
@@ -275,10 +260,9 @@ public class GameManager {
         ObjectManager.getInstance().createWallStructures();
         createWinningCondition();
         gameSpeed = 200;
-        gameManagerLogger.log(Level.DEBUG, "Game reset");
+        gameManagerLogger.log(Level.DEBUG, "Game reseted");
         switchScene = false;
-
-        }
+    }
 
     public boolean isGameWon() {
         return gameWon;

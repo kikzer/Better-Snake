@@ -98,6 +98,11 @@ public class Snake {
         }
     }
 
+
+    public boolean isGrowing() {
+        return growing;
+    }
+
     public int getDirection() {
         return direction;
     }

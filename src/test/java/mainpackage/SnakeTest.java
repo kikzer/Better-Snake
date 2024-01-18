@@ -1,20 +1,21 @@
 package mainpackage;
 
-import Environment.GameField;
 import Environment.Position;
-import Management.Interface.GameWindow;
+import Management.GameManager;
 import Management.MetaDataHelper;
 import Management.SnakeManagement.Directions;
 import Management.SnakeManagement.Snake;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SnakeTest {
 
     @Test
-    public void testStartPosition() {
-        Snake.getInstance().reset();
+    public void testStartPosition() throws IOException {
+        GameManager.getInstance().gameReset();
         assertEquals(new Position(MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK).getX(), Snake.getInstance().getPositions().get(0).getX());
         assertEquals(new Position(MetaDataHelper.SIZEBLOCK, MetaDataHelper.SIZEBLOCK).getY(), Snake.getInstance().getPositions().get(0).getY());
         assertEquals(2, Snake.getInstance().getPositions().size());

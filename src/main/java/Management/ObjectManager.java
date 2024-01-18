@@ -51,6 +51,10 @@ public class ObjectManager {
         return instance;
     }
 
+    public Position[] getSpawnPositions() {
+        return spawnPositions;
+    }
+
     /**
      * Creates one new randomized food for the snake to eat
      */

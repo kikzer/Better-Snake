@@ -1,13 +1,9 @@
 package mainpackage;
 
-import Environment.Food.*;
-import Environment.Obstacle.IShape;
 import Environment.Obstacle.ObstacleFactory;
 import Environment.Obstacle.ObstacleForms.*;
 import Environment.Obstacle.ObstacleNames;
 import Environment.Position;
-import Management.MetaDataHelper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
