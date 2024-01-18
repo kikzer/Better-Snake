@@ -52,8 +52,8 @@ public class GameWindow extends Application{
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //StartScene.getInstance().createScene(primaryStage);
-        createGame(primaryStage);
+        StartScene.getInstance().createScene(primaryStage);
+        //createGame(primaryStage);
     }
 
     public Scene getGameScene() {
