@@ -136,7 +136,23 @@ public class GameManager {
         checkWinningCondition();
         if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
             switchScene = true;
+            //gameOver();
+
         }
+    }
+
+    private void gameOver() {
+        Platform.runLater(() -> {
+            try {
+                Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GameOverScene.fxml")));
+                Scene gameOverScene = new Scene(root);
+                currentStage.setScene(gameOverScene);
+                currentStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public Timer getGameTick() {
@@ -187,12 +203,10 @@ public class GameManager {
      */
     public void checkCollision() {
         for (IShape wallStructure : ObjectManager.getInstance().getWallStructures()) {
-            if (wallStructure != null) {
-                for (Wall wall : wallStructure.getWalls()) {
-                    if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
-                            wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY() && !Snake.getInstance().isGameOver()) {
-                        Snake.getInstance().setGameOver(true);
-                    }
+            for (Wall wall : wallStructure.getWalls()) {
+                if (wall.isBlocked() && wall.getPosition().getX() == Snake.getInstance().getPositions().get(0).getX() &&
+                        wall.getPosition().getY() == Snake.getInstance().getPositions().get(0).getY() && !Snake.getInstance().isGameOver()) {
+                    Snake.getInstance().setGameOver(true);
                 }
             }
         }
@@ -204,7 +218,7 @@ public class GameManager {
                 break;
             }
         }
-        if (ObjectManager.getInstance().getCurrentFood() != null && ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
+        if (ObjectManager.getInstance().getCurrentFood().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getX() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + MetaDataHelper.SIZEBLOCK &&
                 ObjectManager.getInstance().getCurrentFood().getPosition().getY() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getY() + MetaDataHelper.SIZEBLOCK) {
@@ -212,6 +226,7 @@ public class GameManager {
             ObjectManager.getInstance().createFood();
             Snake.getInstance().setGrowing(true);
             Score.getInstance().setScore(Score.getInstance().getScore() + Score.getInstance().getFoodPoint());
+
         } else if (ObjectManager.getInstance().getCurrenTreasure() != null && (ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() <= Snake.getInstance().getPositions().get(0).getX() &&
                 ObjectManager.getInstance().getCurrenTreasure().getPosition().getY() <= Snake.getInstance().getPositions().get(0).getY() &&
                 ObjectManager.getInstance().getCurrenTreasure().getPosition().getX() + MetaDataHelper.SIZEBLOCK >= Snake.getInstance().getPositions().get(0).getX() + MetaDataHelper.SIZEBLOCK &&
@@ -222,6 +237,31 @@ public class GameManager {
 
         } else {
             Snake.getInstance().setGrowing(false);
+        }
+        if (Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> {
+                if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
+                    Score.getInstance().setHighScore(Score.getInstance().getScore());
+                }
+                UiManager.getInstance().getScoreField().setText("Score: " + Score.getInstance().getScore());
+                UiManager.getInstance().getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
+            });
+
+        }
+        if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
+            switchScene = true;
+            Platform.runLater(() -> {
+                try {
+                    Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("GameOverScene.fxml")));
+                    Scene gameOverScene = new Scene(root);
+                    currentStage.setScene(gameOverScene);
+                    currentStage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
         }
     }
 
