@@ -58,8 +58,4 @@ public class GameField {
         return row;
     }
 
-    public Canvas getCanvas() {
-        return canvas;
-    }
-
 }

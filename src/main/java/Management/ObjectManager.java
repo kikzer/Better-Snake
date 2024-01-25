@@ -2,7 +2,6 @@ package Management;
 
 import Environment.Food.FoodFactory;
 import Environment.Food.FoodNames;
-import Environment.GameField;
 import Environment.IObject;
 import Environment.Obstacle.IShape;
 import Environment.Obstacle.ObstacleFactory;
@@ -11,7 +10,6 @@ import Environment.Obstacle.ObstacleForms.Wall;
 import Environment.Obstacle.ObstacleNames;
 import Environment.Obstacle.Treasure;
 import Environment.Position;
-import Management.Interface.GameWindow;
 import Management.SnakeManagement.Snake;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -36,7 +34,7 @@ public class ObjectManager {
     private Boolean treasureExisting = false;
     private IObject currentFood;
     private FoodNames currentFoodEnum;
-    private IShape[] wallStructures = new IShape[5];
+    private final IShape[] wallStructures = new IShape[5];
     private final FoodNames[] foodNames = FoodNames.values();
     private Boolean foodExisting = false;
     private final Random rnd = new Random();

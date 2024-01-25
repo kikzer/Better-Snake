@@ -56,13 +56,14 @@ public class UiManager {
     public void updateGameField() {
         GameWindow.getInstance().updateBackground();
         createVisualObject();
-            Platform.runLater(() -> {
-                if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
-                    Score.getInstance().setHighScore(Score.getInstance().getScore());
-                }
-                getScoreField().setText("Score: " + Score.getInstance().getScore());
-                getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
-            });
+
+        Platform.runLater(() -> {
+            if (Score.getInstance().getHighScore() <= Score.getInstance().getScore()) {
+                Score.getInstance().setHighScore(Score.getInstance().getScore());
+            }
+            getScoreField().setText("Score: " + Score.getInstance().getScore());
+            getHighScoreField().setText("HighScore: " + Score.getInstance().getHighScore());
+        });
     }
 
 

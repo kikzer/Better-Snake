@@ -1,6 +1,6 @@
 package Management;
 
-import Environment.GameField;
+
 import Environment.Obstacle.IShape;
 import Environment.Obstacle.ObstacleForms.Wall;
 import Management.Interface.GameWindow;
@@ -134,25 +134,6 @@ public class GameManager {
 
         checkCollision();
         checkWinningCondition();
-        if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
-            switchScene = true;
-            //gameOver();
-
-        }
-    }
-
-    private void gameOver() {
-        Platform.runLater(() -> {
-            try {
-                Stage currentStage = (Stage) GameWindow.getInstance().getGameScene().getWindow();
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("GameOverScene.fxml")));
-                Scene gameOverScene = new Scene(root);
-                currentStage.setScene(gameOverScene);
-                currentStage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     public Timer getGameTick() {
