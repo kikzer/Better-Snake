@@ -168,12 +168,14 @@ public class Snake {
     }
 
     public List<Position> getPositions() {
-        return positions;
+        List<Position> copyPositions = positions;
+        return copyPositions;
     }
 
 
     public Directions getDirectionEnum() {
-        return directionEnum;
+        Directions copyDirectionEnum = directionEnum;
+        return copyDirectionEnum;
     }
 
     public void setDirectionEnum(Directions directions) {

@@ -137,7 +137,8 @@ public class GameManager {
     }
 
     public Timer getGameTick() {
-        return gameTick;
+        Timer copyGameTick = gameTick;
+        return copyGameTick;
     }
 
 

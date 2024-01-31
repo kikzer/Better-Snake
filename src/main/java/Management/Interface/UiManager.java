@@ -94,10 +94,12 @@ public class UiManager {
     }
 
     public Label getScoreField() {
-        return scoreField;
+        Label copyScoreField = scoreField;
+        return copyScoreField;
     }
 
     public Label getHighScoreField() {
-        return highScoreField;
+        Label copyHighScoreField = highScoreField;
+        return copyHighScoreField;
     }
 }

@@ -11,6 +11,7 @@ import Environment.Obstacle.ObstacleNames;
 import Environment.Obstacle.Treasure;
 import Environment.Position;
 import Management.SnakeManagement.Snake;
+import javafx.geometry.Pos;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,7 +51,8 @@ public class ObjectManager {
     }
 
     public Position[] getSpawnPositions() {
-        return spawnPositions;
+        Position[] copySpawnPositions = spawnPositions;
+        return copySpawnPositions;
     }
 
     /**
@@ -101,7 +103,8 @@ public class ObjectManager {
     }
 
     public FoodNames getCurrentFoodEnum() {
-        return currentFoodEnum;
+        FoodNames copyCurrentFoodEnum = currentFoodEnum;
+        return copyCurrentFoodEnum;
     }
 
     /**
@@ -130,7 +133,8 @@ public class ObjectManager {
     }
 
     public IObject getCurrentFood() {
-        return currentFood;
+        IObject copyCurrentFood = currentFood;
+        return copyCurrentFood;
     }
 
     public Boolean getTreasureExisting() {
@@ -146,11 +150,13 @@ public class ObjectManager {
     }
 
     public IObject getCurrenTreasure() {
-        return treasure;
+        IObject copyCurrentTreasure = treasure;
+        return copyCurrentTreasure;
     }
 
     public IShape[] getWallStructures() {
-        return wallStructures;
+        IShape[] copyWallStructures = wallStructures;
+        return copyWallStructures;
     }
 
     public void setCurrenTreasure(IObject currenObject) {

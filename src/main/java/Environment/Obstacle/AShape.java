@@ -21,6 +21,7 @@ public class AShape implements IShape{
 
     @Override
     public List<Wall> getWalls() {
-        return walls;
+        List<Wall> copyWalls = walls;
+        return copyWalls;
     }
 }

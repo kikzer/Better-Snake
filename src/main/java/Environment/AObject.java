@@ -18,7 +18,7 @@ public abstract class AObject implements IObject {
     }
 
     public Position getPosition() {
-        return position;
+        return new Position(position.getX(),position.getY());
     }
 
     public void setPosition(Position position) {
@@ -36,7 +36,7 @@ public abstract class AObject implements IObject {
     }
 
     public String getAppearance(){
-        return appearance;
+        return String.valueOf(appearance);
     }
 
     public void setAppearance(String appearance) {

@@ -56,7 +56,8 @@ public class GameWindow extends Application{
     }
 
     public Scene getGameScene() {
-        return gameScene;
+        Scene copyGameScene = gameScene;
+        return copyGameScene;
     }
 
     public void updateBackground() {
@@ -64,39 +65,8 @@ public class GameWindow extends Application{
     }
 
     public GraphicsContext getGraphicContext() {
-        return graphicContext;
-    }
-
-    /**
-     * if the game has been lost, it switches to the game over screen, which lets the game restart
-     * @param stage better snake stage (program window)
-     */
-    public void createGameOverScene(Stage stage) {
-        StackPane root = new StackPane();
-        Scene scene = new Scene(root, MetaDataHelper.WIDTH, MetaDataHelper.HEIGHT);
-        Button btn = new Button("Reset");
-
-        btn.setMaxWidth(200);
-        btn.setMaxHeight(50);
-
-        Label title = new Label("Game Over");
-        title.setScaleX(2);
-        title.setScaleY(2);
-        title.setTranslateY(-70);
-
-        btn.setOnAction((ActionEvent e) -> {
-            title.setText("TEST");
-            scene.setFill(Color.BLACK);
-        });
-
-        root.getChildren().add(title);
-        root.getChildren().add(btn);
-
-        stage.setTitle("Game Over");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        gameWindowLogger.log(Level.DEBUG, "Game Over Screen successfully created");
+        GraphicsContext copyGraphicsContext = graphicContext;
+        return copyGraphicsContext;
     }
 
     /**

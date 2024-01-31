@@ -39,7 +39,8 @@ public class Score {
     }
 
     public int getHighScore() {
-        return highScore;
+        final int copyHighscore = highScore;
+        return copyHighscore;
     }
 
     public void setHighScore(int highscore) {
@@ -118,7 +119,7 @@ public class Score {
     }
 
     public void resetInstance(){
-        this.instance = null;
+        instance = null;
     };
 
     public void reset(){
