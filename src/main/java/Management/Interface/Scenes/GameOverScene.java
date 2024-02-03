@@ -1,5 +1,6 @@
 package Management.Interface.Scenes;
 
+import Management.Interface.Score;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +28,6 @@ public class GameOverScene {
 
         stage.setScene(scene);
         stage.show();
-
     }
 
 }

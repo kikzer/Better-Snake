@@ -1,7 +1,5 @@
 package Management.Interface;
 
-import Management.GameManager;
-import javafx.stage.Stage;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +18,8 @@ public class Score {
     private static final Logger scoreLogger = LogManager.getLogger(Score.class);
 
     private static Score instance;
+
+    private final String path = "src/main/resources/HighScore.txt";
     private int score = 0;
 
     private int highScore = score;
@@ -39,8 +39,7 @@ public class Score {
     }
 
     public int getHighScore() {
-        final int copyHighscore = highScore;
-        return copyHighscore;
+        return highScore;
     }
 
     public void setHighScore(int highscore) {
@@ -51,7 +50,6 @@ public class Score {
      * Method reads text file where Highscore is stored and saves value in highScore variable.
      */
     private void readHighScoreFile(){
-        String path = "src/main/resources/HighScore.txt";
 
         try {
             List<String> lines = Files.readAllLines(Paths.get(path));
@@ -65,8 +63,8 @@ public class Score {
 
     /**
      * Überladung der Methode readHighScoreFile.
-     * Sie dient ausschließlich dazu die ürsprungliche Methode testbar zu machen.
-     * @param path
+     * Sie dient ausschließlich dazu die ursprüngliche Methode testbar zu machen.
+     * @param path file-path of the .txt file where the highs-core is stored
      */
     public void readHighScoreFile(String path){
 
@@ -84,11 +82,11 @@ public class Score {
      * When the current score is higher than the current highscore this method updates the highscore to be the current score.
      */
     public void updateHighScoreFile(){
-        String pfad = "src/main/resources/HighScore.txt";
+        String path  = "src/main/resources/HighScore.txt";
         String content = "" + highScore;
 
         try {
-            Files.write(Paths.get(pfad), content.getBytes());
+            Files.write(Paths.get(path), content.getBytes());
         } catch (IOException e) {
             scoreLogger.log(Level.ERROR, "HighScore.txt couldn't be updated");
         }
@@ -97,13 +95,13 @@ public class Score {
     /**
      * Überladung der Methode updateHighScoreFile
      * Sie dient ausschließlich dazu die ürsprungliche Methode testbar zu machen.
-     * @param pfad
+     * @param path file-path of the .txt file where the highs-core is stored
      */
-    public void updateHighScoreFile(String pfad){
+    public void updateHighScoreFile(String path){
         String content = "" + highScore;
 
         try {
-            Files.write(Paths.get(pfad), content.getBytes());
+            Files.write(Paths.get(path), content.getBytes());
         } catch (IOException e) {
             scoreLogger.log(Level.ERROR, "HighScore.txt couldn't be updated");
         }

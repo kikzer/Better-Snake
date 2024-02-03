@@ -53,8 +53,6 @@ public class GameManager {
                 UiManager.getInstance().updateGameField();
                 keyHandler(GameWindow.getInstance().getGameScene());
                 Snake.getInstance().selfDestroy();
-            } else {
-                Score.getInstance().updateHighScoreFile();
             }
         }
     };
@@ -231,6 +229,7 @@ public class GameManager {
 
         }
         if (Snake.getInstance().isGameOver() && !switchScene && Snake.getInstance().getPositions().size() == 1) {
+            Score.getInstance().updateHighScoreFile();
             switchScene = true;
             Platform.runLater(() -> {
                 try {

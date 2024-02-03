@@ -38,8 +38,8 @@ public class ObstacleFactory {
                 return new ZWall(startingPosition);
             }
             default -> {
-                obstacleFactoryLogger.log(Level.ERROR, "Walltype not delivered!");
-                return null;
+                obstacleFactoryLogger.log(Level.ERROR, "Wall type not delivered!");
+                throw new IllegalArgumentException("Wrong type of Wall structure");
             }
         }
     }

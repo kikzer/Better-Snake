@@ -37,13 +37,13 @@ public class GameField {
     }
 
     /**
-     * This Method creates the green/darkgreen pattern in the background of the gamefield.
+     * This Method creates the green/darkgreen pattern in the background of the game field.
      * It is called everytime the frame gets updated.
-     * @param graphicsContext
+     * @param graphicsContext unlocks the ability to draw on the canvas
      */
     public void createGameField(GraphicsContext graphicsContext){
-        for (int i = 0; i < getRow(); i++) {
-            for (int j = 0; j < getRow(); j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
                 if ((i + j) % 2 == 0) {
                     graphicsContext.setFill(Color.GREEN);
                 } else {
@@ -54,8 +54,5 @@ public class GameField {
         }
     }
 
-    public int getRow() {
-        return row;
-    }
 
 }

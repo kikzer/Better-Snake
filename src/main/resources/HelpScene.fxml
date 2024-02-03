@@ -17,12 +17,12 @@
                 <Font size="25.0" />
             </font>
         </Button>
-        <Label layoutX="54.0" layoutY="193.0" prefHeight="59.0" prefWidth="495.0" text="    W: Up      A: Left      S: Down     D: Right">
+        <Label layoutX="90.0" layoutY="182.0" prefHeight="59.0" prefWidth="495.0" text="    Arrow-Up: Up      Arrow-Left: Left">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-        <Label layoutX="100.0" layoutY="108.0" prefHeight="67.0" prefWidth="390.0" text="                   R: Restart" textAlignment="CENTER">
+        <Label layoutX="66.0" layoutY="115.0" prefHeight="67.0" prefWidth="470.0" text="Arrow-Down: Down     Arrow-Right: Right" textAlignment="CENTER">
             <font>
                 <Font size="25.0" />
             </font>

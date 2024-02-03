@@ -2,8 +2,6 @@ package Management.SnakeManagement;
 
 import Environment.Position;
 import Management.MetaDataHelper;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

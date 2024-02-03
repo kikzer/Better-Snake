@@ -11,11 +11,9 @@ import Environment.Obstacle.ObstacleNames;
 import Environment.Obstacle.Treasure;
 import Environment.Position;
 import Management.SnakeManagement.Snake;
-import javafx.geometry.Pos;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Random;
 
 /**
@@ -78,7 +76,7 @@ public class ObjectManager {
     private Position randomCoordinate() {
         Position coordinate = new Position(rnd.nextInt(MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) * MetaDataHelper.SIZEBLOCK,
                 rnd.nextInt(MetaDataHelper.WIDTH / MetaDataHelper.SIZEBLOCK) * MetaDataHelper.SIZEBLOCK);
-        //position (.getX() and .getY(), aren't changing in while the parallelStream() is running
+        //position (.getX() and .getY()), aren't changing while the parallelStream() is running
         boolean foodOnSnake = Snake.getInstance().getPositions().parallelStream()
                 .anyMatch(position -> position.getY() == coordinate.getY() && position.getX() == coordinate.getX());
 

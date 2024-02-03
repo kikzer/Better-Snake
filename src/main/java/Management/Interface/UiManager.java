@@ -8,7 +8,6 @@ import Management.ObjectManager;
 import Management.SnakeManagement.Snake;
 import Management.SnakeManagement.SnakeImages.SnakeImageFactory;
 import javafx.application.Platform;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
