@@ -239,7 +239,8 @@ public class GameManager {
                     currentStage.setScene(gameOverScene);
                     currentStage.show();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    gameManagerLogger.log(Level.WARN, "Can't switch to Game Over Scene");
+                    gameManagerLogger.log(Level.WARN, e.getMessage());
                 }
             });
 

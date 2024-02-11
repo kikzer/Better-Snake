@@ -1,10 +1,8 @@
 package Environment;
 
-import javafx.scene.canvas.GraphicsContext;
 
 public interface IObject {
 
-   String getAppearance();
 
     /**
      * gives back the current position object of the IObject object

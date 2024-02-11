@@ -27,7 +27,7 @@ public class GameWindow extends Application{
 
     private static GameWindow instance;
 
-    private final Canvas canvas = new Canvas(MetaDataHelper.WIDTH, MetaDataHelper.HEIGHT);;
+    private final Canvas canvas = new Canvas(MetaDataHelper.WIDTH, MetaDataHelper.HEIGHT);
     private GraphicsContext graphicContext;
 
 
@@ -54,7 +54,7 @@ public class GameWindow extends Application{
     }
 
     public void updateBackground() {
-        GameField.getInstance(canvas).createGameField(getGraphicContext());
+        GameField.getInstance().createGameField(getGraphicContext());
     }
 
     public GraphicsContext getGraphicContext() {

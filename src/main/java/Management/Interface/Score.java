@@ -62,8 +62,8 @@ public class Score {
     }
 
     /**
-     * Überladung der Methode readHighScoreFile.
-     * Sie dient ausschließlich dazu die ursprüngliche Methode testbar zu machen.
+     * Overloads the Methode readHighScoreFile.
+     * Exists only for test purpose
      * @param path file-path of the .txt file where the highs-core is stored
      */
     public void readHighScoreFile(String path){
@@ -93,8 +93,8 @@ public class Score {
     }
 
     /**
-     * Überladung der Methode updateHighScoreFile
-     * Sie dient ausschließlich dazu die ürsprungliche Methode testbar zu machen.
+     * Overload of the Methode updateHighScoreFile
+     * Exists only for test purpose
      * @param path file-path of the .txt file where the highs-core is stored
      */
     public void updateHighScoreFile(String path){

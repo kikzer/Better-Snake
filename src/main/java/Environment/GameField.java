@@ -1,11 +1,7 @@
 package Environment;
 
-import Environment.Obstacle.ObstacleFactory;
-import Management.Interface.GameWindow;
 import Management.MetaDataHelper;
-import Management.ObjectManager;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -19,18 +15,16 @@ import org.apache.logging.log4j.Logger;
 public class GameField {
     private final int row = MetaDataHelper.WIDTH /MetaDataHelper.SIZEBLOCK;
 
-    private final Canvas canvas;
 
     private static GameField instance;
 
-    private GameField(final Canvas canvas){
-        this.canvas = canvas;
+    private GameField(){
     }
     private static final Logger gameFieldLogger = LogManager.getLogger(GameField.class);
 
-    public static GameField getInstance(final Canvas canvas){
+    public static GameField getInstance(){
         if (instance == null){
-            instance = new GameField(canvas);
+            instance = new GameField();
             gameFieldLogger.log(Level.DEBUG, "Instance of GameField-Class created");
         }
         return instance;

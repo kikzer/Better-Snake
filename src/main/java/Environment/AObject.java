@@ -1,11 +1,5 @@
 package Environment;
 
-import Environment.Images.ImageFactory;
-import Management.MetaDataHelper;
-import Management.ObjectManager;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
 public abstract class AObject implements IObject {
     private Position position;
 
@@ -33,10 +27,6 @@ public abstract class AObject implements IObject {
     @Override
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
-    }
-
-    public String getAppearance(){
-        return String.valueOf(appearance);
     }
 
     public void setAppearance(String appearance) {

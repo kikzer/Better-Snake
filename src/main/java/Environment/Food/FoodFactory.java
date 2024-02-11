@@ -3,7 +3,6 @@ package Environment.Food;
 import Environment.IObject;
 import Environment.Position;
 import Exceptions.InvalidFoodTypeException;
-import Management.GameManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,9 +38,7 @@ public class FoodFactory{
                 foodFactoryLogger.log(Level.DEBUG, "Creating BANANA at X: "+position.getX()+", Y: "+position.getY());
                 return new Banana(position);
             }
-            default ->{
-                throw new InvalidFoodTypeException(String.valueOf(foodType));
-            }
+            default -> throw new InvalidFoodTypeException(String.valueOf(foodType));
         }
     }
 }
