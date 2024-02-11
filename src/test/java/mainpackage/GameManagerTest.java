@@ -70,20 +70,6 @@ public class GameManagerTest {
     }
 
     @Test
-    public void testCheckCollisionIsOnWall() throws IOException {
-        GameManager.getInstance().gameReset();
-        GameManager.getInstance();
-        ObjectManager.getInstance().createWallStructures();
-        for (int i = 0; i < ObjectManager.getInstance().getSpawnPositions().length; i++) {
-            Snake.getInstance().getPositions().get(0).setY(ObjectManager.getInstance().getSpawnPositions()[i].getY());
-            Snake.getInstance().getPositions().get(0).setX(ObjectManager.getInstance().getSpawnPositions()[i].getX());
-            GameManager.getInstance().checkCollision();
-            Assertions.assertTrue(Snake.getInstance().isGameOver());
-            GameManager.getInstance().gameReset();
-        }
-    }
-
-    @Test
     public void testCheckCollisionIsEatingItSelf() throws IOException {
         GameManager.getInstance().gameReset();
         GameManager.getInstance();

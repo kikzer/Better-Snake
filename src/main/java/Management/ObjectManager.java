@@ -161,4 +161,8 @@ public class ObjectManager {
     public void setCurrenTreasure(IObject currenObject) {
         this.treasure = currenObject;
     }
+
+    public static void setInstance(ObjectManager instance) {
+        ObjectManager.instance = instance;
+    }
 }

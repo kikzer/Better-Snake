@@ -95,6 +95,10 @@ public class GameManager {
         }
     }
 
+    public static void setInstance(GameManager instance) {
+        GameManager.instance = instance;
+    }
+
     /**
      * Setting winningCondition depending on the size of the gamefield.
      */
