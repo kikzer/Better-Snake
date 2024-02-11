@@ -1,9 +1,7 @@
 package Environment.Obstacle.ObstacleForms;
 
-import Environment.GameField;
 import Environment.Obstacle.AShape;
 import Environment.Position;
-import Management.Interface.GameWindow;
 import Management.MetaDataHelper;
 
 public class ZWall extends AShape {
